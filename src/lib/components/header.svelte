@@ -19,7 +19,7 @@
 		{ label: 'Services', href: '/services' },
 		{ label: 'Events', href: '/events' },
 
-		{ label: 'Contact', href: '/contact' }
+		{ label: 'Contact', href: '/contact-us' }
 	];
 </script>
 

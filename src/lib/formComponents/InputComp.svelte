@@ -28,14 +28,15 @@
 		year = false,
 		futureDays = false,
 		image = '',
-		images = $bindable()
+		images = $bindable(),
+		className = ''
 	} = $props();
 </script>
 
 <div class="flex w-full max-w-full flex-col justify-start gap-2 p-1">
 	<Label for={name} class="capitalize">{label}</Label>
 	{#if type === 'textarea'}
-		<Textarea {name} bind:value={$form[name]} {required} {rows} {placeholder} />
+		<Textarea class={className} {name} bind:value={$form[name]} {required} {rows} {placeholder} />
 	{:else if type === 'file'}
 		<FileUpload {name} {form} {image} {placeholder} />
 	{:else if type === 'gallery'}
@@ -55,12 +56,22 @@
 		<input type="hidden" {name} bind:value={$form[name]} />
 	{:else if type === 'checkboxSingle'}
 		<div class="flex items-center gap-2">
-			<Checkbox bind:checked={$form[name]} />
+			<Checkbox class={className} bind:checked={$form[name]} />
 			<Label for={name} class="capitalize">{placeholder}</Label>
 			<input type="hidden" {name} bind:value={$form[name]} />
 		</div>
 	{:else}
-		<Input {type} {name} step="any" bind:value={$form[name]} {max} {min} {placeholder} {required} />
+		<Input
+			class={className}
+			{type}
+			{name}
+			step="any"
+			bind:value={$form[name]}
+			{max}
+			{min}
+			{placeholder}
+			{required}
+		/>
 	{/if}
 
 	{#if $errors[name]}
