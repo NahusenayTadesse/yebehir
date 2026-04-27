@@ -6,72 +6,56 @@
 		AccordionContent
 	} from '$lib/components/ui/accordion';
 	import {
-		TruckIcon,
-		PackageIcon,
-		AwardIcon,
-		MessageCircleQuestionMark,
-		CalendarCheckIcon,
-		WalletIcon,
-		StoreIcon,
-		WheatIcon
+		CalendarHeartIcon,
+		MapPin,
+		TrendingUpIcon,
+		QuoteIcon,
+		CoffeeIcon,
+		ZapIcon
 	} from '@lucide/svelte';
 
 	const features = [
 		{
-			id: 'product-range',
-			title: 'Our Product Range',
+			id: 'event-management',
+			title: 'What types of events do you manage?',
 			description:
-				'A wide selection of bakery and pastry essentials, including premium butter, yeast, chocolate, flavorings, and professional cake decorations.',
-			icon: WheatIcon
+				'We provide full-service management for corporate events, brand activations, and private functions, focusing on creating cinematic and high-energy experiences.',
+			icon: CalendarHeartIcon
 		},
 		{
-			id: 'bulk-retail',
-			title: 'Wholesale & Retail',
+			id: 'venue-booking',
+			title: 'How can I book 4 Kilo Plaza?',
 			description:
-				'Flexible purchasing options to suit everyone. We provide both bulk wholesale supplies for businesses and small quantities for home bakers.',
-			icon: PackageIcon
+				'You can request a booking for our central Addis Ababa venue directly through our "Request a Quote" system for corporate meetings, lifestyle events, or private gatherings.',
+			icon: MapPin
 		},
 		{
-			id: 'professional-grade',
-			title: 'Professional Quality',
+			id: 'sponsorship-sales',
+			title: 'Do you offer brand partnership opportunities?',
 			description:
-				'Our ingredients are carefully curated to meet the high standards of professional pastry chefs while remaining accessible for home use.',
-			icon: AwardIcon
+				'Yes, we act as a sales and sponsorship platform, connecting brands with audiences through event-based marketing and sponsorship acquisition.',
+			icon: TrendingUpIcon
 		},
 		{
-			id: 'expert-advice',
-			title: 'Baking Consultation',
+			id: 'quote-process',
+			title: 'How do I get a price estimate for my event?',
 			description:
-				'Not sure what you need? Our expert team provides personalized guidance to help you select the perfect ingredients for your specific recipes.',
-			icon: MessageCircleQuestionMark
+				'Submit a request via our Quote Form with your event date, location, budget range, and estimated number of guests to receive a tailored proposal.',
+			icon: QuoteIcon
 		},
 		{
-			id: 'delivery-services',
-			title: 'Delivery Options',
+			id: 'catering-services',
+			title: 'Do you provide catering and add-ons?',
 			description:
-				'Convenient delivery is available based on your location and order size. Contact us to find the best shipping method for your needs.',
-			icon: TruckIcon
+				'Beyond management and venue rental, we offer integrated catering solutions including coffee and food services to complement your event.',
+			icon: CoffeeIcon
 		},
 		{
-			id: 'advance-orders',
-			title: 'Advance Ordering',
+			id: 'differentiation',
+			title: 'What makes Yebehir Ventures different?',
 			description:
-				'Plan ahead for your big projects. We accept advance orders, which is especially recommended for large bulk purchases.',
-			icon: CalendarCheckIcon
-		},
-		{
-			id: 'payment-methods',
-			title: 'Secure Payments',
-			description:
-				'We offer flexible payment solutions including cash, mobile banking, and direct bank transfers for your convenience.',
-			icon: WalletIcon
-		},
-		{
-			id: 'contact-us',
-			title: 'Get In Touch',
-			description:
-				'Reach out via phone, social media, or visit our shop directly to explore our inventory and place your order.',
-			icon: StoreIcon
+				'We are a multi-service hybrid that combines event management with venue operations and revenue-driven sales tools to monetize every experience.',
+			icon: ZapIcon
 		}
 	];
 </script>
@@ -100,11 +84,11 @@
 					class="hover:shadow-lg-md transition-shadow-lg overflow-hidden rounded-lg border border-border shadow-lg duration-200"
 				>
 					<AccordionTrigger
-						class="px-6 py-4 transition-colors duration-200 hover:bg-accent/5 [&[data-state=open]]:bg-primary/5"
+						class="px-6 py-4 transition-colors duration-200 hover:bg-accent/5 data-[state=open]:bg-primary/5"
 					>
 						<div class="flex items-center gap-4 text-left">
-							<div class="shrink-0 rounded-lg bg-primary/10 p-2">
-								<svelte:component this={feature.icon} class="size-5 text-primary" />
+							<div class="shrink-0 rounded-lg bg-primary p-2">
+								<feature.icon class="size-5 text-accent" />
 							</div>
 							<h3 class="text-lg font-semibold text-foreground">{feature.title}</h3>
 						</div>

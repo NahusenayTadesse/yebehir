@@ -24,7 +24,7 @@
 </script>
 
 <header
-	class="sticky top-0 z-50 w-full bg-accent px-2 py-2 backdrop-blur supports-backdrop-filter:bg-accent lg:px-16"
+	class="sticky top-0 z-50 w-full bg-background px-2 backdrop-blur supports-backdrop-filter:bg-primary lg:px-24"
 >
 	<div class="flex items-center justify-between px-4 md:px-6">
 		<!-- Logo/Title -->
@@ -32,7 +32,7 @@
 			<a href="/" class="inline-block">
 				<img
 					src="/logo.webp"
-					class="h-18 w-auto object-contain"
+					class="h-12 w-auto object-contain"
 					alt="Yebehir"
 					fetchpriority="high"
 				/>
@@ -47,6 +47,7 @@
 				<Button
 					variant={page.url.pathname === item.href ? 'default' : 'ghost'}
 					size="sm"
+					class="text-white {page.url.pathname === item.href ? 'bg-[#F2E1D1] text-[#091B38]' : ''}"
 					href={item.href}
 					onclick={handleMenuClick}
 				>

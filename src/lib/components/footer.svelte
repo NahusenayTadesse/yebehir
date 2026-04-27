@@ -60,7 +60,7 @@
 		>
 			<!-- Company Info -->
 			<div>
-				<img src="/logo.webp" class="w-30" alt="Yebehir Logo" />
+				<img src="/logoDark.webp" class="w-30" alt="Yebehir Logo" />
 				<h4 class="mb-4 font-semibold">Yebhir Ventures</h4>
 
 				<div class="flex flex-col gap-2 text-sm">
