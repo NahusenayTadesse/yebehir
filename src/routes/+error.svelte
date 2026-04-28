@@ -1,7 +1,15 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import { Button } from '$lib/components/ui/button';
-	import { RefreshCwIcon, ArrowLeftIcon, MailIcon, CircleAlert, House } from '@lucide/svelte';
+	import {
+		HomeIcon,
+		RefreshCwIcon,
+		AlertCircleIcon,
+		ArrowLeftIcon,
+		MailIcon,
+		CircleAlert,
+		House
+	} from '@lucide/svelte';
 
 	// SvelteKit error data
 	const status = $derived(page.status);
@@ -56,13 +64,9 @@
 		</p>
 
 		<div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-			<Button
-				href="/dashboard"
-				size="lg"
-				class="w-full gap-2 font-bold tracking-widest uppercase sm:w-auto"
-			>
+			<Button href="/" size="lg" class="w-full gap-2 font-bold tracking-widest uppercase sm:w-auto">
 				<House class="size-4" />
-				Back to Dashboard
+				Back to Home
 			</Button>
 
 			<Button variant="outline" size="lg" onclick={handleRefresh} class="w-full gap-2 sm:w-auto">

@@ -39,11 +39,11 @@
 
 		{
 			title: 'Events & Portfolio',
-			url: '/dashboard/portfolio',
+			url: '/dashboard/events',
 			icon: Briefcase,
 			items: [
-				{ title: 'All Portfolio Items', url: '/dashboard/portfolio', icon: Sheet },
-				{ title: 'Add Event', url: '/dashboard/portfolio/add', icon: Plus }
+				{ title: 'All Portfolio Items', url: '/dashboard/events', icon: Sheet },
+				{ title: 'Add Event', url: '/dashboard/events/add-event', icon: Plus }
 			]
 		},
 
@@ -123,8 +123,9 @@
 					title="Go to Website Home Page"
 					target="_blank"
 				>
-					<img src="/logoDark.webp" class="h-16 w-16 object-contain" alt="Logo" />
-					<h4 class="text-center text-[16px]! font-bold text-primary">Yebehir Ventures</h4>
+					<img src="/logoDark.webp" class="block h-16 w-16 object-contain dark:hidden" alt="Logo" />
+					<img src="/logo.webp" class="hidden h-16 w-16 object-contain dark:block" alt="Logo" />
+					<h4 class="text-center text-[16px]! font-bold">Yebehir Ventures</h4>
 				</a>
 			</Sidebar.GroupLabel>
 
