@@ -20,21 +20,21 @@
 <Card
 	class="group shadow-lg-lg hover:shadow-lg-xl overflow-hidden border-0 bg-card transition-all duration-300 hover:-translate-y-1"
 >
-	<div class="relative aspect-[4/3] overflow-hidden">
+	<a href="/events/{item.slug}" class="relative aspect-4/3 overflow-hidden">
 		<img
 			src="/files/{item.featuredImage}"
 			alt={item.title}
 			class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
 		/>
 		<div
-			class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+			class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
 		></div>
 		{#if item.eventType}
 			<Badge class="absolute top-4 left-4 bg-primary/90 text-primary-foreground backdrop-blur-sm">
 				{item.eventType}
 			</Badge>
 		{/if}
-	</div>
+	</a>
 	<CardContent class="space-y-3 p-5">
 		<h3
 			class="line-clamp-1 text-lg font-semibold text-foreground transition-colors group-hover:text-primary"

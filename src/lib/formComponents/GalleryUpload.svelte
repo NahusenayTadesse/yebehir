@@ -46,7 +46,7 @@
 	<Label
 		for={name}
 		class="group  relative flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed py-2! transition-all
-			{isDragging
+    			{isDragging
 			? 'border-primary bg-primary/5'
 			: 'border-muted-foreground/25 bg-muted/50 hover:border-primary/50 hover:bg-muted'}"
 		ondragover={handleDragOver}
@@ -140,7 +140,7 @@
 
 		{#if images.length}
 			<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-				{#each images as i}
+				{#each images as i, index}
 					<div
 						class="group relative flex flex-col overflow-hidden rounded-xl border bg-card p-2 shadow-sm transition-all hover:shadow-md"
 					>

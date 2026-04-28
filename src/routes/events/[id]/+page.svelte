@@ -5,6 +5,7 @@
 	import { Separator } from '$lib/components/ui/separator';
 	import { ArrowLeftIcon, CalendarIcon, MapPinIcon, UserIcon, SparklesIcon } from '@lucide/svelte';
 	import type { PortfolioItem } from '$lib/data/portfolio';
+	import Gallery from '$lib/components/gallery.svelte';
 
 	// const {
 	// 	item,
@@ -34,11 +35,7 @@
 <div class="min-h-dvh" in:fade={{ duration: 300 }}>
 	<!-- Hero Image Section -->
 	<div class="relative h-[50vh] overflow-hidden lg:h-[60vh]">
-		<img
-			src={item.featuredImage || '$staticServer/placeholder.svg?size=wide'}
-			alt={item.title}
-			class="h-full w-full object-cover"
-		/>
+		<img src={`/files/${item.featuredImage}`} alt={item.title} class="h-full w-full object-cover" />
 		<div
 			class="absolute inset-0 bg-linear-to-t from-background via-background/40 to-transparent"
 		></div>
@@ -84,8 +81,8 @@
 				<div class="mb-6 flex flex-wrap gap-4 lg:gap-6">
 					{#if formattedDate}
 						<div class="flex items-center gap-2 text-muted-foreground">
-							<div class="flex size-9 items-center justify-center rounded-full bg-primary/10">
-								<CalendarIcon class="size-4 text-primary" />
+							<div class="flex size-9 items-center justify-center rounded-full">
+								<CalendarIcon class="size-4 " />
 							</div>
 							<div>
 								<p class="text-xs text-muted-foreground/70">Date</p>
@@ -95,8 +92,8 @@
 					{/if}
 					{#if item.client}
 						<div class="flex items-center gap-2 text-muted-foreground">
-							<div class="flex size-9 items-center justify-center rounded-full bg-primary/10">
-								<UserIcon class="size-4 text-primary" />
+							<div class="flex size-9 items-center justify-center rounded-full">
+								<UserIcon class="size-4" />
 							</div>
 							<div>
 								<p class="text-xs text-muted-foreground/70">Client</p>
@@ -106,8 +103,8 @@
 					{/if}
 					{#if item.location}
 						<div class="flex items-center gap-2 text-muted-foreground">
-							<div class="flex size-9 items-center justify-center rounded-full bg-primary/10">
-								<MapPinIcon class="size-4 text-primary" />
+							<div class="flex size-9 items-center justify-center rounded-full">
+								<MapPinIcon class="size-4" />
 							</div>
 							<div>
 								<p class="text-xs text-muted-foreground/70">Location</p>
@@ -123,7 +120,10 @@
 				{#if item.description}
 					<div class="flex flex-col gap-4">
 						<div class="flex items-center gap-2">
-							<SparklesIcon class="size-5 text-primary" />
+							<SparklesIcon
+								class="size-5
+							"
+							/>
 							<h2 class="text-lg font-semibold text-foreground">About This Event</h2>
 						</div>
 						<p class="text-base leading-relaxed text-muted-foreground lg:text-lg">
@@ -160,7 +160,7 @@
 				<!-- CTA Section -->
 				<div class="mt-8 flex flex-col gap-3 sm:flex-row">
 					<Button class="flex-1 rounded-full" size="lg">Contact Us About This Event</Button>
-					<Button variant="outline" class="flex-1 rounded-full" size="lg" onclick={onBack}
+					<Button variant="outline" class="flex-1 rounded-full" size="lg" href="/events"
 						>View More Events</Button
 					>
 				</div>
@@ -171,3 +171,51 @@
 	<!-- Spacer -->
 	<div class="h-20"></div>
 </div>
+
+<!-- ... existing code ... -->
+
+<!-- Gallery Section -->
+{#if data?.images}
+	<section class="relative bg-muted/30 py-20 lg:py-32">
+		<!-- Subtle Decorative Background Element -->
+		<div class="pointer-events-none absolute inset-0 overflow-hidden">
+			<div class="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-primary/5 blur-3xl"></div>
+			<div class="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-primary/5 blur-3xl"></div>
+		</div>
+
+		<div class="container mx-auto px-4">
+			<!-- Gallery Header -->
+			<div
+				class="mb-12 flex flex-col items-center space-y-4 text-center"
+				in:fade={{ duration: 600, delay: 200 }}
+			>
+				<Badge variant="outline" class="px-4 py-1 tracking-widest uppercase">Gallery</Badge>
+				<h2 class="text-3xl font-bold tracking-tight lg:text-5xl">Capturing the Moments</h2>
+				<div class="h-1 w-20 rounded-full"></div>
+				<p class="max-w-2xl">
+					A visual journey through {item.title}. Take a closer look at the details and atmosphere we
+					captured during this event.
+				</p>
+			</div>
+
+			<!-- The Gallery Component -->
+			<div
+				class="relative rounded-3xl border bg-background/50 p-4 shadow-2xl backdrop-blur-sm lg:p-8"
+			>
+				<Gallery bento images={data.images} title={data?.portfolioItems?.title} />
+			</div>
+
+			<!-- Bottom CTA or Footer Note -->
+			<div class="mt-12 text-center">
+				<p class="text-sm italic">
+					Interested in seeing more? <a href="/events" class="font-medium hover:underline"
+						>Explore our full archive</a
+					>.
+				</p>
+			</div>
+		</div>
+	</section>
+{/if}
+
+<!-- Extra Padding for Footer -->
+<div class="h-12"></div>
