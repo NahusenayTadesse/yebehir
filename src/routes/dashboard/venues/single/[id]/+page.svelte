@@ -47,6 +47,7 @@
 	import EditGallery from './editGallery.svelte';
 	import { formatEthiopianDate } from '$lib/global.svelte.js';
 	import AddFeatures from './addFeatures.svelte';
+	import AddVideo from './addVideo.svelte';
 	$effect(() => {
 		if ($message) {
 			if ($message.type === 'error') {
@@ -179,6 +180,15 @@
 		editForm={data?.editForm}
 		deleteForm={data?.deleteForm}
 		features={data?.features}
+	/>
+</div>
+
+<div class="my-8">
+	<AddVideo
+		data={data?.addVideoForm}
+		editForm={data?.editVideoForm}
+		deleteForm={data?.deleteForm}
+		videos={data?.videos}
 	/>
 </div>
 <div class="mx-auto my-12 px-4 sm:px-6 lg:px-4">

@@ -36,3 +36,15 @@ export const deleteFeature = z.object({
 });
 
 export type DeleteFeature = z.infer<typeof deleteFeature>;
+const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
+export const addVideo = z.object({
+	videoUrl: z.url('Enter a valid YouTube URL').regex(youtubeRegex, 'Only YouTube URLs are allowed')
+});
+
+export type AddVideo = z.infer<typeof addVideo>;
+export const editVideo = z.object({
+	id: z.coerce.number(),
+	videoUrl: z.url('Enter a valid YouTube URL').regex(youtubeRegex, 'Only YouTube URLs are allowed')
+});
+
+export type EditVideo = z.infer<typeof editVideo>;

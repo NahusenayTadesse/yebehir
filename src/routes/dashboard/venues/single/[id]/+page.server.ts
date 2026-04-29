@@ -1,13 +1,22 @@
 import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
 
-import { deleteFeature, edit, editFeature, editGallery, addFeature } from './schema';
+import {
+	deleteFeature,
+	edit,
+	editFeature,
+	editGallery,
+	addFeature,
+	addVideo,
+	editVideo
+} from './schema';
 
 import { db } from '$lib/server/db';
 import {
 	venueDetails as products,
 	venueImages as productImages,
-	venueFeatures as paymentMethods
+	venueFeatures as paymentMethods,
+	venueVideos
 } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 import { fail, message } from 'sveltekit-superforms';
@@ -220,6 +229,102 @@ export const actions: Actions = {
 				{
 					type: 'error',
 					text: 'Error while deleting Feature.'
+				},
+				{ status: 500 }
+			);
+		}
+	},
+	addVideo: async ({ request, params }) => {
+		const form = await superValidate(request, zod4(addVideo));
+		const { id } = params;
+
+		if (!form.valid) {
+			return message(
+				form,
+				{ type: 'error', text: 'Please check the form for Errors' },
+				{ status: 400 }
+			);
+		}
+
+		const { videoUrl } = form.data;
+
+		try {
+			await db.insert(venueVideos).values({
+				videoUrl,
+				venueId: Number(id)
+			});
+
+			return message(form, { type: 'success', text: 'Video Successfully Created' });
+		} catch (err: any) {
+			return message(
+				form,
+				{
+					type: 'error',
+					text:
+						err.code === 'ER_DUP_ENTRY'
+							? 'Venue is already taken. Please choose another one.'
+							: err.message
+				},
+				{
+					status: 500
+				}
+			);
+		}
+	},
+	editVideo: async ({ request }) => {
+		const form = await superValidate(request, zod4(editVideo));
+
+		if (!form.valid) {
+			return message(
+				form,
+				{ type: 'error', text: 'Please check the form for Errors' },
+				{ status: 400 }
+			);
+		}
+
+		const { id, videoUrl } = form.data;
+
+		try {
+			await db
+				.update(venueVideos)
+				.set({ videoUrl })
+				.where(eq(venueVideos.id, Number(id)));
+
+			return message(form, { type: 'success', text: 'Video Successfully Updated' });
+		} catch (err: any) {
+			return message(
+				form,
+				{
+					type: 'error',
+					text:
+						err.code === 'ER_DUP_ENTRY'
+							? 'Venue Video is already taken. Please choose another one.'
+							: err.message
+				},
+				{
+					status: 500
+				}
+			);
+		}
+	},
+	deleteVideo: async ({ request }) => {
+		const form = await superValidate(request, zod4(deleteFeature));
+
+		if (!form.valid) {
+			return fail(400, { form });
+		}
+
+		const { id } = form.data;
+
+		try {
+			await db.delete(venueVideos).where(eq(venueVideos.id, id));
+			return message(form, { type: 'success', text: 'Video Successfully Deleted' });
+		} catch (err: any) {
+			return message(
+				form,
+				{
+					type: 'error',
+					text: 'Error while deleting Video.'
 				},
 				{ status: 500 }
 			);

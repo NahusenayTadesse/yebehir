@@ -1,28 +1,17 @@
 import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
-import {
-	deleteFeature,
-	edit,
-	editFeature,
-	editGallery,
-	addFeature,
-	addVideo,
-	editVideo,
-	deleteVideo
-} from './schema';
 
 import { db } from '$lib/server/db';
 import {
 	venueDetails as event,
 	venueImages as productImages,
-	user,
 	venueFeatures,
 	venueVideos
 } from '$lib/server/db/schema';
-import { eq, sql, getTableColumns } from 'drizzle-orm';
-import type { LayoutServerLoad } from './$types';
+import { eq } from 'drizzle-orm';
+import type { PageServerLoad } from './$types';
 
-export const load: LayoutServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params }) => {
 	const { id } = params;
 
 	const result = await db
@@ -35,12 +24,8 @@ export const load: LayoutServerLoad = async ({ params }) => {
 	const images = result.map((img) => img.url);
 
 	const product = await db
-		.select({
-			...getTableColumns(event),
-			createdBy: user.name
-		})
+		.select()
 		.from(event)
-		.leftJoin(user, eq(event.createdBy, user.id))
 		.where(eq(event.id, Number(id)))
 		.limit(1)
 		.then((rows) => rows[0]);
@@ -62,25 +47,10 @@ export const load: LayoutServerLoad = async ({ params }) => {
 		.from(venueVideos)
 		.where(eq(venueVideos.venueId, Number(id)));
 
-	const addForm = await superValidate(zod4(addFeature));
-	const addVideoForm = await superValidate(zod4(addVideo));
-	const editForm = await superValidate(zod4(editFeature));
-	const editVideoForm = await superValidate(zod4(editVideo));
-	const deleteForm = await superValidate(zod4(deleteFeature));
-	const form = await superValidate(product, zod4(edit));
-	const galleryEdit = await superValidate(zod4(editGallery));
-
 	return {
-		product,
+		venue: product,
 		videos,
-		addForm,
-		addVideoForm,
-		editVideoForm,
-		editForm,
-		deleteForm,
-		form,
 		images,
-		features,
-		galleryEdit
+		features
 	};
 };
