@@ -100,7 +100,7 @@ export const actions: Actions = {
 			if (!id) {
 				return message(
 					form,
-					{ type: 'error', text: 'Unexpected Error: Product ID not provided' },
+					{ type: 'error', text: 'Unexpected Error: Event ID not provided' },
 					{ status: 500 }
 				);
 			}
@@ -136,9 +136,9 @@ export const actions: Actions = {
 				}
 			});
 
-			return message(form, { type: 'success', text: 'Product Gallery added Successfully!' });
+			return message(form, { type: 'success', text: 'Event Gallery added Successfully!' });
 		} catch (err) {
-			console.error('Error marking adding product gallery:', err);
+			console.error('Error marking adding event gallery:', err);
 			return message(
 				form,
 				{ type: 'error', text: `Unexpected Error: ${err?.message}` },

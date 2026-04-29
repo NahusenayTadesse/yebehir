@@ -1,9 +1,14 @@
 import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
-import { edit, editGallery } from './schema';
+import { deleteFeature, edit, editFeature, editGallery, addFeature } from './schema';
 
 import { db } from '$lib/server/db';
-import { portfolio as event, portfolioGallery as productImages, user } from '$lib/server/db/schema';
+import {
+	venueDetails as event,
+	venueImages as productImages,
+	user,
+	venueFeatures
+} from '$lib/server/db/schema';
 import { eq, sql, getTableColumns } from 'drizzle-orm';
 import type { LayoutServerLoad } from './$types';
 
@@ -15,7 +20,7 @@ export const load: LayoutServerLoad = async ({ params }) => {
 			url: productImages.imageUrl
 		})
 		.from(productImages)
-		.where(eq(productImages.portfolioId, Number(id)));
+		.where(eq(productImages.venueId, Number(id)));
 
 	const images = result.map((img) => img.url);
 
@@ -30,13 +35,29 @@ export const load: LayoutServerLoad = async ({ params }) => {
 		.limit(1)
 		.then((rows) => rows[0]);
 
+	const features = await db
+		.select({
+			id: venueFeatures.id,
+			name: venueFeatures.name,
+			description: venueFeatures.description
+		})
+		.from(venueFeatures)
+		.where(eq(venueFeatures.venueId, Number(id)));
+
+	const addForm = await superValidate(zod4(addFeature));
+	const editForm = await superValidate(zod4(editFeature));
+	const deleteForm = await superValidate(zod4(deleteFeature));
 	const form = await superValidate(product, zod4(edit));
 	const galleryEdit = await superValidate(zod4(editGallery));
 
 	return {
 		product,
+		addForm,
+		editForm,
+		deleteForm,
 		form,
 		images,
+		features,
 		galleryEdit
 	};
 };

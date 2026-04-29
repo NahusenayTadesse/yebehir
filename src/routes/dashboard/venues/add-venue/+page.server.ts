@@ -20,7 +20,7 @@ export const load: PageServerLoad = async () => {
 import { saveUploadedFile } from '$lib/server/upload.js';
 
 export const actions: Actions = {
-	addEvent: async ({ request, cookies, locals }) => {
+	addVenue: async ({ request, cookies, locals }) => {
 		const form = await superValidate(request, zod4(add));
 		console.log(form);
 
@@ -37,8 +37,6 @@ export const actions: Actions = {
 			// to avoid keeping a DB connection open during slow network I/O)
 			const featuredImage = await saveUploadedFile(image);
 			const galleryImages = await uploadGallery(gallery);
-
-			let newSlug: string;
 
 			// 2. Insert the main product
 			const [product] = await tx

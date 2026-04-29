@@ -17,7 +17,7 @@ export const columns = [
 	},
 
 	{
-		accessorKey: 'image',
+		accessorKey: 'featuredImage',
 		header: 'Featured Image',
 		sortable: true,
 		cell: ({ row }) => {
@@ -30,10 +30,10 @@ export const columns = [
 	},
 
 	{
-		accessorKey: 'title',
+		accessorKey: 'name',
 		header: ({ column }) =>
 			renderComponent(DataTableSort, {
-				name: 'Title',
+				name: 'Name',
 				onclick: column.getToggleSortingHandler()
 			}),
 		sortable: true,
@@ -41,30 +41,34 @@ export const columns = [
 			// You can pass whatever you need from `row.original` to the component
 			return renderComponent(DataTableLinks, {
 				id: row.original.id,
-				name: row.original.title,
-				link: '/dashboard/events/single'
+				name: row.original.name,
+				link: '/dashboard/venues/single'
 			});
 		}
 	},
 
 	{
-		accessorKey: 'eventType',
+		accessorKey: 'capacity',
 		header: ({ column }) =>
 			renderComponent(DataTableSort, {
-				name: 'Event Type',
+				name: 'Capacity',
 				onclick: column.getToggleSortingHandler()
 			}),
 		sortable: true
 	},
 
 	{
-		accessorKey: 'client',
+		accessorKey: 'features',
 		header: ({ column }) =>
 			renderComponent(DataTableSort, {
-				name: 'Client',
+				name: 'Number of Features',
 				onclick: column.getToggleSortingHandler()
 			}),
-		sortable: true
+		sortable: true,
+		cell: ({ row }) => {
+			// You can pass whatever you need from `row.original` to the component
+			return row.original.features + ' features';
+		}
 	},
 
 	{
@@ -78,31 +82,13 @@ export const columns = [
 	},
 
 	{
-		accessorKey: 'date',
-		header: ({ column }) =>
-			renderComponent(DataTableSort, {
-				name: 'Event Date',
-				onclick: column.getToggleSortingHandler()
-			}),
-		sortable: true,
-		cell: ({ row }) => {
-			// You can pass whatever you need from `row.original` to the component
-			return formatEthiopianDate(row.original.date);
-		}
-	},
+		accessorKey: 'bookingPolicy',
+		header: 'Booking Policy',
 
-	{
-		accessorKey: 'isFeaturedHome',
-		header: ({ column }) =>
-			renderComponent(DataTableSort, {
-				name: 'Featured on Home Page',
-				onclick: column.getToggleSortingHandler()
-			}),
-		sortable: true,
 		cell: ({ row }) => {
 			// You can pass whatever you need from `row.original` to the component
-			return renderComponent(Statuses, {
-				status: row.original.isFeaturedHome ? 'Yes' : 'No'
+			return renderComponent(BigText, {
+				text: row.original.bookingPolicy
 			});
 		}
 	},

@@ -17,13 +17,12 @@
 	import Errors from '$lib/formComponents/Errors.svelte';
 
 	let singleTable = $derived([
-		{ name: 'Title', value: data.product?.title },
-		{ name: 'Slug', value: data.product?.slug },
-		{ name: 'Event Type', value: data.product?.eventType },
-		{ name: 'Date', value: formatEthiopianDate(data.product?.date) },
-		{ name: 'Client', value: data.product?.client },
+		{ name: 'Name', value: data.product?.name },
+		{ name: 'Capacity', value: data.product?.capacity },
 		{ name: 'Location', value: data.product?.location },
-		{ name: 'Event Description', value: data.product?.description },
+
+		{ name: 'Booking Policy', value: data.product?.bookingPolicy },
+		{ name: 'Description', value: data.product?.description },
 		{ name: 'Added On', value: formatEthiopianDate(data.product?.createdAt) },
 		{ name: 'Added By', value: data.product?.createdBy }
 	]);
@@ -47,6 +46,7 @@
 	import Gallery from '$lib/components/gallery.svelte';
 	import EditGallery from './editGallery.svelte';
 	import { formatEthiopianDate } from '$lib/global.svelte.js';
+	import AddFeatures from './addFeatures.svelte';
 	$effect(() => {
 		if ($message) {
 			if ($message.type === 'error') {
@@ -61,11 +61,11 @@
 </script>
 
 <svelte:head>
-	<title>Event Details</title>
+	<title>Venue Details</title>
 </svelte:head>
 
 <SingleView
-	title={data?.product?.title}
+	title={data?.product?.name}
 	photo={String(data?.product?.featuredImage)}
 	class="w-full!"
 >
@@ -99,42 +99,24 @@
 			>
 				<Errors allErrors={$allErrors} />
 
-				<InputComp {form} {errors} type="text" name="title" label="Event Title" required />
-
 				<InputComp
 					{form}
 					{errors}
 					type="text"
-					name="slug"
-					label="Event Slug"
-					placeholder="Enter Slug"
-				/>
-
-				<InputComp
-					{form}
-					{errors}
-					type="text"
-					name="eventType"
-					label="Event Type"
-					placeholder="Enter Event Type"
-				/>
-				<InputComp
-					{form}
-					{errors}
-					type="text"
-					name="client"
-					label="Client"
-					placeholder="Enter Client"
+					name="name"
+					label="Venue Name"
+					placeholder="Enter Venue Name"
 					required
 				/>
 
 				<InputComp
 					{form}
 					{errors}
-					type="date"
-					name="date"
-					label="Event Date"
-					placeholder="Enter Event Date"
+					type="number"
+					name="capacity"
+					label="Capacity"
+					placeholder="Enter Capacity"
+					required
 				/>
 
 				<InputComp
@@ -142,8 +124,19 @@
 					{errors}
 					type="text"
 					name="location"
-					label="Event Location"
-					placeholder="Enter Event Location"
+					label="Venue Location"
+					placeholder="Enter Venue Location"
+					required
+				/>
+
+				<InputComp
+					{form}
+					{errors}
+					type="textarea"
+					name="bookingPolicy"
+					label="Booking Policy"
+					placeholder="Enter Booking Policy"
+					required
 				/>
 
 				<InputComp
@@ -151,17 +144,9 @@
 					{errors}
 					type="textarea"
 					name="description"
-					label="Product Discription"
+					label="Venue Discription"
 					placeholder="Enter Product Description"
-				/>
-
-				<InputComp
-					{form}
-					{errors}
-					type="checkboxSingle"
-					name="isFeaturedOnHome"
-					label="Featured on Home"
-					placeholder="Should this event be featured on the home page?"
+					required
 				/>
 
 				<InputComp
@@ -170,8 +155,9 @@
 					type="file"
 					name="image"
 					image={data?.product?.featuredImage ?? ''}
-					label="Event Featured Image"
-					placeholder="Upload Event Featured Image"
+					label="Venue Featured Image"
+					placeholder="Upload Venue Featured Image"
+					required
 				/>
 
 				<Button form="edit" type="submit" class="mt-4">
@@ -187,6 +173,14 @@
 	{/if}
 </SingleView>
 
+<div class="my-8">
+	<AddFeatures
+		data={data?.addForm}
+		editForm={data?.editForm}
+		deleteForm={data?.deleteForm}
+		features={data?.features}
+	/>
+</div>
 <div class="mx-auto my-12 px-4 sm:px-6 lg:px-4">
 	{#if data?.product?.title}
 		<div class="mb-6 border-b border-gray-100 pb-4">

@@ -75,16 +75,6 @@
 		<InputComp
 			{form}
 			{errors}
-			type="text"
-			name="slug"
-			label="Venue Slug"
-			placeholder="Enter Slug"
-			required
-		/>
-
-		<InputComp
-			{form}
-			{errors}
 			type="number"
 			name="capacity"
 			label="Capacity"
@@ -145,11 +135,11 @@
 
 		<Button type="submit" class="mt-4" form="main">
 			{#if $delayed}
-				<LoadingBtn name="Adding Event" />
+				<LoadingBtn name="Adding Venue" />
 			{:else}
 				<Plus class="h-4 w-4" />
 
-				Add Event
+				Add Venue
 			{/if}
 		</Button>
 	</form>

@@ -102,7 +102,7 @@ export const actions: Actions = {
 				form,
 				{
 					type: 'error',
-					text: 'An error occurred while adding the product.'
+					text: 'An error occurred while adding the event.'
 				},
 				{ status: 500 }
 			);

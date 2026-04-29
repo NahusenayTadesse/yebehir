@@ -22,10 +22,10 @@
 			<Frown class="h-12 w-16  animate-bounce" />
 			Venue List is Empty
 		</p>
-		<Button href="/dashboard/events/add-event"><Plus />Add New Event</Button>
+		<Button href="/dashboard/venues/add-venue"><Plus />Add New Venue</Button>
 	</div>
 {:else}
-	<h2 class="my-4 text-2xl">No of Portfolio Events: {data.eventList?.length}</h2>
+	<h2 class="my-4 text-2xl">No of Venues: {data.eventList?.length}</h2>
 
 	<div class="mt-8 mb-4 w-6xl p-0 pt-4 lg:w-full lg:p-0">
 		<FilterMenu

@@ -1,10 +1,14 @@
 import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
 
-import { edit, editGallery } from './schema';
+import { deleteFeature, edit, editFeature, editGallery, addFeature } from './schema';
 
 import { db } from '$lib/server/db';
-import { portfolio as products, portfolioGallery as productImages } from '$lib/server/db/schema';
+import {
+	venueDetails as products,
+	venueImages as productImages,
+	venueFeatures as paymentMethods
+} from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 import { fail, message } from 'sveltekit-superforms';
 import { setFlash } from 'sveltekit-flash-message/server';
@@ -24,8 +28,7 @@ export const actions: Actions = {
 			return fail(400, { form });
 		}
 
-		const { title, slug, client, eventType, isFeaturedOnHome, image, date, location, description } =
-			form.data;
+		const { name, capacity, bookingPolicy, image, location, description } = form.data;
 
 		try {
 			if (image) {
@@ -34,15 +37,13 @@ export const actions: Actions = {
 				await db
 					.update(products)
 					.set({
-						title,
-						slug,
-						eventType,
-						client,
-						isFeaturedOnHome,
-						featuredImage,
-						date: new Date(date),
+						name,
+						capacity,
+						bookingPolicy,
+
 						location,
 						description,
+						featuredImage,
 						updatedBy: locals?.user?.id
 					})
 					.where(eq(products.id, Number(id)));
@@ -50,12 +51,10 @@ export const actions: Actions = {
 				await db
 					.update(products)
 					.set({
-						title,
-						slug,
-						eventType,
-						client,
-						isFeaturedOnHome,
-						date: new Date(date),
+						name,
+						capacity,
+						bookingPolicy,
+
 						location,
 						description,
 						updatedBy: locals?.user?.id
@@ -63,11 +62,11 @@ export const actions: Actions = {
 					.where(eq(products.id, Number(id)));
 			}
 
-			return message(form, { type: 'success', text: 'Event Portfolio Updated Successfully' });
+			return message(form, { type: 'success', text: 'Venue Updated Successfully' });
 		} catch (err) {
 			console.error(err?.message);
 
-			return message(form, { type: 'error', text: 'Event Portfolio Update Failed' + err?.message });
+			return message(form, { type: 'error', text: 'Venue Update Failed' + err?.message });
 		}
 	},
 
@@ -82,7 +81,7 @@ export const actions: Actions = {
 
 			await db.delete(products).where(eq(products.id, Number(id)));
 
-			setFlash({ type: 'success', message: 'Event Deleted Successfully!' }, cookies);
+			setFlash({ type: 'success', message: 'Venue Deleted Successfully!' }, cookies);
 		} catch (err) {
 			console.error('Error deleting Event:', err);
 			setFlash({ type: 'error', message: `Unexpected Error: ${err?.message}` }, cookies);
@@ -100,7 +99,7 @@ export const actions: Actions = {
 			if (!id) {
 				return message(
 					form,
-					{ type: 'error', text: 'Unexpected Error: Product ID not provided' },
+					{ type: 'error', text: 'Unexpected Error: Venue Id not provided' },
 					{ status: 500 }
 				);
 			}
@@ -123,22 +122,22 @@ export const actions: Actions = {
 				// even if galleryImages.length is 0 (e.g., you just deleted an old photo)
 				if (finalList.length > 0) {
 					const imageRecords = finalList.map((url) => ({
-						portfolioId: Number(id),
+						venueId: Number(id),
 						imageUrl: url
 					}));
 
 					// Wipe the old associations and replace with the new "finalList"
-					await tx.delete(productImages).where(eq(productImages.portfolioId, Number(id)));
+					await tx.delete(productImages).where(eq(productImages.venueId, Number(id)));
 					await tx.insert(productImages).values(imageRecords);
 				} else {
 					// Handle the case where all images were removed
-					await tx.delete(productImages).where(eq(productImages.portfolioId, Number(id)));
+					await tx.delete(productImages).where(eq(productImages.venueId, Number(id)));
 				}
 			});
 
-			return message(form, { type: 'success', text: 'Product Gallery added Successfully!' });
+			return message(form, { type: 'success', text: 'Venue Gallery added Successfully!' });
 		} catch (err) {
-			console.error('Error marking adding product gallery:', err);
+			console.error('Error marking adding Venue gallery:', err);
 			return message(
 				form,
 				{ type: 'error', text: `Unexpected Error: ${err?.message}` },
@@ -146,73 +145,84 @@ export const actions: Actions = {
 			);
 		}
 	},
-	editPrice: async ({ request }) => {
-		const form = await superValidate(request, zod4(editPrice));
-
-		if (!form.valid) {
-			return message(form, { type: 'error', text: 'Invalid form data' });
-		}
-
-		const { id, price, amount } = form.data;
-
-		try {
-			await db
-				.update(priceList)
-				.set({
-					id,
-					price: String(price),
-					amount
-				})
-				.where(eq(priceList.id, id));
-
-			return message(form, { type: 'success', text: 'Product Price updated Successfully!' });
-		} catch (err) {
-			console.error('Error editing product price:', err);
-			return message(form, { type: 'error', text: `Unexpected Error: ${err?.message}` });
-		}
-	},
-	addPrice: async ({ request, params }) => {
-		const form = await superValidate(request, zod4(addPrice));
+	add: async ({ request, params }) => {
+		const form = await superValidate(request, zod4(addFeature));
 		const { id } = params;
 
 		if (!form.valid) {
-			return message(form, { type: 'error', text: 'Invalid form data' });
+			return message(form, { type: 'error', text: 'Please check the form for Errors' });
 		}
 
-		const { price, amount } = form.data;
+		const { name, description } = form.data;
 
 		try {
-			await db.insert(priceList).values({
-				productId: Number(id),
-				price: String(price),
-				amount
+			await db.insert(paymentMethods).values({
+				name,
+				description,
+				venueId: Number(id)
 			});
 
-			return message(form, { type: 'success', text: 'Product Price added Successfully!' });
-		} catch (err) {
-			console.error('Error adding product price:', err);
-			return message(form, { type: 'error', text: `Unexpected Error: ${err?.message}` });
+			return message(form, { type: 'success', text: 'Feature Successfully Created' });
+		} catch (err: any) {
+			return message(
+				form,
+				{
+					type: 'error',
+					text:
+						err.code === 'ER_DUP_ENTRY'
+							? 'Feature is already taken. Please choose another one.'
+							: err.message
+				},
+				{
+					status: 500
+				}
+			);
 		}
 	},
-	deletePrice: async ({ request }) => {
-		const form = await superValidate(request, zod4(editPrice));
+	editFeature: async ({ request }) => {
+		const form = await superValidate(request, zod4(editFeature));
 
 		if (!form.valid) {
-			return message(form, { type: 'error', text: 'Invalid form data' });
+			return fail(400, { form });
 		}
 
-		const { id, price, amount } = form.data;
+		const { id, name, description } = form.data;
 
 		try {
-			await db.delete(priceList).where(eq(priceList.id, id));
-
+			await db.update(paymentMethods).set({ name, description }).where(eq(paymentMethods.id, id));
+			return message(form, { type: 'success', text: 'Feature  Successfully Updated' });
+		} catch (err: any) {
+			if (err.code === 'ER_DUP_ENTRY') return setError(form, 'name', 'Feature  already exists.');
 			return message(form, {
-				type: 'success',
-				text: `Variant ${amount} with ${price} price deleted Successfully!`
+				type: 'error',
+				text:
+					err.code === 'ER_DUP_ENTRY'
+						? 'Feature  is already taken. Please choose another one.'
+						: err.message
 			});
-		} catch (err) {
-			console.error('Error deleting Variant price:', err);
-			return message(form, { type: 'error', text: `Unexpected Error: ${err?.message}` });
+		}
+	},
+	deleteFeature: async ({ request }) => {
+		const form = await superValidate(request, zod4(deleteFeature));
+
+		if (!form.valid) {
+			return fail(400, { form });
+		}
+
+		const { id } = form.data;
+
+		try {
+			await db.delete(paymentMethods).where(eq(paymentMethods.id, id));
+			return message(form, { type: 'success', text: 'Feature Successfully Deleted' });
+		} catch (err: any) {
+			return message(
+				form,
+				{
+					type: 'error',
+					text: 'Error while deleting Feature.'
+				},
+				{ status: 500 }
+			);
 		}
 	}
 };
