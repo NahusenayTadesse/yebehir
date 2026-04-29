@@ -6,6 +6,8 @@ export const venueDetails = mysqlTable('venue_details', {
 	name: varchar('name', { length: 255 }).default('4 Kilo Plaza'),
 	description: text('description'),
 	capacity: int('capacity'),
+	location: varchar('location', { length: 255 }),
+	featuredImage: varchar('featuredImage', { length: 255 }),
 	bookingPolicy: text('booking_policy'),
 	...secureFields
 });

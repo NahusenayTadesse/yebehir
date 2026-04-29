@@ -15,6 +15,20 @@
       "when": 1777234821321,
       "tag": "0001_perpetual_paladin",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1777460524786,
+      "tag": "0002_burly_pretty_boy",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1777460639338,
+      "tag": "0003_careless_network",
+      "breakpoints": true
     }
   ]
 }

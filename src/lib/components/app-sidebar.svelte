@@ -49,22 +49,18 @@
 
 		{
 			title: 'Venue Management',
-			url: '/dashboard/venue',
+			url: '/dashboard/venues',
 			icon: MapPin,
 			items: [
-				{ title: '4 Kilo Plaza Info', url: '/dashboard/venue/info', icon: Sheet },
-				{ title: 'Booking Calendar', url: '/dashboard/venue/calendar', icon: CalendarDays }
+				{ title: 'Add New Venue', url: '/dashboard/venues/add-venue', icon: Plus },
+				{ title: 'View All Venues', url: '/dashboard/venues', icon: Sheet }
 			]
 		},
 
 		{
 			title: 'Services',
 			url: '/dashboard/services',
-			icon: TrendingUp,
-			items: [
-				{ title: 'Manage Services', url: '/dashboard/services', icon: Sheet },
-				{ title: 'Add Service', url: '/dashboard/services/add', icon: Plus }
-			]
+			icon: TrendingUp
 		},
 
 		{

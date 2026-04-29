@@ -6,16 +6,6 @@
 	import { ArrowLeftIcon, CalendarIcon, MapPinIcon, UserIcon, SparklesIcon } from '@lucide/svelte';
 	import type { PortfolioItem } from '$lib/data/portfolio';
 	import Gallery from '$lib/components/gallery.svelte';
-
-	// const {
-	// 	item,
-	// 	onBack
-	// }: {
-	// 	item: PortfolioItem;
-	// 	onBack: () => void;
-	// } = $props();
-	//
-
 	const { data } = $props();
 
 	const item: PortfolioItem = $derived(data?.portfolioItems);

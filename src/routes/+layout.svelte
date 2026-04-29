@@ -58,7 +58,7 @@
 <svelte:head><link rel="icon" href="/logo192.png" /></svelte:head>
 <ModeWatcher />
 <Toaster position="bottom-right" richColors closeButton />
-<ProgressBar color="#bc3d00" zIndex={1000} />
+<ProgressBar color="#F2E1D1" zIndex={1000} />
 
 {#if !page.url.pathname.startsWith('/dashboard')}
 	<Header />
