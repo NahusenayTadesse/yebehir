@@ -9,6 +9,7 @@
 
 	import Testimonial from '$lib/components/testimonial.svelte';
 	import Slider from '$lib/components/slider.svelte';
+	import Venues from '$lib/components/venues.svelte';
 
 	let { data } = $props();
 </script>
@@ -92,6 +93,12 @@
 			</Carousel.Root>
 		</div>
 	</section>
+{/if}
+
+{#if data?.venueList.length}
+	<div class="container mx-auto px-4 lg:px-16">
+		<Venues venues={data?.venueList} />
+	</div>
 {/if}
 
 {#if data?.blogItems.length}
