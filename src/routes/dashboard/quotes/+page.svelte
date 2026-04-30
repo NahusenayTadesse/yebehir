@@ -128,6 +128,22 @@
 						});
 			}
 		},
+
+		{
+			accessorKey: '',
+			header: 'Reply',
+			sortable: true,
+			cell: ({ row }) => {
+				// You can pass whatever you need from `row.original` to the component
+				return renderComponent(Reply, {
+					id: row.original.id,
+					data: data.replyForm,
+					name: row.original.name,
+					email: row.original.email
+				});
+			}
+		},
+
 		{
 			accessorKey: '',
 			header: 'Delete',
@@ -147,6 +163,7 @@
 	import Copy from '$lib/Copy.svelte';
 	import { formatEthiopianDate as formatDate } from '$lib/global.svelte.js';
 	import FilterMenu from '$lib/components/Table/FilterMenu.svelte';
+	import Reply from './reply.svelte';
 
 	let filteredList = $derived(data?.allQuotes);
 </script>
@@ -154,6 +171,9 @@
 <svelte:head>
 	<title>Quotes</title>
 </svelte:head>
+
+<Reply data={data?.replyForm} />
+<br />
 {#key data?.allQuotes}
 	<FilterMenu
 		data={data?.allQuotes}
