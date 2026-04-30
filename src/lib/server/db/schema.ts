@@ -40,10 +40,24 @@ export const venueVideos = mysqlTable('venue_videos', {
 	...secureFields
 });
 
+export const venueBooking = mysqlTable('venue_booking', {
+	id: int('id').primaryKey().autoincrement(),
+	venueId: int('venue_id')
+		.notNull()
+		.references(() => venueDetails.id, { onDelete: 'cascade' }),
+	guestCount: int('guest_count'),
+	description: text('description'),
+	status: varchar('status', { length: 50 }).default('pending'),
+	createdAt: timestamp('created_at').defaultNow()
+});
+
 export const services = mysqlTable('services', {
 	id: int('id').primaryKey().autoincrement(),
 	name: varchar('name', { length: 255 }).notNull(),
-	description: text('description')
+	description: text('description'),
+	longDescription: text('long_description'),
+	featuredImage: varchar('featured_image', { length: 255 }),
+	gallery: text('gallery')
 });
 
 export const quotes = mysqlTable('quotes', {

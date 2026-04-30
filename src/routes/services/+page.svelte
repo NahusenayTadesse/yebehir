@@ -23,9 +23,7 @@
 			<span>Our Services</span>
 		</div>
 		<h1 class="mb-6 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-			Ahead of the
-
-			<span class="text-secondary">Curve</span>
+			Ahead of the Curve
 		</h1>
 		<p class="mx-auto max-w-2xl text-lg leading-relaxed text-secondary sm:text-xl">
 			Yebehir Ventures provides a multi-service platform integrating cinematic event management,

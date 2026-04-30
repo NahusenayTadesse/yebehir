@@ -108,9 +108,7 @@
 </script>
 
 <Sidebar.Root collapsible="offcanvas" {...restProps}>
-	<Sidebar.Content
-		class="z-9999! h-full overflow-y-scroll pt-4 [scrollbar-width:thin] {bgGradient}"
-	>
+	<Sidebar.Content class="z-9999! h-full overflow-y-scroll pt-4 [scrollbar-width:thin]">
 		<Sidebar.Group>
 			<Sidebar.GroupLabel>
 				<a

@@ -73,6 +73,7 @@
 		"nodemailer": "^8.0.6",
 		"papaparse": "^5.5.3",
 		"pluralize": "^8.0.0",
+		"quill": "^2.0.3",
 		"svelte-sonner": "^1.1.1"
 	}
 }

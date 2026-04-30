@@ -1,104 +1,120 @@
 import { renderComponent } from '$lib/components/ui/data-table/index.js';
 import DataTableLinks from '$lib/components/Table/data-table-links.svelte';
+import DataTableActions from './data-table-actions.svelte';
 import DataTableSort from '$lib/components/Table/data-table-sort.svelte';
+import ImageViewer from '$lib/components/Table/image-viewer.svelte';
+import PriceList from './priceList.svelte';
+import { formatEthiopianDate } from '$lib/global.svelte';
+import BigText from '$lib/components/Table/bigText.svelte';
 import Statuses from '$lib/components/Table/statuses.svelte';
-import { formatETB } from '$lib/global.svelte';
 
 export const columns = [
 	{
-		accessorKey: 'orderId',
+		accessorKey: 'index',
 		header: '#',
 		cell: (info) => info.row.index + 1,
 		sortable: false
 	},
 
 	{
-		accessorKey: 'status',
-		header: 'Status',
+		accessorKey: 'image',
+		header: 'Featured Image',
+		sortable: true,
+		cell: ({ row }) => {
+			// You can pass whatever you need from `row.original` to the component
+			return renderComponent(ImageViewer, {
+				src: row.original.featuredImage,
+				alt: row.original.name
+			});
+		}
+	},
+
+	{
+		accessorKey: 'title',
+		header: ({ column }) =>
+			renderComponent(DataTableSort, {
+				name: 'Title',
+				onclick: column.getToggleSortingHandler()
+			}),
+		sortable: true,
+		cell: ({ row }) => {
+			// You can pass whatever you need from `row.original` to the component
+			return renderComponent(DataTableLinks, {
+				id: row.original.id,
+				name: row.original.title,
+				link: '/dashboard/events/single'
+			});
+		}
+	},
+
+	{
+		accessorKey: 'eventType',
+		header: ({ column }) =>
+			renderComponent(DataTableSort, {
+				name: 'Event Type',
+				onclick: column.getToggleSortingHandler()
+			}),
+		sortable: true
+	},
+
+	{
+		accessorKey: 'client',
+		header: ({ column }) =>
+			renderComponent(DataTableSort, {
+				name: 'Client',
+				onclick: column.getToggleSortingHandler()
+			}),
+		sortable: true
+	},
+
+	{
+		accessorKey: 'location',
+		header: ({ column }) =>
+			renderComponent(DataTableSort, {
+				name: 'Location',
+				onclick: column.getToggleSortingHandler()
+			}),
+		sortable: true
+	},
+
+	{
+		accessorKey: 'date',
+		header: ({ column }) =>
+			renderComponent(DataTableSort, {
+				name: 'Event Date',
+				onclick: column.getToggleSortingHandler()
+			}),
+		sortable: true,
+		cell: ({ row }) => {
+			// You can pass whatever you need from `row.original` to the component
+			return formatEthiopianDate(row.original.date);
+		}
+	},
+
+	{
+		accessorKey: 'isFeaturedHome',
+		header: ({ column }) =>
+			renderComponent(DataTableSort, {
+				name: 'Featured on Home Page',
+				onclick: column.getToggleSortingHandler()
+			}),
 		sortable: true,
 		cell: ({ row }) => {
 			// You can pass whatever you need from `row.original` to the component
 			return renderComponent(Statuses, {
-				status: row.original.status
+				status: row.original.isFeaturedHome ? 'Yes' : 'No'
 			});
 		}
 	},
 
 	{
-		accessorKey: 'productName',
-		header: ({ column }) =>
-			renderComponent(DataTableSort, {
-				name: 'Product Name',
-				onclick: column.getToggleSortingHandler()
-			}),
-		sortable: true,
+		accessorKey: 'description',
+		header: 'Description',
+
 		cell: ({ row }) => {
 			// You can pass whatever you need from `row.original` to the component
-			return renderComponent(DataTableLinks, {
-				id: row.original.productId,
-				name: row.original.productName,
-				link: '/dashboard/products/single'
-			});
-		}
-	},
-
-	{
-		accessorKey: 'quantityPurchased',
-		header: ({ column }) =>
-			renderComponent(DataTableSort, {
-				name: 'Quantity Purchased',
-
-				onclick: column.getToggleSortingHandler()
-			}),
-		sortable: true
-	},
-
-	{
-		accessorKey: 'unitPrice',
-		header: ({ column }) =>
-			renderComponent(DataTableSort, {
-				name: 'Unit Price',
-				onclick: column.getToggleSortingHandler()
-			}),
-		sortable: true
-	},
-
-	{
-		accessorKey: 'lineTotal',
-		header: ({ column }) =>
-			renderComponent(DataTableSort, {
-				name: 'Line Total',
-				onclick: column.getToggleSortingHandler()
-			})
-	},
-
-	{
-		accessorKey: 'totalPaid',
-		header: ({ column }) =>
-			renderComponent(DataTableSort, {
-				name: 'Total Paid',
-				onclick: column.getToggleSortingHandler()
-			}),
-		cell: (info) => {
-			return formatETB(info.getValue());
-		}
-	},
-
-	{
-		accessorKey: 'receipt',
-		header: ({ column }) =>
-			renderComponent(DataTableSort, {
-				name: 'Receipt',
-				onclick: column.getToggleSortingHandler()
-			}),
-		sortable: true,
-		cell: ({ row }) => {
-			// You can pass whatever you need from `row.original` to the component
-			return renderComponent(DataTableLinks, {
-				id: row.original.receipt,
-				name: row.original.receipt ? 'View Reciept' : 'No Receipt Found',
-				link: '/files',
-				target: '_blank'
+			return renderComponent(BigText, {
+				text: row.original.description
 			});
 		}
 	}

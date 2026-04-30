@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import { Badge } from '$lib/components/ui/badge';
-	import { CalendarIcon, PlayCircle, SparklesIcon } from '@lucide/svelte';
+	import { Calendar, CalendarIcon, PlayCircle, SparklesIcon } from '@lucide/svelte';
 	import { Card, CardHeader, CardTitle, CardContent } from '$lib/components/ui/card';
 	import { Separator } from '$lib/components/ui/separator';
 	import InfoCard from './info-card.svelte';
@@ -26,7 +26,35 @@
 		const match = videoUrl?.match(regex);
 		return match ? match[1] : null;
 	}
+
+	const navItems = [
+		{ label: 'Overview', id: 'overview' },
+		{ label: 'Amenities', id: 'amenities', show: features?.length > 0 },
+		{ label: 'Policy', id: 'policy', show: !!venue?.bookingPolicy },
+		{ label: 'Gallery', id: 'gallery', show: images?.length > 0 },
+		{ label: 'Videos', id: 'videos', show: videos?.length > 0 }
+	].filter((item) => item.show !== false);
+
+	function scrollToSection(id: string) {
+		const el = document.getElementById(id);
+		if (el) {
+			const offset = 80; // Offset for the sticky nav height
+			const bodyRect = document.body.getBoundingClientRect().top;
+			const elementRect = el.getBoundingClientRect().top;
+			const elementPosition = elementRect - bodyRect;
+			const offsetPosition = elementPosition - offset;
+
+			window.scrollTo({
+				top: offsetPosition,
+				behavior: 'smooth'
+			});
+		}
+	}
 </script>
+
+<svelte:head>
+	<title>{venue?.name}</title>
+</svelte:head>
 
 <section class="relative h-[70vh] min-h-125 w-full overflow-hidden">
 	<!-- Background Image -->
@@ -62,8 +90,27 @@
 				{venue.location}
 			</p>
 		{/if}
+
+		<Button href="/quote" size="lg" class="w-sm" variant="default"
+			><Calendar /> Request a Quote</Button
+		>
 	</div>
 </section>
+
+<nav class="sticky top-0 z-40 border-b border-border/50 bg-background/80 backdrop-blur-md">
+	<div class="mx-auto max-w-7xl px-6">
+		<div class="no-scrollbar flex h-14 items-center justify-start gap-6 overflow-x-auto">
+			{#each navItems as item (item.id)}
+				<button
+					onclick={() => scrollToSection(item.id)}
+					class="text-sm font-medium whitespace-nowrap text-muted-foreground transition-colors hover:text-secondary"
+				>
+					{item.label}
+				</button>
+			{/each}
+		</div>
+	</div>
+</nav>
 
 <section class="mx-auto max-w-7xl px-6 py-12 md:px-12 lg:px-32">
 	<!-- Info Cards Grid -->
@@ -71,7 +118,7 @@
 	<div class="grid grid-cols-1 gap-8">
 		<!-- Main Content -->
 		<div class="space-y-8 lg:col-span-2">
-			<div class="">
+			<div id="overview" class="">
 				{#if venue?.capacity}
 					<InfoCard icon={UsersIcon} label="Capacity">
 						{venue?.capacity.toLocaleString()} guests
@@ -79,7 +126,7 @@
 				{/if}
 			</div>
 			{#if features?.length}
-				<Card class="border-border/50">
+				<Card id="amenities" class="border-border/50">
 					<CardHeader>
 						<CardTitle class="flex items-center gap-3 text-2xl">
 							<div class="rounded-lg bg-primary p-2 text-secondary">
@@ -118,7 +165,7 @@
 
 			<!-- Booking Policy Section -->
 			{#if venue?.bookingPolicy}
-				<Card class="border-border/50">
+				<Card id="policy" class="border-border/50">
 					<CardHeader>
 						<CardTitle class="flex items-center gap-3 text-2xl">
 							<div class="rounded-lg bg-primary/10 p-2 text-secondary">
@@ -141,12 +188,12 @@
 	</div>
 </section>
 
-<div class="mx-auto max-w-7xl px-6 py-12 md:px-12 lg:px-16">
+<div id="gallery" class="mx-auto max-w-7xl px-6 py-12 md:px-12 lg:px-16">
 	<Gallery {images} title="{venue?.name} Gallery" />
 </div>
 
 {#if videos?.length}
-	<section class="mx-auto max-w-7xl px-6 py-24">
+	<section id="videos" class="mx-auto max-w-7xl px-6 py-24">
 		<div class="mb-12 flex items-center gap-4">
 			<Separator class="flex-1 bg-primary/10" />
 			<h2 class="flex items-center gap-2 px-4 text-2xl font-bold">

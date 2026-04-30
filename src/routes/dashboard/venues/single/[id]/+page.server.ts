@@ -49,7 +49,6 @@ export const actions: Actions = {
 						name,
 						capacity,
 						bookingPolicy,
-
 						location,
 						description,
 						featuredImage,

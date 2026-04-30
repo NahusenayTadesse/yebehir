@@ -1,131 +1,38 @@
-<script>
-	import { renderComponent } from '$lib/components/ui/data-table/index.js';
-	import DataTable from '$lib/components/Table/data-table.svelte';
-	import DataTableSort from '$lib/components/Table/data-table-sort.svelte';
-	import Statuses from '$lib/components/Table/statuses.svelte';
-	import DialogComp from '$lib/formComponents/DialogComp.svelte';
-	import { Button } from '$lib/components/ui/button/index';
-	import Edit from './edit.svelte';
-	const columns = [
-		{
-			accessorKey: 'index',
-			header: '#',
-			cell: (info) => info.row.index + 1,
-			sortable: false
-		},
-		{
-			accessorKey: 'name',
-			header: ({ column }) =>
-				renderComponent(DataTableSort, {
-					name: 'Name',
-					onclick: column.getToggleSortingHandler()
-				}),
-			sortable: true,
-			cell: ({ row }) => {
-				// You can pass whatever you need from `row.original` to the component
-				return renderComponent(Edit, {
-					id: row.original.id,
-					name: row.original.name,
-					description: row.original.description,
-					action: '?/edit',
-					data: data?.editForm,
-					icon: false
-				});
-			}
-		},
+<script lang="ts">
+	import { columns } from './columns';
 
-		{
-			accessorKey: 'description',
-			header: 'Description',
-			sortable: true,
-			cell: ({ row }) => {
-				return renderComponent(BigText, {
-					text: row.original.description
-				});
-			}
-		},
-
-		{
-			accessorKey: '',
-			header: 'Edit',
-			sortable: true,
-			cell: ({ row }) => {
-				// You can pass whatever you need from `row.original` to the component
-				return renderComponent(Edit, {
-					id: row.original.id,
-					name: row.original.name,
-					description: row.original.description,
-					action: '?/edit',
-					data: data?.editForm,
-					icon: true
-				});
-			}
-		},
-		{
-			accessorKey: '',
-			header: 'Delete',
-			sortable: true,
-			cell: ({ row }) => {
-				// You can pass whatever you need from `row.original` to the component
-				return renderComponent(Delete, {
-					id: row.original.id,
-					action: '?/delete',
-					data: data.deleteForm
-				});
-			}
-		}
-	];
 	let { data } = $props();
-	import { superForm } from 'sveltekit-superforms/client';
-	import InputComp from '$lib/formComponents/InputComp.svelte';
-	import LoadingBtn from '$lib/formComponents/LoadingBtn.svelte';
-	import { Plus } from '@lucide/svelte';
 
-	const { form, errors, enhance, delayed, message } = superForm(data.form, {});
+	import DataTable from '$lib/components/Table/data-table.svelte';
 
-	import { toast } from 'svelte-sonner';
-	import BigText from '$lib/components/Table/bigText.svelte';
-	import Delete from './delete.svelte';
-	$effect(() => {
-		if ($message) {
-			if ($message.type === 'error') {
-				toast.error($message.text);
-			} else {
-				toast.success($message.text);
-			}
-		}
-	});
+	import { Frown, Plus } from '@lucide/svelte';
+	import { Button } from '$lib/components/ui/button';
+	import FilterMenu from '$lib/components/Table/FilterMenu.svelte';
+
+	let filteredList = $derived(data?.eventList);
 </script>
 
 <svelte:head>
-	<title>Services</title>
+	<title>Portfolios List</title>
 </svelte:head>
 
-{#key data.allData}
-	<DialogComp title="+ Add New Services" variant="default">
-		<form action="?/add" use:enhance id="main" class="flex flex-col gap-4" method="post">
-			<InputComp {form} {errors} label="name" type="text" name="name" required={true} />
+{#if data.eventList.length === 0}
+	<div class="flex h-96 w-full flex-col items-center justify-center lg:w-5xl">
+		<p class="justify-self-cente mt-4 flex flex-row gap-4 text-center text-4xl">
+			<Frown class="h-12 w-16  animate-bounce" />
+			Products List is Empty
+		</p>
+		<Button href="/dashboard/events/add-event"><Plus />Add New Event</Button>
+	</div>
+{:else}
+	<h2 class="my-4 text-2xl">No of Portfolio Events: {data.eventList?.length}</h2>
 
-			<InputComp
-				{form}
-				{errors}
-				label="Description"
-				type="textarea"
-				name="description"
-				placeholder="Enter Service Description"
-				required={true}
-				rows={10}
-			/>
-
-			<Button type="submit" form="main">
-				{#if $delayed}
-					<LoadingBtn name="Adding Service" />
-				{:else}
-					<Plus /> Add Service
-				{/if}
-			</Button>
-		</form>
-	</DialogComp>
-
-	<DataTable {columns} data={data?.allData} search={true} />
-{/key}
+	<div class="mt-8 mb-4 w-6xl p-0 pt-4 lg:w-full lg:p-0">
+		<FilterMenu
+			bind:filteredList
+			data={data?.eventList}
+			filterKeys={['client', 'eventType', 'location']}
+		/>
+		<DataTable data={filteredList} {columns} fileName="Portfolio List List" />
+	</div>
+{/if}
