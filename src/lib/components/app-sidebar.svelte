@@ -14,7 +14,8 @@
 		Image,
 		Quote,
 		Briefcase,
-		Book
+		Book,
+		Images
 	} from '@lucide/svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import type { ComponentProps } from 'svelte';
@@ -78,6 +79,12 @@
 			title: 'Messages',
 			url: '/dashboard/messages',
 			icon: Mail
+		},
+
+		{
+			title: 'Partner Logos',
+			url: '/dashboard/logos',
+			icon: Images
 		},
 
 		{

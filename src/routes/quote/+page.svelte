@@ -32,26 +32,19 @@
 			icon: IconBrandInstagram,
 			name: 'Instagram',
 			value: 'Contact us on Instagram',
-			href: 'https://www.instagram.com/Fix@202016_lalo-instrgram'
+			href: 'https://www.instagram.com/yebehir/'
 		},
 		{
 			icon: IconBrandTiktok,
 			name: 'TikTok',
 			value: 'Follow us on TikTok',
-			href: 'https://www.tiktok.com/@fixtechlalo'
+			href: 'https://www.tiktok.com/@yebehir_'
 		},
 		{
 			name: 'LinkedIn',
-			url: 'https://www.linkedin.com/company/lalobakerysolution/',
+			url: 'https://www.linkedin.com/company/yebehir-marketing/',
 			icon: BrandLinkedin,
 			color: 'hover:text-black dark:hover:text-white'
-		},
-
-		{
-			name: 'Telegram',
-			url: 'https://t.me/fixtectool',
-			icon: Send,
-			color: 'hover:text-blue-400'
 		}
 	];
 
@@ -60,14 +53,14 @@
 		{
 			icon: MailIcon,
 			label: 'Email',
-			value: 'fixtec@mohammedlaloie.com',
-			href: 'mailto:fixtec@mohammedlaloie.com'
+			value: 'contact@yebehir.com',
+			href: 'mailto:contact@yebehir.com'
 		},
 		{
 			icon: PhoneIcon,
 			label: 'WhatsApp',
 			value: 'Contact us on WhatsApp',
-			href: 'https://wa.me/+251912727000'
+			href: 'https://wa.me/+251930109760'
 		}
 	];
 

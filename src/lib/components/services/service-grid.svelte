@@ -3,6 +3,7 @@
 	type Service = {
 		id: number;
 		name: string;
+		featuredImage: string | null;
 		description: string | null;
 	};
 

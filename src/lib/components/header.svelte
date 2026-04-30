@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { MenuIcon, XIcon } from '@lucide/svelte';
+	import { ArrowRight, MenuIcon, XIcon } from '@lucide/svelte';
 	import DarkMode from './DarkMode.svelte';
 
 	import { Sheet, SheetContent, SheetTrigger } from '$lib/components/ui/sheet';
@@ -18,13 +18,14 @@
 
 		{ label: 'Services', href: '/services' },
 		{ label: 'Events', href: '/events' },
+		{ label: 'Blogs', href: '/blogs' },
 
 		{ label: 'Contact', href: '/contact-us' }
 	];
 </script>
 
 <header
-	class="sticky top-0 z-50 w-full bg-background px-2 backdrop-blur supports-backdrop-filter:bg-primary lg:px-24"
+	class="sticky top-0 z-50 w-full bg-background px-2 py-2 backdrop-blur supports-backdrop-filter:bg-primary lg:px-24"
 >
 	<div class="flex items-center justify-between px-4 md:px-6">
 		<!-- Logo/Title -->
@@ -56,7 +57,10 @@
 			{/each}
 		</nav>
 		<div class="flex flex-row gap-4">
-			<div class="hidden flex-row items-center justify-end lg:flex">
+			<div class="hidden flex-row items-center justify-end gap-2 lg:flex">
+				<Button href="/quote" size="lg" variant="outline"
+					>Get A Quote<ArrowRight class="size-4" /></Button
+				>
 				<DarkMode />
 			</div>
 
@@ -94,6 +98,7 @@
 						<div class="space-y-4 border-t bg-muted/10 p-4">
 							<div class="flex items-center justify-between px-2">
 								<span class="text-sm font-medium text-muted-foreground">Interface</span>
+
 								<DarkMode />
 							</div>
 						</div>
