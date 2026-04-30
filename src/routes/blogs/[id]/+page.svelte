@@ -131,6 +131,8 @@
 				<article class="mt-8 rounded-xl border border-border/50 bg-muted/50 p-6">
 					{@html item.content}
 
+					<br />
+
 					{#if data?.images}
 						<Gallery bento images={data.images} title={item.title} />
 					{/if}

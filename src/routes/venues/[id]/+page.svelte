@@ -67,7 +67,7 @@
 		/>
 		<div class="absolute inset-0 bg-primary/60"></div>
 		<div
-			class="absolute inset-0 bg-linear-to-r from-background/80 via-transparent to-transparent"
+			class="absolute inset-0 bg-linear-to-r from-primary/80 via-transparent to-transparent"
 		></div>
 	</div>
 
@@ -91,7 +91,7 @@
 			</p>
 		{/if}
 
-		<Button href="/quote" size="lg" class="w-sm" variant="default"
+		<Button href="/quote" size="lg" class="w-40" variant="outline"
 			><Calendar /> Request a Quote</Button
 		>
 	</div>

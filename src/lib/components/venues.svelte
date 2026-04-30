@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SquareArrowOutUpRight } from '@lucide/svelte';
+	import { Calendar, SquareArrowOutUpRight } from '@lucide/svelte';
 	import Button from './ui/button/button.svelte';
 
 	// ── Types ─────────────────────────────────────────────────────────────────
@@ -88,7 +88,7 @@
 			<!-- Location pill -->
 			{#if venue.location}
 				<span
-					class="mb-4 inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-background/80 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur-sm"
+					class="mb-4 inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-primary px-3 py-1 text-xs font-medium text-white backdrop-blur-sm"
 				>
 					<svg
 						class="h-3 w-3"
@@ -104,12 +104,12 @@
 				</span>
 			{/if}
 
-			<h1 class="mb-3 text-4xl font-bold tracking-tight text-card-foreground lg:text-5xl">
+			<h1 class="mb-3 text-4xl font-bold tracking-tight text-white lg:text-5xl">
 				{venue.name}
 			</h1>
 
 			{#if venue.description}
-				<p class="mb-6 max-w-2xl text-base leading-relaxed text-muted-foreground">
+				<p class="mb-6 max-w-2xl text-base leading-relaxed text-secondary">
 					{venue.description}
 				</p>
 			{/if}
@@ -118,9 +118,7 @@
 			<div class="flex flex-wrap items-center gap-6">
 				{#if venue.capacity !== null}
 					<div class="flex items-center gap-2 text-sm text-card-foreground">
-						<span
-							class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 text-primary"
-						>
+						<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
 							<svg
 								class="h-4 w-4"
 								viewBox="0 0 24 24"
@@ -135,35 +133,24 @@
 							</svg>
 						</span>
 						<span>
-							<span class="font-semibold">{formatCapacity(venue.capacity)}</span>
-							<span class="ml-1 text-muted-foreground">capacity</span>
+							<span class="font-semibold text-white">{formatCapacity(venue.capacity)}</span>
+							<span class="ml-1 text-white">capacity</span>
 						</span>
 					</div>
 				{/if}
 
 				{#if venue.bookingPolicy}
 					<div class="flex items-center gap-2 text-sm text-card-foreground">
-						<span
-							class="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-accent-foreground"
-						>
-							<svg
-								class="h-4 w-4"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-							>
-								<rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-								<line x1="16" y1="2" x2="16" y2="6" />
-								<line x1="8" y1="2" x2="8" y2="6" />
-								<line x1="3" y1="10" x2="21" y2="10" />
-							</svg>
+						<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+							<Calendar size="16" />
 						</span>
-						<span class="max-w-xs truncate text-muted-foreground">{venue.bookingPolicy}</span>
+						<span class="max-w-xs truncate text-white/80">{venue.bookingPolicy}</span>
 					</div>
 				{/if}
 			</div>
-			<Button class="w-30" href="/venues/{venue.id}"><SquareArrowOutUpRight /> View Details</Button>
+			<Button class="mt-8 w-30 py-3" size="lg" href="/venues/{venue.id}"
+				><SquareArrowOutUpRight /> View Details</Button
+			>
 		</div>
 	</article>
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
-	import { MailIcon, PhoneIcon, MapPinIcon, MessageCircleIcon, MapPin } from '@lucide/svelte';
+	import { MailIcon, Send, PhoneIcon, MapPinIcon, MessageCircleIcon, MapPin } from '@lucide/svelte';
 	let email = $state('');
 
 	const handleNewsletterSubmit = (e: Event) => {
@@ -10,31 +10,25 @@
 		email = '';
 	};
 
-	import { IconBrandFacebook, IconBrandInstagram, IconBrandTiktok } from '@tabler/icons-svelte';
+	import { IconBrandInstagram, IconBrandLinkedin, IconBrandTiktok } from '@tabler/icons-svelte';
 
 	const socialLinks = [
 		{
 			name: 'Instagram',
-			url: 'https://www.instagram.com/lalobakerysolution?igsh=MTZ1eDNldHl3OW9iNw%3D%3D&utm_source=qr',
+			url: 'https://www.instagram.com/yebehir',
 			icon: IconBrandInstagram,
 			color: 'hover:text-pink-500'
 		},
 		{
 			name: 'TikTok',
-			url: 'https://www.tiktok.com/@lalobakerysolution?_r=1&_t=ZM-91WtG5hY5VY',
+			url: 'https://www.tiktok.com/@yebehir',
 			icon: IconBrandTiktok,
 			color: 'hover:text-black dark:hover:text-white'
 		},
 		{
-			name: 'Facebook',
-			url: 'https://facebook.com',
-			icon: IconBrandFacebook,
-			color: 'hover:text-blue-600'
-		},
-		{
-			name: 'Telegram',
-			url: 'https://t.me/LaloBakery',
-			icon: MessageCircleIcon,
+			name: 'LinkedIn',
+			url: 'https://www.linkedin.com/company/yebehir-marketing/',
+			icon: IconBrandLinkedin,
 			color: 'hover:text-blue-400'
 		}
 	];
@@ -72,25 +66,25 @@
 						class="flex items-center gap-2 text-foreground/70"
 					>
 						<MapPinIcon class="size-4 shrink-0" />
-						<span>Diplomat Building, Mozambique St, Addis Ababa</span>
+						<span>Yohannes Guest House, Hayahulet, Addis Ababa</span>
 					</a>
 					<a
-						href="tel:+251908454545"
+						href="tel:+251930109760"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="flex items-center gap-2 text-foreground/70"
 					>
 						<PhoneIcon class="size-4 shrink-0" />
-						<span>+251908454545</span>
+						<span>+251930109760</span>
 					</a>
 					<a
-						href="tel:+251902645724"
+						href="tel:+251930109760"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="flex items-center gap-2 text-foreground/70"
 					>
 						<PhoneIcon class="size-4 shrink-0" />
-						<span>+251902645724</span>
+						<span>+251930109760</span>
 					</a>
 					<a
 						href="mailto:contact@yebehir.com"
@@ -123,7 +117,7 @@
 				<h4 class="mb-4 flex gap-2 font-semibold"><MapPin /> Location</h4>
 				<section class="relative h-32 w-full">
 					<iframe
-						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.6989163918774!2d38.74450221007991!3d8.999827389408697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b8513494db273%3A0x88235dbe171c4224!2sDiplomat%20Building!5e0!3m2!1sen!2set!4v1772532021053!5m2!1sen!2set"
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.5823625085322!2d38.779322850608956!3d9.010520800748324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b8592f498d563%3A0x97f1598563cbd7aa!2sYebehir%20Marketing!5e0!3m2!1sen!2set!4v1777583510761!5m2!1sen!2set"
 						style="border:0;"
 						class="w-full rounded-3xl"
 						loading="lazy"
@@ -165,7 +159,7 @@
 			<div class="flex flex-col items-center justify-between gap-4 border-t pt-8 md:flex-row">
 				<p class="text-sm text-foreground/70">Follow us on social media</p>
 				<div class="grid grid-cols-4 gap-3">
-					{#each socialLinks as social (social.url)}
+					{#each socialLinks as social (social.name)}
 						<a
 							href={social.url}
 							target="_blank"
@@ -183,9 +177,19 @@
 			</div>
 
 			<!-- Copyright -->
-			<div class="mt-8 border-t pt-8 text-center text-sm text-foreground/70">
-				<p>&copy; {new Date().getFullYear()} Lalo Bakery. All rights reserved.</p>
-			</div>
 		</div>
+	</div>
+
+	<div class="-mt-24 justify-self-center border-t pt-8 text-center text-sm text-foreground/70">
+		<p class="">
+			&copy; {new Date().getFullYear()} Yebehir Marketing. All rights reserved.
+		</p>
+		<p class="text-center text-[8px] text-foreground/60">
+			Powered by <a
+				href="https://nahusenaytadesse.vercel.app"
+				target="_blank"
+				rel="noopener noreferrer">NT</a
+			>
+		</p>
 	</div>
 </footer>

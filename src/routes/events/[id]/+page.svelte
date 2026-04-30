@@ -186,14 +186,14 @@
 							<p class="text-xs text-muted-foreground">Event Type</p>
 							<p class="text-sm font-medium text-foreground">{item.eventType || 'Not specified'}</p>
 						</div>
-						<div class="space-y-1">
+						<!-- <div class="space-y-1">
 							<p class="text-xs text-muted-foreground">Event ID</p>
 							<p class="text-sm font-medium text-foreground">#{item.id}</p>
 						</div>
 						<div class="space-y-1">
 							<p class="text-xs text-muted-foreground">Slug</p>
 							<p class="font-mono text-sm font-medium text-foreground">{item.slug}</p>
-						</div>
+						</div> -->
 						<div class="space-y-1">
 							<p class="text-xs text-muted-foreground">Status</p>
 							<Badge variant="outline" class="text-xs">Completed</Badge>
