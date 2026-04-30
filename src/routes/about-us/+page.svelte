@@ -19,6 +19,8 @@
 	import FAQ from '$lib/components/faq.svelte';
 	import Slider from '$lib/components/slider.svelte';
 	import Catalog from '$lib/components/catalog.svelte';
+	import Testimonial from '$lib/components/testimonial.svelte';
+	import ServiceGrid from '$lib/components/services/service-grid.svelte';
 
 	const socialLinks = [
 		{ name: 'Instagram', url: '#', icon: IconBrandInstagram, color: 'hover:text-primary' },
@@ -63,11 +65,47 @@
 </script>
 
 <svelte:head>
-	<title>About Us | Yebehir Ventures - Ahead of the Curve</title>
+	<!-- Primary Meta Tags -->
+	<title>About Us | Event Management & 4 Kilo Plaza Venue Addis Ababa</title>
+	<meta
+		name="title"
+		content="Yebehir Ventures | Event Management & 4 Kilo Plaza Venue Addis Ababa"
+	/>
 	<meta
 		name="description"
-		content="Yebehir Ventures is a multi-service company specializing in event management, venue operations at 4 Kilo Plaza, and sales-driven brand experiences."
+		content="Ahead of the curve. Yebehir Ventures provides premium event management, corporate brand experiences, and venue rentals at 4 Kilo Plaza, Addis Ababa."
 	/>
+	<meta
+		name="keywords"
+		content="Yebehir Ventures, Event Management Ethiopia, 4 Kilo Plaza, Venue Rental Addis Ababa, Corporate Events Addis, Brand Activations Ethiopia, Sponsorship Marketing"
+	/>
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://yebehir.com/" />
+	<meta property="og:title" content="Yebehir Ventures | Ahead of the curve" />
+	<meta
+		property="og:description"
+		content="We create, manage, and monetize events. Discover full-service event production and venue bookings at 4 Kilo Plaza."
+	/>
+	<meta property="og:image" content="/logo.png" />
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image" />
+	<meta property="twitter:url" content="https://yebehir.com/" />
+	<meta property="twitter:title" content="Yebehir Ventures | Event Management & Venue Operations" />
+	<meta
+		property="twitter:description"
+		content="Leading multi-service event company in Addis Ababa. Specializing in event production, venue operations, and sales-driven brand experiences."
+	/>
+	<meta property="twitter:image" content="/logo.png" />
+
+	<!-- Canonical URL -->
+	<link rel="canonical" href="https://yebehir.com/" />
+
+	<!-- Favicon / Theming -->
+	<link rel="icon" type="image/png" href="/logo.png" />
+	<meta name="theme-color" content="#091B38" />
 </svelte:head>
 
 <section
@@ -283,6 +321,11 @@
 	</div>
 </section>
 
+{#if data?.servicesItems.length}
+	<ServiceGrid services={data.servicesItems} />
+	<br />
+{/if}
+
 <section class="mx-auto max-w-7xl px-6 py-24 md:py-32">
 	<div class="mb-16 md:mb-20">
 		<h3
@@ -322,9 +365,23 @@
 </section>
 
 {#if data?.imagesList?.length > 0}
-	<Slider imagesList={data.imagesList} />
+	<Slider imagesList={data?.imagesList} />
 {/if}
-{#if data?.files}<Catalog files={data?.files} />{/if}
+
+{#if data?.testimonialList.length > 0}
+	<main class="flex flex-col items-center justify-center px-4 py-12 md:py-20">
+		<!-- Section Header -->
+		<div class="mb-12 max-w-2xl text-center">
+			<h2 class="mb-4 text-3xl font-bold text-foreground md:text-4xl">What Our Customers Say</h2>
+			<p class="text-lg text-muted-foreground">
+				Don't just take our word for it. Here's what people are saying about their experience.
+			</p>
+		</div>
+
+		<!-- Testimonial Carousel -->
+		<Testimonial testimonials={data.testimonialList} />
+	</main>
+{/if}
 
 <FAQ />
 

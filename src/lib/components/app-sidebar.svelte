@@ -32,11 +32,7 @@
 		{
 			title: 'Quote Requests',
 			url: '/dashboard/quotes',
-			icon: Quote,
-			items: [
-				{ title: 'View All', url: '/dashboard/quotes', icon: Sheet },
-				{ title: 'Pending', url: '/dashboard/quotes/pending', icon: Sheet }
-			]
+			icon: Quote
 		},
 
 		{
@@ -87,11 +83,11 @@
 			icon: Images
 		},
 
-		{
-			title: 'Gallery',
-			url: '/dashboard/gallery',
-			icon: Image
-		},
+		// {
+		// 	title: 'Gallery',
+		// 	url: '/dashboard/gallery',
+		// 	icon: Image
+		// },bu
 
 		{
 			title: 'Testimonials',
@@ -99,20 +95,17 @@
 			icon: Star
 		},
 
-		{
-			title: 'Reports',
-			url: '/dashboard/reports',
-			icon: ChartArea
-		},
+		// {
+		// 	title: 'Reports',
+		// 	url: '/dashboard/reports',
+		// 	icon: ChartArea
+		// },
 
 		{
 			title: 'Admin Panel',
 			url: '/dashboard/admin-panel',
 			icon: UserRoundCog,
-			items: [
-				{ title: 'Users', url: '/dashboard/admin-panel/users', icon: Users },
-				{ title: 'Roles', url: '/dashboard/admin-panel/roles', icon: Users }
-			]
+			items: [{ title: 'Users', url: '/dashboard/admin-panel/users', icon: Users }]
 		}
 	];
 

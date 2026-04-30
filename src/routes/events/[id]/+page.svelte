@@ -20,7 +20,61 @@
 				})
 			: null
 	);
+
+	const event: PortfolioItem = $derived(data?.portfolioItems);
+
+	const pageTitle = `${event.title} ${event.client ? `for ${event.client}` : ''} | Yebehir Ventures`;
 </script>
+
+<svelte:head>
+	<!-- Primary Meta Tags -->
+	<title>{pageTitle}</title>
+	<meta name="title" content={pageTitle} />
+	<meta
+		name="description"
+		content={event.description?.substring(0, 160) ||
+			`Experience the ${event.title} executed by Yebehir Ventures. Specialized in ${event.eventType} at ${event.location || 'Addis Ababa'}.`}
+	/>
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="/events/{event.slug}" />
+	<meta property="og:title" content="" />
+	<meta property="og:description" content={event.description?.substring(0, 160)} />
+	<meta property="og:image" content="/files/{event.featuredImage}" />
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image" />
+	<meta property="twitter:url" content="/events/{event.slug}" />
+	<meta property="twitter:title" content={pageTitle} />
+	<meta property="twitter:description" content={event.description?.substring(0, 160)} />
+	<meta property="twitter:image" content="/files/{event.featuredImage}" />
+
+	<!-- Canonical URL -->
+	<link rel="canonical" href="/events/{event.slug}" />
+
+	<!-- Schema.org / JSON-LD for Event Rich Snippets -->
+	{@html `<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "${event.title}",
+      "startDate": "${event.date}",
+      "location": {
+        "@type": "Place",
+        "name": "${event.location || '4 Kilo Plaza'}",
+        "address": "Addis Ababa, Ethiopia"
+      },
+      "image": ["${event.featuredImage ? `/files/${event.featuredImage}` : ''}"],
+      "description": "${event.description?.replace(/"/g, '\\"')}",
+      "organizer": {
+        "@type": "Organization",
+        "name": "Yebehir Ventures",
+        "url": "https://yebehir.com"
+      }
+    }
+  </script>`}
+</svelte:head>
 
 <div class="min-h-dvh" in:fade={{ duration: 300 }}>
 	<!-- Hero Image Section -->

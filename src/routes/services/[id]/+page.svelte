@@ -14,12 +14,68 @@
 	const { data } = $props();
 
 	const item: Service = $derived(data?.portfolioItems);
+	const service: Service = $derived(data?.portfolioItems);
+
+	const imageUrl = $derived(
+		service.featuredImage ? `/files/${service.featuredImage}` : `/logo.png`
+	);
+
+	// SEO optimization: Even if the URL uses ID, we keep the content brand-focused
+	const pageTitle = `${service.name} | Yebehir Ventures`;
 </script>
+
+<svelte:head>
+	<!-- Primary Meta Tags -->
+	<title>{pageTitle}</title>
+	<meta name="title" content={pageTitle} />
+	<meta
+		name="description"
+		content={service.description ||
+			`Professional ${service.name} services in Addis Ababa by Yebehir Ventures. We deliver premium results ahead of the curve.`}
+	/>
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="/services/${service.id}" />
+	<meta property="og:title" content={pageTitle} />
+	<meta property="og:description" content={service.description} />
+	<meta property="og:image" content={imageUrl} />
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image" />
+	<meta property="twitter:url" content="/services/${service.id}" />
+	<meta property="twitter:title" content={pageTitle} />
+	<meta property="twitter:description" content={service.description} />
+	<meta property="twitter:image" content={imageUrl} />
+
+	<!-- Canonical URL to prevent duplicate content if query params are added -->
+	<link rel="canonical" href="/services/${service.id}" />
+
+	<!-- Local Business / Service Schema -->
+	{@html `<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "${service.name}",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Yebehir Ventures",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Addis Ababa",
+          "addressCountry": "ET"
+        }
+      },
+      "description": "${service.description?.replace(/"/g, '\\"')}",
+      "image": "${imageUrl}"
+    }
+  </script>`}
+</svelte:head>
 
 <div class="min-h-dvh" in:fade={{ duration: 300 }}>
 	<!-- Hero Image Section -->
 	<div class="relative h-[50vh] overflow-hidden lg:h-[60vh]">
-		<img src={`/files/${item.featuredImage}`} alt={item.title} class="h-full w-full object-cover" />
+		<img src={`/files/${item.featuredImage}`} alt={item.name} class="h-full w-full object-cover" />
 		<div
 			class="absolute inset-0 bg-linear-to-t from-background via-background/40 to-transparent"
 		></div>

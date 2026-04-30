@@ -3,7 +3,7 @@ import { zod4 } from 'sveltekit-superforms/adapters';
 import { eq } from 'drizzle-orm';
 // import { sendEmail, customerContactTemplate, adminContactTemplate } from '$lib/server/email';
 // import { USER } from '$env/static/private';
-import { contactSchema } from './schema';
+import { contactSchema, schema } from './schema';
 import { db } from '$lib/server/db';
 import { quotes } from '$lib/server/db/schema';
 import type { PageServerLoad, Actions } from './$types';

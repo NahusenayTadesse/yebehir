@@ -50,6 +50,32 @@
 	const resultsCount = $derived(filteredItems.length);
 </script>
 
+<svelte:head>
+	<title>Our Portfolio | Past Events & Experiences by Yebehir Ventures</title>
+	<meta name="title" content="Our Portfolio | Past Events & Experiences by Yebehir Ventures" />
+	<meta
+		name="description"
+		content="Explore our gallery of corporate events, brand activations, and lifestyle experiences executed at 4 Kilo Plaza and across Addis Ababa."
+	/>
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="/events" />
+	<meta property="og:title" content="Yebehir Ventures Portfolio | See Our Work" />
+	<meta
+		property="og:description"
+		content="From high-energy brand activations to premium corporate gatherings. See how we create experiences."
+	/>
+	<meta property="og:image" content="https://yebehir.com/logo.png" />
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image" />
+	<meta property="twitter:title" content="Yebehir Ventures | Event Portfolio" />
+	<meta property="twitter:image" content="/logo.png" />
+
+	<link rel="canonical" href="/events" />
+</svelte:head>
+
 <div class="min-h-dvh bg-background text-foreground">
 	<!-- Header -->
 

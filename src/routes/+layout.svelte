@@ -55,7 +55,7 @@
 	});
 </script>
 
-<svelte:head><link rel="icon" href="/logo192.png" /></svelte:head>
+<svelte:head><link rel="icon" href="/logoWhite.png" /></svelte:head>
 <ModeWatcher />
 <Toaster position="bottom-right" richColors closeButton />
 <ProgressBar color="#F2E1D1" zIndex={1000} />

@@ -37,6 +37,32 @@
 	const resultsCount = $derived(filteredItems.length);
 </script>
 
+<svelte:head>
+	<title>Insights & Event Trends | Yebehir Ventures Blog</title>
+	<meta name="title" content="Insights & Event Trends | Yebehir Ventures Blog" />
+	<meta
+		name="description"
+		content="Expert advice on event management, brand experiences, and venue hosting in Ethiopia. Stay ahead of the curve with the Yebehir Ventures blog."
+	/>
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="/blog" />
+	<meta property="og:title" content="Yebehir Ventures Blog | Event Excellence in Addis" />
+	<meta
+		property="og:description"
+		content="Discover professional insights on creating, managing, and monetizing events."
+	/>
+	<meta property="og:image" content="/logo.png" />
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image" />
+	<meta property="twitter:title" content="Yebehir Ventures Blog" />
+	<meta property="twitter:image" content="/logo.png" />
+
+	<link rel="canonical" href="https://yebehir.com/blog" />
+</svelte:head>
+
 <div class="min-h-dvh bg-background text-foreground">
 	<!-- Header -->
 

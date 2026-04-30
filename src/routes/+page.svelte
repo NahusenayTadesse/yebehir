@@ -14,7 +14,47 @@
 </script>
 
 <svelte:head>
-	<title>Yebehir Ventures</title>
+	<!-- Primary Meta Tags -->
+	<title>Yebehir Ventures | Event Management & 4 Kilo Plaza Venue Addis Ababa</title>
+	<meta
+		name="title"
+		content="Yebehir Ventures | Event Management & 4 Kilo Plaza Venue Addis Ababa"
+	/>
+	<meta
+		name="description"
+		content="Ahead of the curve. Yebehir Ventures provides premium event management, corporate brand experiences, and venue rentals at 4 Kilo Plaza, Addis Ababa."
+	/>
+	<meta
+		name="keywords"
+		content="Yebehir Ventures, Event Management Ethiopia, 4 Kilo Plaza, Venue Rental Addis Ababa, Corporate Events Addis, Brand Activations Ethiopia, Sponsorship Marketing"
+	/>
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://yebehir.com/" />
+	<meta property="og:title" content="Yebehir Ventures | Ahead of the curve" />
+	<meta
+		property="og:description"
+		content="We create, manage, and monetize events. Discover full-service event production and venue bookings at 4 Kilo Plaza."
+	/>
+	<meta property="og:image" content="/logo.png" />
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image" />
+	<meta property="twitter:url" content="https://yebehir.com/" />
+	<meta property="twitter:title" content="Yebehir Ventures | Event Management & Venue Operations" />
+	<meta
+		property="twitter:description"
+		content="Leading multi-service event company in Addis Ababa. Specializing in event production, venue operations, and sales-driven brand experiences."
+	/>
+	<meta property="twitter:image" content="/logo.png" />
+
+	<!-- Canonical URL -->
+	<link rel="canonical" href="https://yebehir.com/" />
+
+	<!-- Favicon / Theming -->
+	<link rel="icon" type="image/png" href="/logo.png" />
+	<meta name="theme-color" content="#091B38" />
 </svelte:head>
 
 <Hero />

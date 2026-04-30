@@ -5,6 +5,34 @@
 	let { data } = $props();
 </script>
 
+<svelte:head>
+	<title>Our Services | Event Management, Venue & Sponsorship | Yebehir Ventures</title>
+	<meta
+		name="title"
+		content="Our Services | Event Management, Venue & Sponsorship | Yebehir Ventures"
+	/>
+	<meta
+		name="description"
+		content="Discover Yebehir Ventures' comprehensive service units: Professional Event Management, 4 Kilo Plaza Venue Operations, and Sales-driven Brand Sponsorships in Addis Ababa."
+	/>
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="/services" />
+	<meta property="og:title" content="Multi-Service Excellence | Yebehir Ventures" />
+	<meta
+		property="og:description"
+		content="We don’t just organize events—we create experiences, manage top-tier venues, and connect brands with audiences."
+	/>
+	<meta property="og:image" content="/logo.png" />
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image" />
+	<meta property="twitter:title" content="Yebehir Ventures | Services Overview" />
+	<meta property="twitter:image" content="/logo.png" />
+
+	<link rel="canonical" href="/services" />
+</svelte:head>
 <section
 	class="relative mb-10 overflow-hidden bg-muted/30 bg-cover bg-center px-4 py-20 text-white sm:py-32"
 	style="background-image: url('/event (1).webp')"

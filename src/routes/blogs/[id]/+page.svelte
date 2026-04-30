@@ -20,7 +20,41 @@
 				})
 			: null
 	);
+
+	const post: BlogItem = $derived(data?.portfolioItems);
 </script>
+
+<svelte:head>
+	<!-- Primary Meta Tags -->
+	<title>{post.title} | Yebehir Ventures Blog</title>
+	<meta name="title" content="{post.title} | Yebehir Ventures" />
+	<meta
+		name="description"
+		content={post.excerpt ||
+			'Read the latest from Yebehir Ventures about events, venues, and brand experiences in Addis Ababa.'}
+	/>
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="/blogs/{post.slug}" />
+	<meta property="og:title" content={post.title} />
+	<meta property="og:description" content={post.excerpt} />
+	<meta property="og:image" content="/files/{post.featuredImage}" />
+	<meta property="article:section" content={post.category || 'Events'} />
+
+	<!-- Twitter -->
+	<meta property="twitter:card" content="summary_large_image" />
+	<meta property="twitter:url" content="/blogs/{post.slug}" />
+	<meta property="twitter:title" content={post.title} />
+	<meta property="twitter:description" content={post.excerpt} />
+	<meta property="twitter:image" content="/files/{post.featuredImage}" />
+
+	<!-- Canonical URL -->
+	<link rel="canonical" href="/blogs/{post.slug}" />
+
+	<!-- Article Specific Tags -->
+	<meta name="author" content="Yebehir Ventures" />
+</svelte:head>
 
 <div class="min-h-dvh" in:fade={{ duration: 300 }}>
 	<!-- Hero Image Section -->
