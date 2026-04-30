@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Popover, PopoverContent, PopoverTrigger } from '$lib/components/ui/popover';
 
-	const { text }: { text: string } = $props();
+	const { text, html = false }: { text: string; html?: boolean } = $props();
 
 	/**
 	 * Truncate text to a maximum length
@@ -15,10 +15,14 @@
 <div class="w-32">
 	<Popover>
 		<PopoverTrigger>
-			{truncateText(text)}
+			{html ? 'View Full Text' : truncateText(text)}
 		</PopoverTrigger>
 		<PopoverContent class="max-w-sm p-3  text-sm wrap-break-word">
-			{text}
+			{#if html}
+				{@html text}
+			{:else}
+				{text}
+			{/if}
 		</PopoverContent>
 	</Popover>
 </div>

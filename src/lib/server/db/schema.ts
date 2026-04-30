@@ -57,7 +57,15 @@ export const services = mysqlTable('services', {
 	description: text('description'),
 	longDescription: text('long_description'),
 	featuredImage: varchar('featured_image', { length: 255 }),
-	gallery: text('gallery')
+	...secureFields
+});
+
+export const serviceGallery = mysqlTable('service_gallery', {
+	id: int('id').primaryKey().autoincrement(),
+	serviceId: int('service_id')
+		.notNull()
+		.references(() => services.id, { onDelete: 'cascade' }),
+	imageUrl: varchar('image_url', { length: 255 })
 });
 
 export const quotes = mysqlTable('quotes', {
@@ -74,11 +82,32 @@ export const quotes = mysqlTable('quotes', {
 	status: varchar('status', { length: 50 }).default('pending'),
 	createdAt: timestamp('created_at').defaultNow()
 });
-export const serviceGallery = mysqlTable('service_gallery', {
+
+export const blogCategories = mysqlTable('blog_categories', {
 	id: int('id').primaryKey().autoincrement(),
-	serviceId: int('service_id')
+	name: varchar('name', { length: 255 }).notNull(),
+	description: varchar('description', { length: 255 }).notNull()
+});
+
+export const blog = mysqlTable('blog', {
+	id: int('id').primaryKey().autoincrement(),
+	title: varchar('title', { length: 255 }).notNull(),
+	categoryId: int('category_id')
 		.notNull()
-		.references(() => services.id, { onDelete: 'cascade' }),
+		.references(() => blogCategories.id, { onDelete: 'cascade' }),
+	slug: varchar('slug', { length: 255 }).notNull(),
+	excerpt: text('excerpt'),
+	content: text('content'),
+	isFeaturedOnHome: boolean('is_featured_on_home').default(false),
+	featuredImage: varchar('featured_image', { length: 255 }),
+	...secureFields
+});
+
+export const blogGallery = mysqlTable('blog_gallery', {
+	id: int('id').primaryKey().autoincrement(),
+	blogId: int('blog_id')
+		.notNull()
+		.references(() => blog.id, { onDelete: 'cascade' }),
 	imageUrl: varchar('image_url', { length: 255 })
 });
 

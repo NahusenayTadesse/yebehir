@@ -13,7 +13,8 @@
 		Star,
 		Image,
 		Quote,
-		Briefcase
+		Briefcase,
+		Book
 	} from '@lucide/svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import type { ComponentProps } from 'svelte';
@@ -44,6 +45,16 @@
 			items: [
 				{ title: 'All Portfolio Items', url: '/dashboard/events', icon: Sheet },
 				{ title: 'Add Event', url: '/dashboard/events/add-event', icon: Plus }
+			]
+		},
+
+		{
+			title: 'Blogs',
+			url: '/dashboard/blog',
+			icon: Book,
+			items: [
+				{ title: 'Add New Blog', url: '/dashboard/blog/add-blog', icon: Plus },
+				{ title: 'View All Blogs', url: '/dashboard/blog', icon: Sheet }
 			]
 		},
 

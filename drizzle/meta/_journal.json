@@ -36,6 +36,20 @@
       "when": 1777538639769,
       "tag": "0004_loud_vulcan",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1777541628266,
+      "tag": "0005_futuristic_piledriver",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1777543797506,
+      "tag": "0006_dusty_invisible_woman",
+      "breakpoints": true
     }
   ]
 }

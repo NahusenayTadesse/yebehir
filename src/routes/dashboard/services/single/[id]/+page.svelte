@@ -17,13 +17,8 @@
 	import Errors from '$lib/formComponents/Errors.svelte';
 
 	let singleTable = $derived([
-		{ name: 'Title', value: data.product?.title },
-		{ name: 'Slug', value: data.product?.slug },
-		{ name: 'Event Type', value: data.product?.eventType },
-		{ name: 'Date', value: formatEthiopianDate(data.product?.date) },
-		{ name: 'Client', value: data.product?.client },
-		{ name: 'Location', value: data.product?.location },
-		{ name: 'Event Description', value: data.product?.description },
+		{ name: 'Title', value: data.product?.name },
+		{ name: 'Short Description', value: data.product?.description },
 		{ name: 'Added On', value: formatEthiopianDate(data.product?.createdAt) },
 		{ name: 'Added By', value: data.product?.createdBy }
 	]);
@@ -47,6 +42,7 @@
 	import Gallery from '$lib/components/gallery.svelte';
 	import EditGallery from './editGallery.svelte';
 	import { formatEthiopianDate } from '$lib/global.svelte.js';
+	import RichTextEditor from '$lib/formComponents/RichTextEditor.svelte';
 	$effect(() => {
 		if ($message) {
 			if ($message.type === 'error') {
@@ -61,11 +57,11 @@
 </script>
 
 <svelte:head>
-	<title>Event Details</title>
+	<title>Service Details</title>
 </svelte:head>
 
 <SingleView
-	title={data?.product?.title}
+	title={data?.product?.name}
 	photo={String(data?.product?.featuredImage)}
 	class="w-full!"
 >
@@ -81,11 +77,31 @@
 			{/if}
 		</Button>
 
-		<Delete redirect="/dashboard/products" />
+		<Delete redirect="/dashboard/services" />
 	</div>
 
 	{#if editForm === false}
-		<div class="w-full p-4"><SingleTable {singleTable} /></div>
+		<div class="flex w-full flex-col items-start justify-start gap-4 p-4">
+			<SingleTable {singleTable} />
+
+			<article class="max-auto mx-auto w-full max-w-4xl px-6 py-12">
+				<div class="rounded-2xl border border-slate-100 bg-white p-8 shadow-sm md:p-12">
+					<!-- Section Header -->
+					<h2
+						class="mb-6 border-b border-slate-100 pb-4 text-3xl font-bold tracking-tight text-slate-900"
+					>
+						Long Description
+					</h2>
+
+					<!-- Injected Content -->
+					<div
+						class="prose prose-slate prose-headings:text-slate-800 prose-p:leading-relaxed prose-li:my-1 max-w-none"
+					>
+						{@html data?.product?.longDescription}
+					</div>
+				</div>
+			</article>
+		</div>
 	{/if}
 	{#if editForm}
 		<div class="w-full p-4">
@@ -99,81 +115,40 @@
 			>
 				<Errors allErrors={$allErrors} />
 
-				<InputComp {form} {errors} type="text" name="title" label="Event Title" required />
+				<InputComp {form} {errors} label="name" type="text" name="name" required={true} />
 
 				<InputComp
 					{form}
 					{errors}
-					type="text"
-					name="slug"
-					label="Event Slug"
-					placeholder="Enter Slug"
-				/>
-
-				<InputComp
-					{form}
-					{errors}
-					type="text"
-					name="eventType"
-					label="Event Type"
-					placeholder="Enter Event Type"
-				/>
-				<InputComp
-					{form}
-					{errors}
-					type="text"
-					name="client"
-					label="Client"
-					placeholder="Enter Client"
-					required
-				/>
-
-				<InputComp
-					{form}
-					{errors}
-					type="date"
-					name="date"
-					label="Event Date"
-					placeholder="Enter Event Date"
-				/>
-
-				<InputComp
-					{form}
-					{errors}
-					type="text"
-					name="location"
-					label="Event Location"
-					placeholder="Enter Event Location"
-				/>
-
-				<InputComp
-					{form}
-					{errors}
+					label="Short Description"
 					type="textarea"
 					name="description"
-					label="Product Discription"
-					placeholder="Enter Product Description"
+					placeholder="Enter Service Description"
+					required={true}
+					rows={10}
 				/>
 
 				<InputComp
 					{form}
 					{errors}
-					type="checkboxSingle"
-					name="isFeaturedOnHome"
-					label="Featured on Home"
-					placeholder="Should this event be featured on the home page?"
+					label="Long Description"
+					type="hidden"
+					name="longDescription"
+					placeholder="Enter Service Description"
+					required={true}
+					rows={10}
 				/>
-
+				<RichTextEditor bind:value={$form.longDescription} />
 				<InputComp
 					{form}
 					{errors}
 					type="file"
 					name="image"
 					image={data?.product?.featuredImage ?? ''}
-					label="Event Featured Image"
-					placeholder="Upload Event Featured Image"
+					label="Service Featured Image"
+					placeholder="Upload Service Featured Image"
+					required
 				/>
-
 				<Button form="edit" type="submit" class="mt-4">
 					{#if $delayed}
 						<LoadingBtn name="Saving Changes" />

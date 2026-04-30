@@ -4,7 +4,7 @@ import { zod4 } from 'sveltekit-superforms/adapters';
 import { edit, editGallery } from './schema';
 
 import { db } from '$lib/server/db';
-import { portfolio as products, portfolioGallery as productImages } from '$lib/server/db/schema';
+import { services as products, serviceGallery as productImages } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 import { fail, message } from 'sveltekit-superforms';
 import { setFlash } from 'sveltekit-flash-message/server';
@@ -24,8 +24,7 @@ export const actions: Actions = {
 			return fail(400, { form });
 		}
 
-		const { title, slug, client, eventType, isFeaturedOnHome, image, date, location, description } =
-			form.data;
+		const { name, image, description, longDescription } = form.data;
 
 		try {
 			if (image) {
@@ -34,15 +33,9 @@ export const actions: Actions = {
 				await db
 					.update(products)
 					.set({
-						title,
-						slug,
-						eventType,
-						client,
-						isFeaturedOnHome,
-						featuredImage,
-						date: new Date(date),
-						location,
+						name,
 						description,
+						longDescription,
 						updatedBy: locals?.user?.id
 					})
 					.where(eq(products.id, Number(id)));
@@ -50,24 +43,20 @@ export const actions: Actions = {
 				await db
 					.update(products)
 					.set({
-						title,
-						slug,
-						eventType,
-						client,
-						isFeaturedOnHome,
-						date: new Date(date),
-						location,
+						name,
 						description,
+						longDescription,
+
 						updatedBy: locals?.user?.id
 					})
 					.where(eq(products.id, Number(id)));
 			}
 
-			return message(form, { type: 'success', text: 'Event Portfolio Updated Successfully' });
+			return message(form, { type: 'success', text: 'Service Updated Successfully' });
 		} catch (err) {
 			console.error(err?.message);
 
-			return message(form, { type: 'error', text: 'Event Portfolio Update Failed' + err?.message });
+			return message(form, { type: 'error', text: 'Service Update Failed' + err?.message });
 		}
 	},
 
@@ -82,9 +71,9 @@ export const actions: Actions = {
 
 			await db.delete(products).where(eq(products.id, Number(id)));
 
-			setFlash({ type: 'success', message: 'Event Deleted Successfully!' }, cookies);
+			setFlash({ type: 'success', message: 'Service Deleted Successfully!' }, cookies);
 		} catch (err) {
-			console.error('Error deleting Event:', err);
+			console.error('Error deleting Service:', err);
 			setFlash({ type: 'error', message: `Unexpected Error: ${err?.message}` }, cookies);
 			return fail(400);
 		}
@@ -123,22 +112,22 @@ export const actions: Actions = {
 				// even if galleryImages.length is 0 (e.g., you just deleted an old photo)
 				if (finalList.length > 0) {
 					const imageRecords = finalList.map((url) => ({
-						portfolioId: Number(id),
+						serviceId: Number(id),
 						imageUrl: url
 					}));
 
 					// Wipe the old associations and replace with the new "finalList"
-					await tx.delete(productImages).where(eq(productImages.portfolioId, Number(id)));
+					await tx.delete(productImages).where(eq(productImages.serviceId, Number(id)));
 					await tx.insert(productImages).values(imageRecords);
 				} else {
 					// Handle the case where all images were removed
-					await tx.delete(productImages).where(eq(productImages.portfolioId, Number(id)));
+					await tx.delete(productImages).where(eq(productImages.serviceId, Number(id)));
 				}
 			});
 
-			return message(form, { type: 'success', text: 'Event Gallery added Successfully!' });
+			return message(form, { type: 'success', text: 'Service added Successfully!' });
 		} catch (err) {
-			console.error('Error marking adding event gallery:', err);
+			console.error('Error marking adding service gallery:', err);
 			return message(
 				form,
 				{ type: 'error', text: `Unexpected Error: ${err?.message}` },

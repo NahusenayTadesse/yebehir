@@ -3,7 +3,7 @@ import { zod4 } from 'sveltekit-superforms/adapters';
 import { edit, editGallery } from './schema';
 
 import { db } from '$lib/server/db';
-import { portfolio as event, portfolioGallery as productImages, user } from '$lib/server/db/schema';
+import { services as event, serviceGallery as productImages, user } from '$lib/server/db/schema';
 import { eq, sql, getTableColumns } from 'drizzle-orm';
 import type { LayoutServerLoad } from './$types';
 
@@ -15,7 +15,7 @@ export const load: LayoutServerLoad = async ({ params }) => {
 			url: productImages.imageUrl
 		})
 		.from(productImages)
-		.where(eq(productImages.portfolioId, Number(id)));
+		.where(eq(productImages.serviceId, Number(id)));
 
 	const images = result.map((img) => img.url);
 
