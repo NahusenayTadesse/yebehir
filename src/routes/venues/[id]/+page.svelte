@@ -60,23 +60,19 @@
 	<!-- Background Image -->
 	<div class="absolute inset-0">
 		<img
-			src="/files/{venue?.featuredImage}"
+			src={venue?.featuredImage ? `/files/${venue?.featuredImage}` : '/event (1).webp'}
 			loading="lazy"
 			alt={venue?.name}
 			class="h-full w-full object-cover"
 		/>
-		<div class="absolute inset-0 bg-primary/60"></div>
-		<div
-			class="absolute inset-0 bg-linear-to-r from-primary/80 via-transparent to-transparent"
-		></div>
+
+		<div class="absolute inset-0 bg-primary/60 dark:bg-secondary/60"></div>
+		<div class="absolute inset-0"></div>
 	</div>
 
 	<!-- Content Overlay -->
 	<div class="relative flex h-full max-w-4xl flex-col justify-end p-6 md:p-12 lg:p-16">
-		<Badge
-			variant="secondary"
-			class="mb-4 w-fit gap-2 border-primary/30 bg-primary/20 px-3 py-1.5 text-white backdrop-blur-sm "
-		>
+		<Badge variant="secondary">
 			<SparklesIcon class="size-4" />
 			Premium Venue
 		</Badge>
@@ -149,14 +145,14 @@
 				<Card class="border-border/50">
 					<CardHeader>
 						<CardTitle class="flex items-center gap-3 text-2xl">
-							<div class="rounded-lg bg-primary/10 p-2 text-secondary">
+							<div class="rounded-lg bg-primary/10 p-2">
 								<BuildingIcon class="size-5" />
 							</div>
 							About the Venue
 						</CardTitle>
 					</CardHeader>
 					<CardContent>
-						<p class="text-lg leading-relaxed text-muted-foreground">
+						<p class="text-lg leading-relaxed">
 							{venue?.description}
 						</p>
 					</CardContent>
@@ -168,14 +164,14 @@
 				<Card id="policy" class="border-border/50">
 					<CardHeader>
 						<CardTitle class="flex items-center gap-3 text-2xl">
-							<div class="rounded-lg bg-primary/10 p-2 text-secondary">
+							<div class="rounded-lg bg-primary/10 p-2">
 								<FileTextIcon class="size-5" />
 							</div>
 							Booking Policy
 						</CardTitle>
 					</CardHeader>
 					<CardContent>
-						<p class="leading-relaxed text-muted-foreground">
+						<p class="leading-relaxed">
 							{venue.bookingPolicy}
 						</p>
 					</CardContent>

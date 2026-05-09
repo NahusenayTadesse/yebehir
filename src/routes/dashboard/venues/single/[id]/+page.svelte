@@ -23,7 +23,7 @@
 
 		{ name: 'Booking Policy', value: data.product?.bookingPolicy },
 		{ name: 'Description', value: data.product?.description },
-		{ name: 'Added On', value: formatEthiopianDate(data.product?.createdAt) },
+		{ name: 'Added On', value: formatEthiopianDate(new Date(data.product?.createdAt)) },
 		{ name: 'Added By', value: data.product?.createdBy }
 	]);
 
@@ -192,13 +192,13 @@
 	/>
 </div>
 <div class="mx-auto my-12 px-4 sm:px-6 lg:px-4">
-	{#if data?.product?.title}
+	{#if data?.product?.name}
 		<div class="mb-6 border-b border-gray-100 pb-4">
 			<nav class="mb-2 text-xs font-medium tracking-wider text-gray-400 uppercase">
 				Gallery Images
 			</nav>
 			<h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
-				{data.product.title}
+				{data.product.name}
 			</h1>
 		</div>
 	{/if}
@@ -219,7 +219,7 @@
 			</Button>
 
 			{#if !editGallery}
-				<Gallery {images} title={data?.product?.title} />
+				<Gallery {images} title={data?.product?.name} />
 			{:else}
 				<EditGallery data={data?.galleryEdit} bind:images />
 			{/if}

@@ -27,7 +27,7 @@
 {:else}
 	<h2 class="my-4 text-2xl">No of Portfolio Events: {data.eventList?.length}</h2>
 
-	<div class="mt-8 mb-4 w-6xl p-0 pt-4 lg:w-full lg:p-0">
+	<div class="mt-8 mb-4 p-0 pt-4 lg:w-full lg:p-0">
 		<FilterMenu
 			bind:filteredList
 			data={data?.eventList}

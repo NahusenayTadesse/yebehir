@@ -78,8 +78,8 @@
 			{errors}
 			type="text"
 			name="slug"
-			label="Event Slug"
-			placeholder="Enter Slug"
+			label="Blog Slug"
+			placeholder="Enter Blog Slug"
 			required
 		/>
 

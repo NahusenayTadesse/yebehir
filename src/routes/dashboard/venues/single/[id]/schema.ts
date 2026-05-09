@@ -32,7 +32,7 @@ export const editGallery = z.object({
 export type EditGallery = z.infer<typeof editGallery>;
 
 export const deleteFeature = z.object({
-	id: z.coerce.number()
+	id: z.number()
 });
 
 export type DeleteFeature = z.infer<typeof deleteFeature>;

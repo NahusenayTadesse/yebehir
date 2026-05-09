@@ -6,7 +6,6 @@
 	import SingleTable from '$lib/components/SingleTable.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { superForm } from 'sveltekit-superforms/client';
-	import { page } from '$app/state';
 	import InputComp from '$lib/formComponents/InputComp.svelte';
 
 	import LoadingBtn from '$lib/formComponents/LoadingBtn.svelte';
@@ -22,7 +21,7 @@
 		{ name: 'Category', value: data.product?.categoryName },
 
 		{ name: 'Excerpt | Short Description', value: data.product?.excerpt },
-		{ name: 'Added On', value: formatEthiopianDate(data.product?.createdAt) },
+		{ name: 'Added On', value: formatEthiopianDate(new Date(data.product?.createdAt)) },
 		{ name: 'Added By', value: data.product?.createdBy }
 	]);
 
@@ -60,7 +59,7 @@
 </script>
 
 <svelte:head>
-	<title>Service Details</title>
+	<title>Blog Details</title>
 </svelte:head>
 
 <SingleView

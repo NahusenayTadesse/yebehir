@@ -7,72 +7,84 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+	/* Light Mode - Clean, Professional, White/Beige base */
 	--background: oklch(1 0 0);
-	--foreground: oklch(0.141 0.005 285.823);
+	--foreground: oklch(0.12 0.02 280); /* Deep Navy Tint */
+
 	--card: oklch(1 0 0);
-	--card-foreground: oklch(0.141 0.005 285.823);
+	--card-foreground: oklch(0.12 0.02 280);
+
 	--popover: oklch(1 0 0);
-	--popover-foreground: oklch(0.141 0.005 285.823);
+	--popover-foreground: oklch(0.12 0.02 280);
+
+	/* Yebehir Navy for main actions */
 	--primary: #091b38;
 	--primary-foreground: #f2e1d1;
+
+	/* Yebehir Beige for secondary/muted areas */
 	--secondary: #f2e1d1;
-	--secondary-foreground: oklch(0.21 0.006 285.885);
-	--muted: #f2e1d1;
-	--muted-foreground: oklch(0.552 0.016 285.938);
+	--secondary-foreground: #091b38;
+
+	--muted: oklch(0.95 0.01 50); /* Very faint beige tint */
+	--muted-foreground: oklch(0.4 0.02 280);
+
 	--accent: #f2e1d1;
-	--accent-foreground: oklch(0.21 0.006 285.885);
-	--destructive: oklch(0.577 0.245 27.325);
-	--border: oklch(0.92 0.004 286.32);
-	--input: oklch(0.92 0.004 286.32);
-	--ring: oklch(0.705 0.015 286.067);
-	--chart-1: oklch(0.809 0.105 251.813);
-	--chart-2: oklch(0.623 0.214 259.815);
-	--chart-3: oklch(0.546 0.245 262.881);
-	--chart-4: oklch(0.488 0.243 264.376);
-	--chart-5: oklch(0.424 0.199 265.638);
+	--accent-foreground: #091b38;
+
+	--destructive: oklch(0.55 0.2 25);
+	--destructive-foreground: oklch(0.98 0.01 25);
+
+	--border: oklch(0.9 0.01 50);
+	--input: oklch(0.9 0.01 50);
+	--ring: #091b38;
+
 	--radius: 0.625rem;
+
+	/* Sidebar - Soft Beige in Light Mode */
 	--sidebar: #f2e1d1;
-	--sidebar-foreground: oklch(0.141 0.005 285.823);
+	--sidebar-foreground: #091b38;
 	--sidebar-primary: #091b38;
-	--sidebar-primary-foreground: oklch(0.962 0.018 272.314);
-	--sidebar-accent: oklch(0.967 0.001 286.375);
-	--sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-	--sidebar-border: oklch(0.92 0.004 286.32);
-	--sidebar-ring: oklch(0.705 0.015 286.067);
+	--sidebar-primary-foreground: #f2e1d1;
+	--sidebar-accent: oklch(0.88 0.02 50);
+	--sidebar-border: oklch(0.85 0.02 50);
 }
 
 .dark {
-	--background: oklch(0.141 0.005 285.823);
-	--foreground: oklch(0.985 0 0);
-	--card: oklch(0.21 0.006 285.885);
-	--card-foreground: oklch(0.985 0 0);
-	--popover: oklch(0.21 0.006 285.885);
-	--popover-foreground: oklch(0.985 0 0);
-	--primary: #091b38;
-	--primary-foreground: #f2e1d1;
-	--secondary: #f2e1d1;
-	--secondary-foreground: oklch(0.985 0 0);
-	--muted: oklch(0.274 0.006 286.033);
-	--muted-foreground: oklch(0.705 0.015 286.067);
-	--accent: #f2e1d1;
-	--accent-foreground: oklch(0.985 0 0);
-	--destructive: oklch(0.704 0.191 22.216);
-	--border: oklch(1 0 0 / 10%);
+	/* Dark Mode - Premium Navy base */
+	--background: #010101;
+	--foreground: #f2e1d1; /* High contrast beige text */
+
+	--card: oklch(0.18 0.02 280); /* Slightly lighter navy for cards */
+	--card-foreground: #f2e1d1;
+
+	--popover: oklch(0.18 0.02 280);
+	--popover-foreground: #f2e1d1;
+
+	/* Flip: In dark mode, Primary is Beige to pop against Navy background */
+	--primary: #f2e1d1;
+	--primary-foreground: #091b38;
+
+	/* Secondary is a translucent navy/beige mix */
+	--secondary: oklch(0.25 0.02 280);
+	--secondary-foreground: #f2e1d1;
+
+	--muted: oklch(0.22 0.02 280);
+	--muted-foreground: oklch(0.75 0.02 50);
+
+	--accent: oklch(0.25 0.02 280);
+	--accent-foreground: #f2e1d1;
+
+	--border: oklch(1 0 0 / 15%);
 	--input: oklch(1 0 0 / 15%);
-	--ring: oklch(0.552 0.016 285.938);
-	--chart-1: oklch(0.809 0.105 251.813);
-	--chart-2: oklch(0.623 0.214 259.815);
-	--chart-3: oklch(0.546 0.245 262.881);
-	--chart-4: oklch(0.488 0.243 264.376);
-	--chart-5: oklch(0.424 0.199 265.638);
-	--sidebar: oklch(0.21 0.006 285.885);
-	--sidebar-foreground: oklch(0.985 0 0);
-	--sidebar-primary: oklch(0.585 0.233 277.117);
-	--sidebar-primary-foreground: oklch(0.962 0.018 272.314);
-	--sidebar-accent: oklch(0.274 0.006 286.033);
-	--sidebar-accent-foreground: oklch(0.985 0 0);
+	--ring: #f2e1d1;
+
+	/* Sidebar - Deep Navy in Dark Mode */
+	--sidebar: oklch(0.14 0.02 280);
+	--sidebar-foreground: #f2e1d1;
+	--sidebar-primary: #f2e1d1;
+	--sidebar-primary-foreground: #091b38;
+	--sidebar-accent: oklch(0.2 0.02 280);
 	--sidebar-border: oklch(1 0 0 / 10%);
-	--sidebar-ring: oklch(0.552 0.016 285.938);
 }
 
 @theme inline {

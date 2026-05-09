@@ -112,22 +112,22 @@
 	class="relative overflow-hidden bg-muted/30 bg-cover bg-center px-4 py-20 text-white sm:py-32"
 	style="background-image: url('/event (3).webp')"
 >
-	<div class="absolute inset-0 bg-primary/60"></div>
+	<div class="absolute inset-0 bg-primary/70 dark:bg-primary-foreground/70"></div>
 
 	<div class="relative z-10 mx-auto max-w-4xl space-y-6 text-center">
 		<div
-			class="inline-block rounded-full bg-primary/10 px-4 py-2 text-sm font-medium tracking-widest text-white uppercase"
+			class="inline-block rounded-full bg-primary/10 px-4 py-2 text-sm font-medium tracking-widest uppercase"
 		>
 			Ahead of the curve
 		</div>
 
 		<h1
-			class="text-center text-4xl font-extrabold tracking-tight text-accent sm:text-5xl lg:text-6xl"
+			class="text-center text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl"
 		>
 			We Create, Manage & <span class="text-primary">Monetize</span> Events.
 		</h1>
 
-		<p class="mx-auto max-w-2xl text-lg text-accent sm:text-xl">
+		<p class="mx-auto max-w-2xl text-lg text-white/80 sm:text-xl">
 			A multi-service platform in Addis Ababa integrating event management, premium venue providing,
 			and sales-driven brand partnerships.
 		</p>
@@ -268,7 +268,7 @@
 	class="relative bg-cover bg-center px-4 py-20 sm:py-32"
 	style="background-image: url('/event (3).webp')"
 >
-	<div class="absolute inset-0 bg-primary/60"></div>
+	<div class="absolute inset-0 bg-foreground/70"></div>
 	<div class="relative z-10 mx-auto max-w-5xl">
 		<div class="mb-16 text-center">
 			<h2
@@ -331,7 +331,7 @@
 		<h3
 			class="mt-4 text-4xl font-black tracking-tight text-foreground uppercase sm:text-5xl lg:text-6xl"
 		>
-			Business <span class="text-primary dark:text-accent">Units</span>
+			Business <span class="text-primary/60">Units</span>
 		</h3>
 	</div>
 

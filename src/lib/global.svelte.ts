@@ -147,8 +147,10 @@ export type Item = {
 	name: string;
 };
 
-export const formatEthiopianDate = (date: Date | undefined): string => {
+export const formatEthiopianDate = (date: Date | string | undefined): string => {
 	if (!date) return '';
+
+	const newDate = new SvelteDate(date);
 
 	const formatter = new Intl.DateTimeFormat('en-US', {
 		year: 'numeric',
@@ -156,5 +158,5 @@ export const formatEthiopianDate = (date: Date | undefined): string => {
 		day: 'numeric'
 	});
 
-	return formatter.format(date);
+	return formatter.format(newDate);
 };

@@ -47,7 +47,7 @@ export const actions: Actions = {
 					featuredImage,
 					createdBy: locals?.user?.id
 				})
-				.$returningId();
+				.returning();
 
 			const newProductId = product.id;
 

@@ -39,8 +39,10 @@
 
 		{ label: 'Services', href: '/services' },
 		{ label: 'Events', href: '/events' },
+		{ label: 'Venues', href: '/venues' },
+		{ label: 'Blogs', href: '/blogs' },
 
-		{ label: 'Contact', href: '/contact' }
+		{ label: 'Contact', href: '/contact-us' }
 	];
 </script>
 
@@ -182,7 +184,7 @@
 
 	<div class="-mt-24 justify-self-center border-t pt-8 text-center text-sm text-foreground/70">
 		<p class="">
-			&copy; {new Date().getFullYear()} Yebehir Marketing. All rights reserved.
+			&copy; {new Date().getFullYear()} Yebehir Ventures. All rights reserved.
 		</p>
 		<p class="text-center text-[8px] text-foreground/60">
 			Powered by <a

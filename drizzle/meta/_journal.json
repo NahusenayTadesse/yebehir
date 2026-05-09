@@ -1,54 +1,12 @@
 {
   "version": "7",
-  "dialect": "mysql",
+  "dialect": "sqlite",
   "entries": [
     {
       "idx": 0,
-      "version": "5",
-      "when": 1777234689738,
-      "tag": "0000_black_randall",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1777234821321,
-      "tag": "0001_perpetual_paladin",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1777460524786,
-      "tag": "0002_burly_pretty_boy",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1777460639338,
-      "tag": "0003_careless_network",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1777538639769,
-      "tag": "0004_loud_vulcan",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "5",
-      "when": 1777541628266,
-      "tag": "0005_futuristic_piledriver",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "5",
-      "when": 1777543797506,
-      "tag": "0006_dusty_invisible_woman",
+      "version": "6",
+      "when": 1778343466732,
+      "tag": "0000_flowery_pet_avengers",
       "breakpoints": true
     }
   ]

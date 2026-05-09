@@ -76,7 +76,7 @@
 					style="background-image: url('/event (2).webp')"
 					class="relative z-0 h-full overflow-hidden border-none bg-cover bg-center text-white shadow-xl"
 				>
-					<div class="absolute inset-0 -z-1 bg-primary/85"></div>
+					<div class="absolute inset-0 -z-1 bg-primary/80 dark:bg-primary-foreground/80"></div>
 					<CardHeader>
 						<CardTitle class="text-2xl text-[#F2E1D1]">Ahead of the Curve</CardTitle>
 						<CardDescription class="text-white/80">More than just an event company</CardDescription>

@@ -310,10 +310,19 @@ export const actions: Actions = {
 		const form = await superValidate(request, zod4(deleteFeature));
 
 		if (!form.valid) {
-			return fail(400, { form });
+			return message(
+				form,
+				{
+					type: 'error',
+					text: 'Error while deleting Video.'
+				},
+				{ status: 500 }
+			);
 		}
 
 		const { id } = form.data;
+
+		console.log(form);
 
 		try {
 			await db.delete(venueVideos).where(eq(venueVideos.id, id));

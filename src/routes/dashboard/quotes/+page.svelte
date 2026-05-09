@@ -174,11 +174,12 @@
 
 <Reply data={data?.replyForm} />
 <br />
+<br />
 {#key data?.allQuotes}
 	<FilterMenu
 		data={data?.allQuotes}
 		bind:filteredList
 		filterKeys={['serviceType', 'eventLocation', 'guestCount', 'isRead']}
 	/>
-	<DataTable {columns} class="lg:max-w-6xl!" data={filteredList} search={true} fileName="Quotes" />
+	<DataTable {columns} data={filteredList} search={true} fileName="Quotes" />
 {/key}

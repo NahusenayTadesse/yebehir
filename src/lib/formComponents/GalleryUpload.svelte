@@ -157,7 +157,7 @@
 
 			<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
 				<!-- Existing Images (Server) -->
-				{#each images as img, i (img)}
+				{#each images as img, i}
 					<div
 						class="group relative aspect-square overflow-hidden rounded-lg border bg-muted"
 						transition:fade
@@ -182,7 +182,7 @@
 				{/each}
 
 				<!-- New Uploads (Compressed) -->
-				{#each $file as f, i (f.name + i)}
+				{#each $file as f, i}
 					<div
 						class="group relative aspect-square overflow-hidden rounded-lg border bg-card shadow-sm"
 						transition:fade

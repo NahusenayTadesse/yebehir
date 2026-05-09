@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { Calendar, SquareArrowOutUpRight } from '@lucide/svelte';
+	import { Calendar, Users, ArrowUpRight, MapPin } from '@lucide/svelte';
 	import Button from './ui/button/button.svelte';
+	import { fade, fly } from 'svelte/transition';
+	import Badge from './ui/badge/badge.svelte';
 
 	// ── Types ─────────────────────────────────────────────────────────────────
 	type VenueDetail = {
@@ -15,27 +17,23 @@
 
 	type Props = {
 		venues: VenueDetail[];
-		/** Fallback image when featuredImage is null */
 		fallbackImage?: string;
+		layout?: 'carousel' | 'grid'; // New Prop
 	};
 
 	// ── Props & State ─────────────────────────────────────────────────────────
-	let { venues, fallbackImage = '/logo.webp' }: Props = $props();
+	let { venues = [], fallbackImage = '/logo.webp', layout = 'carousel' }: Props = $props();
 
 	let currentIndex = $state(0);
 	let isAnimating = $state(false);
 	let direction = $state<'left' | 'right'>('right');
 
 	// ── Derived ───────────────────────────────────────────────────────────────
-	const isSingle = $derived(venues.length === 1);
 	const current = $derived(venues[currentIndex]);
 	const hasMultiple = $derived(venues.length > 1);
-	const imageSrc = $derived(current?.featuredImage ?? fallbackImage);
+	const isGrid = $derived(layout === 'grid');
 
 	// ── Helpers ───────────────────────────────────────────────────────────────
-	function resolveImage(venue: VenueDetail): string {
-		return venue.featuredImage ? `/files/${venue?.featuredImage}` : fallbackImage;
-	}
 
 	function navigate(dir: 'left' | 'right'): void {
 		if (isAnimating || !hasMultiple) return;
@@ -59,289 +57,253 @@
 			isAnimating = false;
 		}, 320);
 	}
-
-	function formatCapacity(n: number | null): string {
-		if (n === null) return '—';
-		return n.toLocaleString();
-	}
 </script>
 
-<!-- ── Single Venue ───────────────────────────────────────────────────────── -->
-{#if isSingle}
+{#if venues.length === 0}
+	<div
+		class="flex min-h-48 items-center justify-center rounded-xl border border-dashed border-border bg-muted/30 text-muted-foreground"
+	>
+		<p class="text-sm italic">No premier venues available at the moment.</p>
+	</div>
+{:else if isGrid}
+	<!-- ── GRID LAYOUT ──────────────────────────────────────────────────────── -->
+	<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+		{#each venues as venue (venue.id)}
+			<article
+				class="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-[#091b38] shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
+			>
+				<a href="/venues/{venue.id}" class="relative aspect-4/3 overflow-hidden">
+					<img
+						src="/files/{venue?.featuredImage}"
+						alt={venue.name}
+						class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+					/>
+					<div
+						class="absolute inset-0 bg-linear-to-t from-[#091b38]/80 via-transparent to-transparent opacity-60"
+					></div>
+				</a>
+
+				<div class="flex flex-1 flex-col p-6 text-white">
+					{#if venue.location}
+						<div
+							class="mb-2 flex items-center gap-1 text-[10px] font-bold tracking-widest text-white/60 uppercase"
+						>
+							<MapPin size="12" />
+							{venue.location}
+						</div>
+					{/if}
+
+					<a href="/venues/{venue.id}" class="transition-colors group-hover:text-primary">
+						<h3 class="mb-2 text-xl leading-tight font-bold">{venue.name}</h3>
+					</a>
+
+					<p class="mb-4 line-clamp-2 text-sm text-white/80">
+						{venue.description ?? 'Experience luxury at one of our premier locations.'}
+					</p>
+
+					<div class="mt-auto flex items-center justify-between border-t border-border pt-4">
+						<div class="flex gap-3">
+							{#if venue.capacity}
+								<div class="flex items-center gap-1 text-xs font-medium text-white/80">
+									<Users size="14" />
+									{venue.capacity}
+								</div>
+							{/if}
+						</div>
+						<Button
+							variant="ghost"
+							size="sm"
+							href="/venues/{venue.id}"
+							class="gap-1 group-hover:bg-primary group-hover:text-white"
+						>
+							Details <ArrowUpRight size="14" />
+						</Button>
+					</div>
+				</div>
+			</article>
+		{/each}
+	</div>
+{:else if venues.length === 1}
+	<!-- ── SINGLE VENUE HERO ────────────────────────────────────────────────── -->
 	{@const venue = venues[0]}
 	<article
-		class="relative w-full overflow-hidden rounded-xl border border-border bg-card shadow-2xl"
-		style="min-height: 540px;"
+		class="group relative w-full overflow-hidden rounded-2xl border border-border shadow-2xl"
+		style="min-height: 580px;"
 	>
-		<!-- Hero image -->
-		<a href="/venues/{venue.id}" class="absolute inset-0 h-full w-full">
-			<img src={resolveImage(venue)} alt={venue.name} class="h-full w-full object-cover" />
-			<!-- Gradient overlay -->
+		<a href="/venues/{venue.id}" class="absolute inset-0 block h-full w-full overflow-hidden">
+			<img
+				src="/files/{venue?.featuredImage}"
+				alt={venue.name}
+				class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+			/>
 			<div
-				class="absolute inset-0"
-				style="background: linear-gradient(to top, hsl(var(--card)) 0%, hsl(var(--card) / 0.72) 40%, hsl(var(--card) / 0.08) 100%);"
+				class="absolute inset-0 bg-linear-to-r from-[#091b38] via-[#091b38]/80 to-transparent"
 			></div>
 		</a>
 
-		<!-- Content -->
-		<div class="relative flex h-full flex-col justify-end px-10 pt-72 pb-12">
-			<!-- Location pill -->
+		<div class="relative flex h-full max-w-4xl flex-col justify-end p-8 text-white md:p-16">
 			{#if venue.location}
 				<span
-					class="mb-4 inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-primary px-3 py-1 text-xs font-medium text-white backdrop-blur-sm"
+					class="mb-4 inline-flex items-center gap-2 rounded-full bg-[#f2e1d1] px-4 py-1.5 text-xs font-bold tracking-widest text-[#091b38] uppercase"
 				>
-					<svg
-						class="h-3 w-3"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-					>
-						<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-						<circle cx="12" cy="10" r="3" />
-					</svg>
+					<MapPin size="14" />
 					{venue.location}
 				</span>
 			{/if}
 
-			<h1 class="mb-3 text-4xl font-bold tracking-tight text-white lg:text-5xl">
+			<h1 class="mb-4 text-5xl font-black tracking-tight text-white lg:text-7xl">
 				{venue.name}
 			</h1>
 
-			{#if venue.description}
-				<p class="mb-6 max-w-2xl text-base leading-relaxed text-secondary">
-					{venue.description}
-				</p>
-			{/if}
+			<p class="mb-8 max-w-2xl text-lg leading-relaxed text-[#f2e1d1]/80">
+				{venue.description ?? ''}
+			</p>
 
-			<!-- Stats row -->
-			<div class="flex flex-wrap items-center gap-6">
-				{#if venue.capacity !== null}
-					<div class="flex items-center gap-2 text-sm text-card-foreground">
-						<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
-							<svg
-								class="h-4 w-4"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-							>
-								<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-								<circle cx="9" cy="7" r="4" />
-								<path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-								<path d="M16 3.13a4 4 0 0 1 0 7.75" />
-							</svg>
-						</span>
-						<span>
-							<span class="font-semibold text-white">{formatCapacity(venue.capacity)}</span>
-							<span class="ml-1 text-white">capacity</span>
-						</span>
+			<div class="mb-10 flex flex-wrap items-center gap-8">
+				{#if venue.capacity}
+					<div class="flex items-center gap-3">
+						<div
+							class="flex h-10 w-10 items-center justify-center rounded-full bg-[#f2e1d1]/10 text-[#f2e1d1]"
+						>
+							<Users size="20" />
+						</div>
+						<div class="text-white">
+							<p class="text-xs tracking-tighter uppercase opacity-60">Capacity</p>
+							<p class="font-bold">{venue.capacity.toLocaleString()} Guests</p>
+						</div>
 					</div>
 				{/if}
-
 				{#if venue.bookingPolicy}
-					<div class="flex items-center gap-2 text-sm text-card-foreground">
-						<span class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
-							<Calendar size="16" />
-						</span>
-						<span class="max-w-xs truncate text-white/80">{venue.bookingPolicy}</span>
+					<div class="flex items-center gap-3">
+						<div
+							class="flex h-10 w-10 items-center justify-center rounded-full bg-[#f2e1d1]/10 text-[#f2e1d1]"
+						>
+							<Calendar size="20" />
+						</div>
+						<div class="text-white">
+							<p class="text-xs tracking-tighter uppercase opacity-60">Availability</p>
+							<p class="max-w-50 truncate font-bold">{venue.bookingPolicy}</p>
+						</div>
 					</div>
 				{/if}
 			</div>
-			<Button class="mt-8 w-30 py-3" size="lg" href="/venues/{venue.id}"
-				><SquareArrowOutUpRight /> View Details</Button
+
+			<Button
+				size="lg"
+				href="/venues/{venue.id}"
+				class="h-14 w-fit rounded-full bg-[#f2e1d1] px-8 text-lg font-bold text-[#091b38] hover:bg-white"
 			>
+				Explore Venue <ArrowUpRight class="ml-2" />
+			</Button>
 		</div>
 	</article>
-
-	<!-- ── Carousel ───────────────────────────────────────────────────────────── -->
-{:else if hasMultiple}
-	<div class="relative w-full" role="region" aria-label="Venue carousel">
-		<!-- Main card -->
+{:else}
+	<!-- ── CAROUSEL LAYOUT ──────────────────────────────────────────────────── -->
+	<div class="group/carousel relative w-full" role="region" aria-label="Venue showcase">
 		<div
-			class="relative overflow-hidden rounded-xl border border-border bg-card shadow-xl"
-			style="min-height: 480px;"
+			class="relative min-h-125 overflow-hidden rounded-2xl border border-border bg-[#091b38] shadow-2xl"
 		>
-			<!-- Sliding image + overlay -->
-			<a
-				href="/venues/{current?.id}"
-				class="absolute inset-0 transition-opacity duration-300"
-				style="opacity: {isAnimating ? 0 : 1};"
-			>
-				<img src={imageSrc} alt={current?.name} class="h-full w-full object-cover" />
+			<!-- Image Link -->
+			<a href="/venues/{current.id}" class="absolute inset-0 block h-full w-full">
+				<img
+					src="/files/{current?.featuredImage}"
+					alt={current.name}
+					class="h-full w-full object-cover transition-opacity duration-500"
+					style="opacity: {isAnimating ? 0.3 : 1};"
+				/>
 				<div
-					class="absolute inset-0"
-					style="background: linear-gradient(to top, hsl(var(--card)) 0%, hsl(var(--card) / 0.65) 45%, hsl(var(--card) / 0.05) 100%);"
+					class="absolute inset-0 bg-linear-to-r from-[#091b38] via-[#091b38]/80 to-transparent"
 				></div>
 			</a>
 
-			<!-- Content block -->
+			<!-- Content -->
 			<div
-				class="relative flex h-full flex-col justify-end px-8 pt-64 pb-10 transition-all duration-300"
-				style="opacity: {isAnimating ? 0 : 1}; transform: translateX({isAnimating
-					? direction === 'right'
-						? '-18px'
-						: '18px'
-					: '0'});"
+				class="relative flex h-full flex-col justify-end p-8 text-white transition-all duration-300 md:p-12"
+				style="opacity: {isAnimating ? 0 : 1}; transform: translateY({isAnimating ? '10px' : '0'});"
 			>
-				{#if current?.location}
-					<span
-						class="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-background/80 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur-sm"
+				<div class="max-w-2xl">
+					{#if current.location}
+						<Badge>
+							{current.location}
+						</Badge>
+					{/if}
+
+					<a href="/venues/{current.id}"
+						><h2
+							class="mb-3 text-4xl font-bold text-white transition-all ease-in-out hover:scale-102"
+						>
+							{current.name}
+						</h2></a
 					>
-						<svg
-							class="h-3 w-3"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
+
+					<p class="mb-6 line-clamp-2 text-white/80">{current.description}</p>
+
+					<div class="mb-8 flex items-center gap-6">
+						{#if current.capacity}<span
+								class="flex items-center gap-2 text-sm font-medium text-white/80"
+								><Users size="16" class="text-white/80" /> {current.capacity} Guests</span
+							>{/if}
+						<Button
+							size="sm"
+							variant="secondary"
+							href="/venues/{current.id}"
+							class="rounded-full font-bold">View Venue</Button
 						>
-							<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-							<circle cx="12" cy="10" r="3" />
-						</svg>
-						{current.location}
-					</span>
-				{/if}
-
-				<h2 class="mb-2 text-3xl font-bold tracking-tight text-card-foreground">
-					{current?.name}
-				</h2>
-
-				{#if current?.description}
-					<p class="mb-5 line-clamp-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-						{current.description}
-					</p>
-				{/if}
-
-				<div class="flex flex-wrap gap-4">
-					{#if current?.capacity !== null && current?.capacity !== undefined}
-						<span
-							class="inline-flex items-center gap-1.5 rounded-lg bg-primary/15 px-3 py-1.5 text-xs font-medium text-primary"
-						>
-							<svg
-								class="h-3.5 w-3.5"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-							>
-								<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-								<circle cx="9" cy="7" r="4" />
-								<path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-								<path d="M16 3.13a4 4 0 0 1 0 7.75" />
-							</svg>
-							{formatCapacity(current.capacity)} guests
-						</span>
-					{/if}
-
-					{#if current?.bookingPolicy}
-						<span
-							class="inline-flex items-center gap-1.5 rounded-lg bg-accent px-3 py-1.5 text-xs font-medium text-accent-foreground"
-						>
-							<svg
-								class="h-3.5 w-3.5"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-							>
-								<rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-								<line x1="16" y1="2" x2="16" y2="6" />
-								<line x1="8" y1="2" x2="8" y2="6" />
-								<line x1="3" y1="10" x2="21" y2="10" />
-							</svg>
-							<span class="max-w-[180px] truncate">{current.bookingPolicy}</span>
-						</span>
-					{/if}
+					</div>
 				</div>
 			</div>
 
-			<!-- Prev / Next buttons -->
-			<button
-				onclick={() => navigate('left')}
-				disabled={isAnimating}
-				aria-label="Previous venue"
-				class="absolute top-1/2 left-4 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/80 text-foreground shadow-lg backdrop-blur-sm transition-all duration-150 hover:bg-background hover:shadow-xl disabled:opacity-40"
+			<!-- Navigation -->
+			<div
+				class="absolute top-1/2 right-0 left-0 flex -translate-y-1/2 justify-between px-4 opacity-0 transition-opacity group-hover/carousel:opacity-100"
 			>
-				<svg
-					class="h-4 w-4"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2.5"
+				<Button
+					size="icon"
+					onclick={() => navigate('left')}
+					class="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition-all hover:bg-primary"
 				>
-					<polyline points="15 18 9 12 15 6" />
-				</svg>
-			</button>
-
-			<button
-				onclick={() => navigate('right')}
-				disabled={isAnimating}
-				aria-label="Next venue"
-				class="absolute top-1/2 right-4 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background/80 text-foreground shadow-lg backdrop-blur-sm transition-all duration-150 hover:bg-background hover:shadow-xl disabled:opacity-40"
-			>
-				<svg
-					class="h-4 w-4"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2.5"
+					<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+						><path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M15 19l-7-7 7-7"
+						/></svg
+					>
+				</Button>
+				<button
+					onclick={() => navigate('right')}
+					class="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition-all hover:bg-primary"
 				>
-					<polyline points="9 18 15 12 9 6" />
-				</svg>
-			</button>
+					<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+						><path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M9 5l7 7-7 7"
+						/></svg
+					>
+				</button>
+			</div>
 
-			<!-- Counter badge -->
-			<span
-				class="absolute top-4 right-4 rounded-full border border-border bg-background/80 px-2.5 py-1 text-xs font-semibold text-foreground tabular-nums backdrop-blur-sm"
+			<!-- Counter -->
+			<div
+				class="absolute top-6 right-6 rounded-full border border-white/10 bg-black/40 px-4 py-1 text-[10px] font-bold tracking-widest text-white uppercase backdrop-blur-md"
 			>
 				{currentIndex + 1} / {venues.length}
-			</span>
+			</div>
 		</div>
 
-		<!-- Dot indicators -->
-		<div
-			class="mt-4 flex items-center justify-center gap-2"
-			role="tablist"
-			aria-label="Venue slides"
-		>
-			{#each venues as venue, i}
+		<!-- Dots -->
+		<div class="mt-6 flex justify-center gap-3">
+			{#each venues as _, i}
 				<button
-					role="tab"
-					aria-selected={i === currentIndex}
-					aria-label="Go to venue {i + 1}: {venue.name}"
 					onclick={() => goTo(i)}
-					class="h-1.5 rounded-full transition-all duration-300 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none {i ===
-					currentIndex
-						? 'w-6 bg-primary'
-						: 'w-1.5 bg-muted-foreground/40 hover:bg-muted-foreground/70'}"
+					class="h-1 rounded-full transition-all duration-300 {i === currentIndex
+						? 'w-8 bg-primary'
+						: 'w-2 bg-border hover:bg-muted-foreground'}"
 				></button>
 			{/each}
 		</div>
-
-		<!-- Thumbnail strip (visible if ≥ 3 venues) -->
-		{#if venues.length >= 3}
-			<div class="mt-3 flex gap-2 overflow-x-auto pb-1">
-				{#each venues as venue, i}
-					<button
-						onclick={() => goTo(i)}
-						aria-label="Go to {venue.name}"
-						class="relative h-14 w-20 flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none {i ===
-						currentIndex
-							? 'border-primary shadow-md'
-							: 'border-border opacity-60 hover:opacity-90'}"
-					>
-						<img src={resolveImage(venue)} alt={venue.name} class="h-full w-full object-cover" />
-					</button>
-				{/each}
-			</div>
-		{/if}
-	</div>
-
-	<!-- ── Empty state ────────────────────────────────────────────────────────── -->
-{:else}
-	<div
-		class="flex min-h-48 items-center justify-center rounded-xl border border-dashed border-border bg-muted/30 text-muted-foreground"
-	>
-		<p class="text-sm">No venues to display.</p>
 	</div>
 {/if}

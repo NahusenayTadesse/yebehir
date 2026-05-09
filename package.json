@@ -63,11 +63,13 @@
 		"zod": "^4.3.6"
 	},
 	"dependencies": {
+		"@libsql/client": "^0.17.3",
 		"@tabler/icons-svelte": "^3.41.1",
 		"browser-image-compression": "^2.0.2",
 		"embla-carousel-autoplay": "^8.6.0",
 		"jspdf": "^4.2.1",
 		"jspdf-autotable": "^5.0.7",
+		"libsql": "^0.5.29",
 		"mode-watcher": "^1.1.0",
 		"mysql2": "^3.22.2",
 		"nodemailer": "^8.0.7",

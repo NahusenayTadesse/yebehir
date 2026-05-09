@@ -16,7 +16,7 @@
 >
 	<div class="flex items-start gap-4">
 		<div
-			class="rounded-xl bg-primary/10 p-3 text-secondary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground"
+			class="rounded-xl bg-primary/10 p-3 transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground"
 		>
 			<Icon class="size-6" />
 		</div>

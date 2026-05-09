@@ -102,7 +102,7 @@
 		<div class="mb-12 text-center">
 			<h2 class="mb-4 text-4xl font-bold sm:text-5xl">Get in Touch</h2>
 			<p class="mx-auto max-w-2xl text-lg text-muted-foreground">
-				For project inquiries, bulk orders, and corporate supply agreements.
+				For event inquiries, venue bookings and brand partnership proposals.
 			</p>
 		</div>
 
@@ -213,7 +213,7 @@
 						<div class="grid grid-cols-2 gap-3">
 							{#each socialLinks as social (social.icon)}
 								<a
-									href={social.url}
+									href={social.href}
 									target="_blank"
 									rel="noopener noreferrer"
 									class={[

@@ -3,22 +3,16 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Badge } from '$lib/components/ui/badge';
 	import { Separator } from '$lib/components/ui/separator';
-	import { ArrowLeftIcon, CalendarIcon, MapPinIcon, UserIcon, SparklesIcon } from '@lucide/svelte';
+	import { ArrowLeftIcon, CalendarIcon } from '@lucide/svelte';
 	import type { BlogItem } from '$lib/data/portfolio';
 	import Gallery from '$lib/components/gallery.svelte';
+	import { formatEthiopianDate } from '$lib/global.svelte.js';
 	const { data } = $props();
 
 	const item: BlogItem = $derived(data?.portfolioItems);
 
 	const formattedDate = $derived(
-		item.createdAt
-			? new Date(item.createdAt).toLocaleDateString('en-US', {
-					weekday: 'long',
-					month: 'long',
-					day: 'numeric',
-					year: 'numeric'
-				})
-			: null
+		item?.createdAt ? formatEthiopianDate(new Date(item?.createdAt)) : null
 	);
 
 	const post: BlogItem = $derived(data?.portfolioItems);

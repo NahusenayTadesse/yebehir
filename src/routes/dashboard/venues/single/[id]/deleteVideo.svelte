@@ -51,7 +51,7 @@
 			<div class="flex flex-row items-end justify-center gap-4 pt-4">
 				<form method="post" id="delete" action="?/deleteVideo" use:enhance>
 					<Errors allErrors={$allErrors} />
-					<input bind:value={$form.id} name="id" type="hidden" />
+					<input bind:value={$form.id} name="id" hidden />
 					<Button type="submit" class="mt-4" form="delete">
 						{#if $delayed}
 							<LoadingBtn name="Deleting" />

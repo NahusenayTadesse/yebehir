@@ -24,7 +24,7 @@
 		{ name: 'Client', value: data.product?.client },
 		{ name: 'Location', value: data.product?.location },
 		{ name: 'Event Description', value: data.product?.description },
-		{ name: 'Added On', value: formatEthiopianDate(data.product?.createdAt) },
+		{ name: 'Added On', value: formatEthiopianDate(new Date(data.product?.createdAt)) },
 		{ name: 'Added By', value: data.product?.createdBy }
 	]);
 
