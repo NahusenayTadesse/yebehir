@@ -28,9 +28,7 @@
 	{:else}
 		<h2 class="my-4 text-2xl">No of Users: {data.userList?.length}</h2>
 
-		<div class="mt-8 mb-4 w-[350px] p-0 pt-4 lg:w-full lg:p-0">
-			<DataTable data={data.userList} {columns} fileName="Users List" />
-		</div>
+		<DataTable data={data.userList} {columns} fileName="Users List" />
 	{/if}
 {:catch}
 	<div class="flex h-screen w-screen flex-col items-center justify-center">

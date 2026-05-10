@@ -24,7 +24,5 @@
 {:else}
 	<h2 class="my-4 text-2xl">No of Blogs: {data.eventList?.length}</h2>
 
-	<div class="mt-8 mb-4 w-6xl p-0 pt-4 lg:w-full lg:p-0">
-		<DataTable data={data?.eventList} {columns} fileName="Blog List" />
-	</div>
+	<DataTable data={data?.eventList} {columns} fileName="Blog List" />
 {/if}

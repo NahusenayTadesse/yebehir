@@ -6,7 +6,6 @@
 	import SingleTable from '$lib/components/SingleTable.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { superForm } from 'sveltekit-superforms/client';
-	import { page } from '$app/state';
 	import InputComp from '$lib/formComponents/InputComp.svelte';
 
 	import LoadingBtn from '$lib/formComponents/LoadingBtn.svelte';

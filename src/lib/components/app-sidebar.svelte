@@ -128,7 +128,11 @@
 					title="Go to Website Home Page"
 					target="_blank"
 				>
-					<img src="/logoDark.webp" class="block h-16 w-16 object-contain dark:hidden" alt="Logo" />
+					<img
+						src="/logoForWhite.webp"
+						class="block h-16 w-16 object-contain dark:hidden"
+						alt="Logo"
+					/>
 					<img src="/logo.webp" class="hidden h-16 w-16 object-contain dark:block" alt="Logo" />
 					<h4 class="text-center text-[16px]! font-bold">Yebehir Ventures</h4>
 				</a>
