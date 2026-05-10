@@ -15,7 +15,7 @@
 	import { toast } from 'svelte-sonner';
 	import InputComp from '$lib/formComponents/InputComp.svelte';
 	import LoadingBtn from '$lib/formComponents/LoadingBtn.svelte';
-	import { IconBrandInstagram, IconBrandTiktok } from '@tabler/icons-svelte';
+	import { IconBrandFacebook, IconBrandInstagram, IconBrandTiktok } from '@tabler/icons-svelte';
 	import BrandLinkedin from '@tabler/icons-svelte/icons/brand-linkedin';
 	let { data } = $props();
 	const { form, errors, enhance, delayed, message } = superForm(data.form, {
@@ -28,6 +28,12 @@
 
 	// Social links
 	const socialLinks = [
+		{
+			name: 'Facebook',
+			href: 'https://www.facebook.com/yebehir',
+			icon: IconBrandFacebook,
+			value: 'Contact us on Facebook'
+		},
 		{
 			icon: IconBrandInstagram,
 			name: 'Instagram',
@@ -42,7 +48,7 @@
 		},
 		{
 			name: 'LinkedIn',
-			url: 'https://www.linkedin.com/company/yebehir-marketing/',
+			href: 'https://www.linkedin.com/in/maramawit-alemayehu-940880203/',
 			icon: BrandLinkedin,
 			color: 'hover:text-black dark:hover:text-white'
 		}

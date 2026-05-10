@@ -387,7 +387,7 @@
 
 <section
 	class="relative bg-muted bg-cover bg-center px-4 py-20 sm:py-32"
-	style="background-image: url('/event (4).webp')"
+	style="background-image: url('/event (3).webp')"
 >
 	<div class="absolute inset-0 bg-primary/60"></div>
 	<div class="relative z-10 mx-auto max-w-4xl">

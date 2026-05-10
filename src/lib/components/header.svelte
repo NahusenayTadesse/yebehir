@@ -34,7 +34,7 @@
 			<a href="/" class="inline-block">
 				<img
 					src="/logo.webp"
-					class="h-12 w-auto object-contain"
+					class="h-18 w-auto object-contain"
 					alt="Yebehir"
 					fetchpriority="high"
 				/>

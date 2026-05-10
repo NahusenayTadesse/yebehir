@@ -10,9 +10,20 @@
 		email = '';
 	};
 
-	import { IconBrandInstagram, IconBrandLinkedin, IconBrandTiktok } from '@tabler/icons-svelte';
+	import {
+		IconBrandInstagram,
+		IconBrandLinkedin,
+		IconBrandTiktok,
+		IconBrandFacebook
+	} from '@tabler/icons-svelte';
 
 	const socialLinks = [
+		{
+			name: 'Facebook',
+			url: 'https://www.facebook.com/yebehir',
+			icon: IconBrandFacebook,
+			color: 'hover:text-pink-500'
+		},
 		{
 			name: 'Instagram',
 			url: 'https://www.instagram.com/yebehir',
@@ -27,7 +38,7 @@
 		},
 		{
 			name: 'LinkedIn',
-			url: 'https://www.linkedin.com/company/yebehir-marketing/',
+			url: 'https://www.linkedin.com/in/maramawit-alemayehu-940880203/',
 			icon: IconBrandLinkedin,
 			color: 'hover:text-blue-400'
 		}
@@ -56,8 +67,8 @@
 		>
 			<!-- Company Info -->
 			<div>
-				<img src="/logoDark.webp" class="block w-30 dark:hidden" alt="Yebehir Logo" />
-				<img src="/logo.webp" class="hidden w-18 dark:block" alt="Yebehir Logo" />
+				<img src="/logoForWhite.webp" class="block w-30 dark:hidden" alt="Yebehir Logo" />
+				<img src="/logo.webp" class="hidden w-30 dark:block" alt="Yebehir Logo" />
 				<h4 class="mb-4 font-semibold">Yebhir Ventures</h4>
 
 				<div class="flex flex-col gap-2 text-sm">
