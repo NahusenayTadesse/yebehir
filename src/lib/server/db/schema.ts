@@ -1,20 +1,49 @@
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
-import { sql } from 'drizzle-orm';
+
+// ---------------------------------------------------------------------------
+// Shared field helpers
+// ---------------------------------------------------------------------------
+
+/** createdAt + updatedAt mapped to JS Date objects via integer({ mode: 'timestamp' }). */
+const timestamps = () => ({
+	createdAt: integer('created_at', { mode: 'timestamp' })
+		.$defaultFn(() => new Date())
+		.notNull(),
+	updatedAt: integer('updated_at', { mode: 'timestamp' })
+		.$defaultFn(() => new Date())
+		.$onUpdateFn(() => new Date())
+		.notNull()
+});
+
+/** Soft-delete fields. */
+const softDelete = () => ({
+	deletedAt: integer('deleted_at', { mode: 'timestamp' }),
+	deletedBy: text('deleted_by', { length: 255 })
+});
+
+/** Audit (created/updated by) fields. */
+const auditFields = () => ({
+	createdBy: text('created_by', { length: 255 }),
+	updatedBy: text('updated_by', { length: 255 })
+});
+
+// ---------------------------------------------------------------------------
+// Tables
+// ---------------------------------------------------------------------------
 
 export const account = sqliteTable('account', {
 	id: text({ length: 36 }).primaryKey(),
 	accountId: text('account_id').notNull(),
 	providerId: text('provider_id').notNull(),
 	userId: text('user_id', { length: 36 }).notNull(),
-	accessToken: text('access_token').default('sql`(NULL)`'),
-	refreshToken: text('refresh_token').default('sql`(NULL)`'),
-	idToken: text('id_token').default('sql`(NULL)`'),
-	accessTokenExpiresAt: text('access_token_expires_at').default('sql`(NULL)`'),
-	refreshTokenExpiresAt: text('refresh_token_expires_at').default('sql`(NULL)`'),
-	scope: text().default('sql`(NULL)`'),
-	password: text().default('sql`(NULL)`'),
-	createdAt: text('created_at', { length: 3 }).default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	updatedAt: text('updated_at').default('sql`(CURRENT_TIMESTAMP)`').notNull()
+	accessToken: text('access_token'),
+	refreshToken: text('refresh_token'),
+	idToken: text('id_token'),
+	accessTokenExpiresAt: integer('access_token_expires_at', { mode: 'timestamp' }),
+	refreshTokenExpiresAt: integer('refresh_token_expires_at', { mode: 'timestamp' }),
+	scope: text(),
+	password: text(),
+	...timestamps()
 });
 
 export const blog = sqliteTable('blog', {
@@ -22,17 +51,14 @@ export const blog = sqliteTable('blog', {
 	title: text({ length: 255 }).notNull(),
 	categoryId: integer('category_id').notNull(),
 	slug: text({ length: 255 }).notNull(),
-	excerpt: text().default('sql`(NULL)`'),
-	content: text().default('sql`(NULL)`'),
+	excerpt: text(),
+	content: text(),
 	isFeaturedOnHome: integer('is_featured_on_home').default(0),
-	featuredImage: text('featured_image', { length: 255 }).default('sql`(NULL)`'),
+	featuredImage: text('featured_image', { length: 255 }),
 	isActive: integer('is_active').default(1).notNull(),
-	createdBy: text('created_by', { length: 255 }).default('sql`(NULL)`'),
-	updatedBy: text('updated_by', { length: 255 }).default('sql`(NULL)`'),
-	createdAt: text('created_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	updatedAt: text('updated_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	deletedAt: text('deleted_at').default('sql`(NULL)`'),
-	deletedBy: text('deleted_by', { length: 255 }).default('sql`(NULL)`')
+	...auditFields(),
+	...timestamps(),
+	...softDelete()
 });
 
 export const blogCategories = sqliteTable('blog_categories', {
@@ -44,56 +70,53 @@ export const blogCategories = sqliteTable('blog_categories', {
 export const blogGallery = sqliteTable('blog_gallery', {
 	id: integer().primaryKey({ autoIncrement: true }),
 	blogId: integer('blog_id').notNull(),
-	imageUrl: text('image_url', { length: 255 }).default('sql`(NULL)`')
+	imageUrl: text('image_url', { length: 255 })
 });
 
 export const contactMessages = sqliteTable('contact_messages', {
 	id: integer().primaryKey({ autoIncrement: true }),
 	name: text({ length: 255 }).notNull(),
 	email: text({ length: 100 }).notNull(),
-	phone: text({ length: 20 }).default('sql`(NULL)`'),
+	phone: text({ length: 20 }),
 	subject: text({ length: 255 }).notNull(),
 	message: text().notNull(),
-	address: text({ length: 255 }).default('sql`(NULL)`'),
+	address: text({ length: 255 }),
 	seen: integer().default(0),
-	createdAt: text('created_at').default('sql`(CURRENT_TIMESTAMP)`').notNull()
+	...timestamps()
 });
 
 export const gallery = sqliteTable('gallery', {
 	id: integer().primaryKey({ autoIncrement: true }),
-	imageUrl: text('image_url', { length: 255 }).default('sql`(NULL)`')
+	imageUrl: text('image_url', { length: 255 })
 });
 
 export const permissions = sqliteTable('permissions', {
 	id: integer().primaryKey({ autoIncrement: true }),
 	name: text({ length: 50 }).notNull(),
-	description: text({ length: 255 }).default('sql`(NULL)`')
+	description: text({ length: 255 })
 });
 
 export const portfolio = sqliteTable('portfolio', {
 	id: integer().primaryKey({ autoIncrement: true }),
 	title: text({ length: 255 }).notNull(),
 	slug: text({ length: 255 }).notNull(),
-	description: text().default('sql`(NULL)`'),
-	featuredImage: text({ length: 255 }).default('sql`(NULL)`'),
-	eventType: text({ length: 255 }).default('sql`(NULL)`'),
-	date: text().default('sql`(NULL)`'),
-	client: text({ length: 255 }).default('sql`(NULL)`'),
-	location: text({ length: 255 }).default('sql`(NULL)`'),
+	description: text(),
+	featuredImage: text({ length: 255 }),
+	eventType: text({ length: 255 }),
+	date: integer({ mode: 'timestamp' }),
+	client: text({ length: 255 }),
+	location: text({ length: 255 }),
 	isFeaturedOnHome: integer('is_featured_on_home').default(0),
 	isActive: integer('is_active').default(1).notNull(),
-	createdBy: text('created_by', { length: 255 }).default('sql`(NULL)`'),
-	updatedBy: text('updated_by', { length: 255 }).default('sql`(NULL)`'),
-	createdAt: text('created_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	updatedAt: text('updated_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	deletedAt: text('deleted_at').default('sql`(NULL)`'),
-	deletedBy: text('deleted_by', { length: 255 }).default('sql`(NULL)`')
+	...auditFields(),
+	...timestamps(),
+	...softDelete()
 });
 
 export const portfolioGallery = sqliteTable('portfolio_gallery', {
 	id: integer().primaryKey({ autoIncrement: true }),
 	portfolioId: integer('portfolio_id').notNull(),
-	imageUrl: text('image_url', { length: 255 }).default('sql`(NULL)`')
+	imageUrl: text('image_url', { length: 255 })
 });
 
 export const quotes = sqliteTable('quotes', {
@@ -101,20 +124,20 @@ export const quotes = sqliteTable('quotes', {
 	serviceType: text('service_type', { length: 100 }).notNull(),
 	name: text({ length: 255 }).notNull(),
 	email: text({ length: 255 }).notNull(),
-	phone: text({ length: 50 }).default('sql`(NULL)`'),
-	eventDate: text('event_date').default('sql`(NULL)`'),
-	eventLocation: text('event_location', { length: 255 }).default('sql`(NULL)`'),
-	budgetRange: text('budget_range', { length: 100 }).default('sql`(NULL)`'),
-	guestCount: integer('guest_count').default(sql`(NULL)`),
-	description: text().default('sql`(NULL)`'),
+	phone: text({ length: 50 }),
+	eventDate: integer('event_date', { mode: 'timestamp' }),
+	eventLocation: text('event_location', { length: 255 }),
+	budgetRange: text('budget_range', { length: 100 }),
+	guestCount: integer('guest_count'),
+	description: text(),
 	status: text({ length: 50 }).default('pending'),
-	createdAt: text('created_at').default('sql`(CURRENT_TIMESTAMP)`').notNull()
+	...timestamps()
 });
 
 export const roles = sqliteTable('roles', {
 	id: integer().primaryKey({ autoIncrement: true }),
 	name: text({ length: 32 }).notNull(),
-	description: text({ length: 255 }).default('sql`(NULL)`'),
+	description: text({ length: 255 }),
 	isActive: integer('is_active').default(1).notNull()
 });
 
@@ -123,45 +146,38 @@ export const rolePermissions = sqliteTable('role_permissions', {
 	roleId: integer('role_id').notNull(),
 	permissionId: integer('permission_id').notNull(),
 	isActive: integer('is_active').default(1).notNull(),
-	createdBy: text('created_by', { length: 255 }).default('sql`(NULL)`'),
-	updatedBy: text('updated_by', { length: 255 }).default('sql`(NULL)`'),
-	createdAt: text('created_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	updatedAt: text('updated_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	deletedAt: text('deleted_at').default('sql`(NULL)`'),
-	deletedBy: text('deleted_by', { length: 255 }).default('sql`(NULL)`')
+	...auditFields(),
+	...timestamps(),
+	...softDelete()
 });
 
 export const services = sqliteTable('services', {
 	id: integer().primaryKey({ autoIncrement: true }),
 	name: text({ length: 255 }).notNull(),
-	description: text().default('sql`(NULL)`'),
-	longDescription: text('long_description').default('sql`(NULL)`'),
-	featuredImage: text('featured_image', { length: 255 }).default('sql`(NULL)`'),
+	description: text(),
+	longDescription: text('long_description'),
+	featuredImage: text('featured_image', { length: 255 }),
 	isActive: integer('is_active').default(1).notNull(),
-	createdBy: text('created_by', { length: 255 }).default('sql`(NULL)`'),
-	updatedBy: text('updated_by', { length: 255 }).default('sql`(NULL)`'),
-	createdAt: text('created_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	updatedAt: text('updated_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	deletedAt: text('deleted_at').default('sql`(NULL)`'),
-	deletedBy: text('deleted_by', { length: 255 }).default('sql`(NULL)`')
+	...auditFields(),
+	...timestamps(),
+	...softDelete()
 });
 
 export const serviceGallery = sqliteTable('service_gallery', {
 	id: integer().primaryKey({ autoIncrement: true }),
 	serviceId: integer('service_id').notNull(),
-	imageUrl: text('image_url', { length: 255 }).default('sql`(NULL)`')
+	imageUrl: text('image_url', { length: 255 })
 });
 
 export const session = sqliteTable('session', {
 	id: text({ length: 36 }).primaryKey(),
-	expiresAt: text('expires_at').notNull(),
+	expiresAt: integer('expires_at', { mode: 'timestamp' }).notNull(),
 	token: text({ length: 255 }).notNull(),
-	createdAt: text('created_at', { length: 3 }).default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	updatedAt: text('updated_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	ipAddress: text('ip_address').default('sql`(NULL)`'),
-	userAgent: text('user_agent').default('sql`(NULL)`'),
+	ipAddress: text('ip_address'),
+	userAgent: text('user_agent'),
 	userId: text('user_id', { length: 36 }).notNull(),
-	impersonatedBy: text('impersonated_by').default('sql`(NULL)`')
+	impersonatedBy: text('impersonated_by'),
+	...timestamps()
 });
 
 export const specialPermissions = sqliteTable('special_permissions', {
@@ -169,27 +185,21 @@ export const specialPermissions = sqliteTable('special_permissions', {
 	userId: text('user_id', { length: 255 }).notNull(),
 	permissionId: integer('permission_id').notNull(),
 	isActive: integer('is_active').default(1).notNull(),
-	createdBy: text('created_by', { length: 255 }).default('sql`(NULL)`'),
-	updatedBy: text('updated_by', { length: 255 }).default('sql`(NULL)`'),
-	createdAt: text('created_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	updatedAt: text('updated_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	deletedAt: text('deleted_at').default('sql`(NULL)`'),
-	deletedBy: text('deleted_by', { length: 255 }).default('sql`(NULL)`')
+	...auditFields(),
+	...timestamps(),
+	...softDelete()
 });
 
 export const testimonials = sqliteTable('testimonials', {
 	id: integer().primaryKey({ autoIncrement: true }),
 	name: text({ length: 255 }).notNull(),
-	position: text({ length: 255 }).default('sql`(NULL)`'),
+	position: text({ length: 255 }),
 	message: text().notNull(),
-	avatar: text({ length: 255 }).default('sql`(NULL)`'),
+	avatar: text({ length: 255 }),
 	isActive: integer('is_active').default(1).notNull(),
-	createdBy: text('created_by', { length: 255 }).default('sql`(NULL)`'),
-	updatedBy: text('updated_by', { length: 255 }).default('sql`(NULL)`'),
-	createdAt: text('created_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	updatedAt: text('updated_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	deletedAt: text('deleted_at').default('sql`(NULL)`'),
-	deletedBy: text('deleted_by', { length: 255 }).default('sql`(NULL)`')
+	...auditFields(),
+	...timestamps(),
+	...softDelete()
 });
 
 export const user = sqliteTable('user', {
@@ -197,46 +207,42 @@ export const user = sqliteTable('user', {
 	name: text({ length: 255 }).notNull(),
 	email: text({ length: 255 }).notNull(),
 	emailVerified: integer('email_verified').default(0).notNull(),
-	image: text().default('sql`(NULL)`'),
-	role: text().default('sql`(NULL)`'),
-	banned: integer().default(sql`(NULL)`),
-	banReason: text('ban_reason').default('sql`(NULL)`'),
-	banExpires: text('ban_expires', { length: 3 }).default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	roleId: integer('role_id').default(sql`(NULL)`),
-	createdAt: text('created_at', { length: 3 }).default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	updatedAt: text('updated_at').default('sql`(CURRENT_TIMESTAMP)`').notNull()
+	image: text(),
+	role: text(),
+	banned: integer(),
+	banReason: text('ban_reason'),
+	banExpires: integer('ban_expires', { mode: 'timestamp' }),
+	roleId: integer('role_id'),
+	...timestamps()
 });
 
 export const venueBooking = sqliteTable('venue_booking', {
 	id: integer().primaryKey({ autoIncrement: true }),
 	venueId: integer('venue_id').notNull(),
-	guestCount: integer('guest_count').default(sql`(NULL)`),
-	description: text().default('sql`(NULL)`'),
+	guestCount: integer('guest_count'),
+	description: text(),
 	status: text({ length: 50 }).default('pending'),
-	createdAt: text('created_at').default('sql`(CURRENT_TIMESTAMP)`').notNull()
+	...timestamps()
 });
 
 export const venueDetails = sqliteTable('venue_details', {
 	id: integer().primaryKey({ autoIncrement: true }),
 	name: text({ length: 255 }).default('4 Kilo Plaza'),
-	description: text().default('sql`(NULL)`'),
-	capacity: integer().default(sql`(NULL)`),
-	bookingPolicy: text('booking_policy').default('sql`(NULL)`'),
+	description: text(),
+	capacity: integer(),
+	bookingPolicy: text('booking_policy'),
 	isActive: integer('is_active').default(1).notNull(),
-	createdBy: text('created_by', { length: 255 }).default('sql`(NULL)`'),
-	updatedBy: text('updated_by', { length: 255 }).default('sql`(NULL)`'),
-	createdAt: text('created_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	updatedAt: text('updated_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	deletedAt: text('deleted_at').default('sql`(NULL)`'),
-	deletedBy: text('deleted_by', { length: 255 }).default('sql`(NULL)`'),
-	featuredImage: text({ length: 255 }).default('sql`(NULL)`'),
-	location: text({ length: 255 }).default('sql`(NULL)`')
+	featuredImage: text({ length: 255 }),
+	location: text({ length: 255 }),
+	...auditFields(),
+	...timestamps(),
+	...softDelete()
 });
 
 export const venueFeatures = sqliteTable('venue_features', {
 	id: integer().primaryKey({ autoIncrement: true }),
-	name: text({ length: 255 }).default('sql`(NULL)`'),
-	description: text().default('sql`(NULL)`'),
+	name: text({ length: 255 }),
+	description: text(),
 	venueId: integer('venue_id').notNull()
 });
 
@@ -246,12 +252,9 @@ export const venueImages = sqliteTable('venue_images', {
 	imageUrl: text('image_url', { length: 255 }).notNull(),
 	isFeatured: integer('is_featured').default(0),
 	isActive: integer('is_active').default(1).notNull(),
-	createdBy: text('created_by', { length: 255 }).default('sql`(NULL)`'),
-	updatedBy: text('updated_by', { length: 255 }).default('sql`(NULL)`'),
-	createdAt: text('created_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	updatedAt: text('updated_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	deletedAt: text('deleted_at').default('sql`(NULL)`'),
-	deletedBy: text('deleted_by', { length: 255 }).default('sql`(NULL)`')
+	...auditFields(),
+	...timestamps(),
+	...softDelete()
 });
 
 export const venueVideos = sqliteTable('venue_videos', {
@@ -259,19 +262,15 @@ export const venueVideos = sqliteTable('venue_videos', {
 	venueId: integer('venue_id').notNull(),
 	videoUrl: text('video_url', { length: 255 }).notNull(),
 	isActive: integer('is_active').default(1).notNull(),
-	createdBy: text('created_by', { length: 255 }).default('sql`(NULL)`'),
-	updatedBy: text('updated_by', { length: 255 }).default('sql`(NULL)`'),
-	createdAt: text('created_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	updatedAt: text('updated_at').default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	deletedAt: text('deleted_at').default('sql`(NULL)`'),
-	deletedBy: text('deleted_by', { length: 255 }).default('sql`(NULL)`')
+	...auditFields(),
+	...timestamps(),
+	...softDelete()
 });
 
 export const verification = sqliteTable('verification', {
 	id: text({ length: 36 }).primaryKey(),
 	identifier: text({ length: 255 }).notNull(),
 	value: text().notNull(),
-	expiresAt: text('expires_at').notNull(),
-	createdAt: text('created_at', { length: 3 }).default('sql`(CURRENT_TIMESTAMP)`').notNull(),
-	updatedAt: text('updated_at').default('sql`(CURRENT_TIMESTAMP)`').notNull()
+	expiresAt: integer('expires_at', { mode: 'timestamp' }).notNull(),
+	...timestamps()
 });

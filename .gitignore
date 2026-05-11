@@ -10,6 +10,7 @@ node_modules
 local.db
 local.db-shm
 local.db-wal
+build.tar
 
 # OS
 .DS_Store

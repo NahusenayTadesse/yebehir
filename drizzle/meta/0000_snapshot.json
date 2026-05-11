@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "dbc86555-4c55-4746-8094-68ac10a0fec1",
+  "id": "7f813015-93a3-4829-9ed9-732981138576",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "account": {
@@ -40,72 +40,63 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "refresh_token": {
           "name": "refresh_token",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "id_token": {
           "name": "id_token",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "access_token_expires_at": {
           "name": "access_token_expires_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "refresh_token_expires_at": {
           "name": "refresh_token_expires_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "scope": {
           "name": "scope",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "password": {
           "name": "password",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "created_at": {
           "name": "created_at",
-          "type": "text(3)",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -150,16 +141,14 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "content": {
           "name": "content",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "is_featured_on_home": {
           "name": "is_featured_on_home",
@@ -174,8 +163,7 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "is_active": {
           "name": "is_active",
@@ -190,48 +178,42 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "updated_by": {
           "name": "updated_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "deleted_at": {
           "name": "deleted_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "deleted_by": {
           "name": "deleted_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -279,7 +261,7 @@
           "type": "integer",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": false
+          "autoincrement": true
         },
         "blog_id": {
           "name": "blog_id",
@@ -293,8 +275,7 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -332,8 +313,7 @@
           "type": "text(20)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "subject": {
           "name": "subject",
@@ -354,8 +334,7 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "seen": {
           "name": "seen",
@@ -367,11 +346,17 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -395,8 +380,7 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -427,8 +411,7 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -466,48 +449,42 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "featuredImage": {
           "name": "featuredImage",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "eventType": {
           "name": "eventType",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "date": {
           "name": "date",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "client": {
           "name": "client",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "location": {
           "name": "location",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "is_featured_on_home": {
           "name": "is_featured_on_home",
@@ -530,48 +507,42 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "updated_by": {
           "name": "updated_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "deleted_at": {
           "name": "deleted_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "deleted_by": {
           "name": "deleted_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -602,8 +573,7 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -648,48 +618,42 @@
           "type": "text(50)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "event_date": {
           "name": "event_date",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "event_location": {
           "name": "event_location",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "budget_range": {
           "name": "budget_range",
           "type": "text(100)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "guest_count": {
           "name": "guest_count",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "(NULL)"
+          "autoincrement": false
         },
         "description": {
           "name": "description",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "status": {
           "name": "status",
@@ -701,11 +665,17 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -751,48 +721,42 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "updated_by": {
           "name": "updated_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "deleted_at": {
           "name": "deleted_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "deleted_by": {
           "name": "deleted_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -823,8 +787,7 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "is_active": {
           "name": "is_active",
@@ -863,8 +826,7 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -895,24 +857,21 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "long_description": {
           "name": "long_description",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "featured_image": {
           "name": "featured_image",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "is_active": {
           "name": "is_active",
@@ -927,48 +886,42 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "updated_by": {
           "name": "updated_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "deleted_at": {
           "name": "deleted_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "deleted_by": {
           "name": "deleted_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -989,7 +942,7 @@
         },
         "expires_at": {
           "name": "expires_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -1001,37 +954,19 @@
           "notNull": true,
           "autoincrement": false
         },
-        "created_at": {
-          "name": "created_at",
-          "type": "text(3)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
-        },
         "ip_address": {
           "name": "ip_address",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "user_agent": {
           "name": "user_agent",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "user_id": {
           "name": "user_id",
@@ -1045,8 +980,21 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -1092,48 +1040,42 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "updated_by": {
           "name": "updated_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "deleted_at": {
           "name": "deleted_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "deleted_by": {
           "name": "deleted_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -1164,8 +1106,7 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "message": {
           "name": "message",
@@ -1179,8 +1120,7 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "is_active": {
           "name": "is_active",
@@ -1195,48 +1135,42 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "updated_by": {
           "name": "updated_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "deleted_at": {
           "name": "deleted_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "deleted_by": {
           "name": "deleted_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -1282,64 +1216,56 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "role": {
           "name": "role",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "banned": {
           "name": "banned",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "(NULL)"
+          "autoincrement": false
         },
         "ban_reason": {
           "name": "ban_reason",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "ban_expires": {
           "name": "ban_expires",
-          "type": "text(3)",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "notNull": false,
+          "autoincrement": false
         },
         "role_id": {
           "name": "role_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "(NULL)"
+          "autoincrement": false
         },
         "created_at": {
           "name": "created_at",
-          "type": "text(3)",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -1370,16 +1296,14 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "(NULL)"
+          "autoincrement": false
         },
         "description": {
           "name": "description",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "status": {
           "name": "status",
@@ -1391,11 +1315,17 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -1427,24 +1357,21 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "capacity": {
           "name": "capacity",
           "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "(NULL)"
+          "autoincrement": false
         },
         "booking_policy": {
           "name": "booking_policy",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "is_active": {
           "name": "is_active",
@@ -1454,69 +1381,61 @@
           "autoincrement": false,
           "default": 1
         },
-        "created_by": {
-          "name": "created_by",
-          "type": "text(255)",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
-        },
-        "updated_by": {
-          "name": "updated_by",
-          "type": "text(255)",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
-        },
-        "deleted_at": {
-          "name": "deleted_at",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
-        },
-        "deleted_by": {
-          "name": "deleted_by",
-          "type": "text(255)",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
-        },
         "featuredImage": {
           "name": "featuredImage",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "location": {
           "name": "location",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
+        },
+        "created_by": {
+          "name": "created_by",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "deleted_at": {
+          "name": "deleted_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "deleted_by": {
+          "name": "deleted_by",
+          "type": "text(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -1540,16 +1459,14 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "description": {
           "name": "description",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "venue_id": {
           "name": "venue_id",
@@ -1610,48 +1527,42 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "updated_by": {
           "name": "updated_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "deleted_at": {
           "name": "deleted_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "deleted_by": {
           "name": "deleted_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -1697,48 +1608,42 @@
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "updated_by": {
           "name": "updated_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "deleted_at": {
           "name": "deleted_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         },
         "deleted_by": {
           "name": "deleted_by",
           "type": "text(255)",
           "primaryKey": false,
           "notNull": false,
-          "autoincrement": false,
-          "default": "'sql`(NULL)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},
@@ -1773,26 +1678,24 @@
         },
         "expires_at": {
           "name": "expires_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
         "created_at": {
           "name": "created_at",
-          "type": "text(3)",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "'sql`(CURRENT_TIMESTAMP)`'"
+          "autoincrement": false
         }
       },
       "indexes": {},

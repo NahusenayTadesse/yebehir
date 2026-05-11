@@ -87,7 +87,7 @@ export const columns = [
 		sortable: true,
 		cell: ({ row }) => {
 			// You can pass whatever you need from `row.original` to the component
-			return formatEthiopianDate(new Date(row.original.date));
+			return formatEthiopianDate(row.original.date);
 		}
 	},
 
