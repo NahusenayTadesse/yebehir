@@ -4,7 +4,7 @@
 
 <section
 	class="relative mb-10 overflow-hidden bg-muted/30 bg-cover bg-center px-4 py-20 text-white sm:py-32"
-	style="background-image: url('/event (3).webp')"
+	style="background-image: url('/event (2).webp')"
 >
 	<!-- Overlay to ensure text readability -->
 	<div class="absolute inset-0 bg-primary/70 dark:bg-primary-foreground/70"></div>

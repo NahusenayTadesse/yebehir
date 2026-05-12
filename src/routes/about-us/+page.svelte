@@ -15,20 +15,51 @@
 		MicIcon
 	} from '@lucide/svelte';
 	import { Card, CardContent, CardHeader, CardTitle } from '$lib/components/ui/card';
-	import { IconBrandFacebook, IconBrandInstagram, IconBrandTiktok } from '@tabler/icons-svelte';
+	import {
+		IconBrandFacebook,
+		IconBrandLinkedin,
+		IconBrandInstagram,
+		IconBrandTiktok
+	} from '@tabler/icons-svelte';
 	import FAQ from '$lib/components/faq.svelte';
 	import Slider from '$lib/components/slider.svelte';
 	import Catalog from '$lib/components/catalog.svelte';
 	import Testimonial from '$lib/components/testimonial.svelte';
 	import ServiceGrid from '$lib/components/services/service-grid.svelte';
 
-	const socialLinks = [
-		{ name: 'Instagram', url: '#', icon: IconBrandInstagram, color: 'hover:text-primary' },
-		{ name: 'TikTok', url: '#', icon: IconBrandTiktok, color: 'hover:text-primary' },
-		{ name: 'Facebook', url: '#', icon: IconBrandFacebook, color: 'hover:text-primary' },
-		{ name: 'Telegram', url: '#', icon: Send, color: 'hover:text-primary' }
-	];
+	// const socialLinks = [
+	// 	{ name: 'Instagram', url: '#', icon: IconBrandInstagram, color: 'hover:text-primary' },
+	// 	{ name: 'TikTok', url: '#', icon: IconBrandTiktok, color: 'hover:text-primary' },
+	// 	{ name: 'Facebook', url: '#', icon: IconBrandFacebook, color: 'hover:text-primary' },
+	// 	{ name: 'Telegram', url: '#', icon: Send, color: 'hover:text-primary' }
+	// ];
 
+	const socialLinks = [
+		{
+			name: 'Facebook',
+			url: 'https://www.facebook.com/yebehir',
+			icon: IconBrandFacebook,
+			color: 'hover:text-pink-500'
+		},
+		{
+			name: 'Instagram',
+			url: 'https://www.instagram.com/yebehir',
+			icon: IconBrandInstagram,
+			color: 'hover:text-pink-500'
+		},
+		{
+			name: 'TikTok',
+			url: 'https://www.tiktok.com/@yebehir',
+			icon: IconBrandTiktok,
+			color: 'hover:text-black dark:hover:text-white'
+		},
+		{
+			name: 'LinkedIn',
+			url: 'https://www.linkedin.com/in/maramawit-alemayehu-940880203/',
+			icon: IconBrandLinkedin,
+			color: 'hover:text-blue-400'
+		}
+	];
 	// Business Units based on the Project Brief
 	const units = [
 		{
@@ -110,7 +141,7 @@
 
 <section
 	class="relative overflow-hidden bg-muted/30 bg-cover bg-center px-4 py-20 text-white sm:py-32"
-	style="background-image: url('/event (3).webp')"
+	style="background-image: url('/event (2).webp')"
 >
 	<div class="absolute inset-0 bg-primary/70 dark:bg-primary-foreground/70"></div>
 
@@ -124,7 +155,7 @@
 		<h1
 			class="text-center text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl"
 		>
-			We Create, Manage & <span class="text-primary">Monetize</span> Events.
+			We Create, Manage & Monetize Events.
 		</h1>
 
 		<p class="mx-auto max-w-2xl text-lg text-white/80 sm:text-xl">
@@ -147,7 +178,7 @@
 		>
 			<p class="text-sm text-muted-foreground">Join our community</p>
 			<div class="grid grid-cols-4 gap-3">
-				{#each socialLinks as social}
+				{#each socialLinks as social (social.name)}
 					<a
 						href={social.url}
 						class="flex flex-col items-center gap-2 rounded-lg border border-border p-4 transition-all hover:border-primary hover:bg-primary/5 {social.color}"
@@ -161,11 +192,11 @@
 </section>
 
 <section class="px-4 py-20 sm:py-32">
-	<div class="mx-auto max-w-5xl">
+	<div class="mx-auto max-w-6xl">
 		<div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
 			<div class="relative">
 				<div class="aspect-square overflow-hidden rounded-2xl border border-border">
-					<img src="/event (2).webp" alt="Yebehir Events" class="h-full w-full object-cover" />
+					<img src="/growth.webp" alt="Yebehir Events" class="h-full w-full object-contain" />
 				</div>
 				<div
 					class="absolute -right-2 -bottom-6 max-w-xs rounded-xl bg-primary p-6 text-primary-foreground shadow-xl lg:-right-6"

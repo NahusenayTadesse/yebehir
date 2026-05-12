@@ -32,7 +32,7 @@
 		}
 	];
 
-	const images = ['/event (1).webp', '/event (2).webp', '/event (3).webp'];
+	const images = ['/event (1).webp', '/event (2).webp'];
 	let currentIndex = $state(0);
 	let mounted = $state(false);
 	let titleVisible = $state(false);

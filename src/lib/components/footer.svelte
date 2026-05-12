@@ -91,13 +91,13 @@
 						<span>+251930109760</span>
 					</a>
 					<a
-						href="tel:+251930109760"
+						href="tel:++251 97 037 3285"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="flex items-center gap-2 text-foreground/70"
 					>
 						<PhoneIcon class="size-4 shrink-0" />
-						<span>+251930109760</span>
+						<span>+251 97 037 3285</span>
 					</a>
 					<a
 						href="mailto:contact@yebehir.com"
