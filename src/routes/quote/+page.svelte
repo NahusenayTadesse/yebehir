@@ -147,34 +147,16 @@
 
 							<InputComp {form} {errors} type="date" name="eventDate" label="Event Date" />
 							<InputComp {form} {errors} type="number" name="guestCount" label="Guest Count" />
-							<div class="space-y-4 rounded-xl border p-6 shadow-sm">
-								<div class="flex items-center justify-end">
-									<span
-										class="rounded-full border border-secondary bg-foreground px-3 py-1 text-sm font-bold text-white dark:text-black"
-									>
-										ETB {Number($form.budgetRange ?? 0).toLocaleString()}
-									</span>
-								</div>
 
-								<div class="relative flex items-center">
-									<InputComp
-										{form}
-										label="Budget Range"
-										{errors}
-										type="range"
-										name="budgetRange"
-										min="1000"
-										max="10000000"
-										className="h-2 w-full cursor-pointer appearance-none rounded-lg  "
-									/>
-									<input hidden bind:value={$form.budgetRange} name="budgetRange" />
-								</div>
-
-								<div class="flex justify-between px-1 text-xs font-medium text-slate-400">
-									<span>1000 ETB</span>
-									<span>10M ETB</span>
-								</div>
-							</div>
+							<InputComp
+								{form}
+								label="Budget Range"
+								{errors}
+								type="number"
+								name="budgetRange"
+								min="1000"
+								max="10000000"
+							/>
 
 							<InputComp
 								{form}

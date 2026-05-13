@@ -9,7 +9,7 @@
 	} from '$lib/components/ui/card';
 	import { Button } from '$lib/components/ui/button';
 
-	import { MailIcon, Send, SendIcon, PhoneIcon } from '@lucide/svelte';
+	import { MailIcon, SendIcon, PhoneIcon } from '@lucide/svelte';
 
 	import { superForm } from 'sveltekit-superforms/client';
 	import { toast } from 'svelte-sonner';

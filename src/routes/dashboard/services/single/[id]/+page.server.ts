@@ -34,6 +34,7 @@ export const actions: Actions = {
 					.update(products)
 					.set({
 						name,
+						featuredImage,
 						description,
 						longDescription,
 						updatedBy: locals?.user?.id
