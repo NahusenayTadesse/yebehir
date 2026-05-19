@@ -274,3 +274,15 @@ export const verification = sqliteTable('verification', {
 	expiresAt: integer('expires_at', { mode: 'timestamp' }).notNull(),
 	...timestamps()
 });
+
+export const teamMembers = sqliteTable('teamMembers', {
+	id: integer().primaryKey({ autoIncrement: true }),
+	name: text({ length: 255 }).notNull(),
+	position: text({ length: 255 }),
+	message: text().notNull(),
+	avatar: text({ length: 255 }),
+	isActive: integer('is_active').default(1).notNull(),
+	...auditFields(),
+	...timestamps(),
+	...softDelete()
+});
