@@ -94,7 +94,7 @@
 
 	let { data } = $props();
 
-	import TeamCarousel from '$lib/components/team-caro.svelte';
+	import TeamCarousel from '$lib/components/teams/team-caro.svelte';
 </script>
 
 <svelte:head>

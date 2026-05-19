@@ -10,7 +10,7 @@
 	/* Light Mode - Clean, Professional, White/Beige base */
 	--background: oklch(1 0 0);
 	--foreground: oklch(0.12 0.02 280); /* Deep Navy Tint */
-
+	--carbg: #f2e1d1;
 	--card: oklch(1 0 0);
 	--card-foreground: oklch(0.12 0.02 280);
 
@@ -53,7 +53,7 @@
 	/* Dark Mode - Premium Navy base */
 	--background: #010101;
 	--foreground: #f2e1d1; /* High contrast beige text */
-
+	--carbg: #091b38;
 	--card: oklch(0.18 0.02 280); /* Slightly lighter navy for cards */
 	--card-foreground: #f2e1d1;
 
@@ -121,6 +121,7 @@
 	--color-card: var(--card);
 	--color-foreground: var(--foreground);
 	--color-background: var(--background);
+	--color-carbg: var(--carbg);
 	--radius-sm: calc(var(--radius) * 0.6);
 	--radius-md: calc(var(--radius) * 0.8);
 	--radius-lg: var(--radius);

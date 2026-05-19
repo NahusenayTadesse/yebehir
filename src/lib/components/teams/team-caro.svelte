@@ -49,7 +49,13 @@
 		>
 			<CarouselContent class="-ml-4">
 				{#each members as member, index (index)}
-					<CarouselItem class="basis-full pl-4 sm:basis-1/2 lg:basis-1/3">
+					<CarouselItem
+						class="basis-full pl-4 sm:basis-1/2 {members.length >= 3
+							? 'lg:basis-1/3'
+							: members.length === 2
+								? 'lg:basis-1/2'
+								: 'lg:basis-full'}"
+					>
 						<TeamCard {member} />
 					</CarouselItem>
 				{/each}
