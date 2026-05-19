@@ -240,14 +240,15 @@
 		</div>
 	</div>
 </section>
-
-<div class="py-12">
-	<TeamCarousel
-		members={data?.teamMembers}
-		title="Meet Our Team"
-		subtitle="The talented people behind our success, dedicated to delivering excellence every day."
-	/>
-</div>
+{#if data?.teamMembers.length}
+	<div class="py-12">
+		<TeamCarousel
+			members={data?.teamMembers}
+			title="Meet Our Team"
+			subtitle="The talented people behind our success, dedicated to delivering excellence every day."
+		/>
+	</div>
+{/if}
 
 <section class="bg-muted/30 px-4 py-20 sm:py-32">
 	<div class="mx-auto max-w-5xl">

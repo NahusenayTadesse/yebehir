@@ -35,7 +35,7 @@ export const load: LayoutServerLoad = async () => {
 			id: teamMembers.id,
 			name: teamMembers.name,
 			position: teamMembers.position,
-			description: teamMembers.testimonial,
+			description: teamMembers.message,
 			avatar: teamMembers.avatar
 		})
 		.from(teamMembers);
