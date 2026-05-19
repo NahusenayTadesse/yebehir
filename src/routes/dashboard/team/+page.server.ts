@@ -1,4 +1,4 @@
-import { setError, superValidate, message, fail } from 'sveltekit-superforms';
+import { superValidate, message, fail } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
 import { eq } from 'drizzle-orm';
 
@@ -9,8 +9,7 @@ import {
 } from './schema.js';
 import { db } from '$lib/server/db';
 import { teamMembers as paymentMethods, user } from '$lib/server/db/schema';
-import type { Actions } from './$types.js';
-import type { PageServerLoad } from './$types.js';
+import type { PageServerLoad, Actions } from './$types.js';
 
 export const load: PageServerLoad = async () => {
 	const form = await superValidate(zod4(schema));
@@ -45,7 +44,11 @@ export const actions: Actions = {
 		const form = await superValidate(request, zod4(schema));
 
 		if (!form.valid) {
-			return message(form, { type: 'error', text: 'Please check the form for Errors' });
+			return message(
+				form,
+				{ type: 'error', text: 'Please check the form for Errors' },
+				{ status: 400 }
+			);
 		}
 
 		const { name, position, testimonial, avatar } = form.data;
@@ -60,13 +63,13 @@ export const actions: Actions = {
 				createdBy: locals.user?.id
 			});
 
-			return message(form, { type: 'success', text: 'Testimonial Successfully Created' });
+			return message(form, { type: 'success', text: 'Team Member Successfully Created' });
 		} catch (err: any) {
 			return message(
 				form,
 				{
 					type: 'error',
-					text: 'Error while creating testimonial.'
+					text: 'Error while creating Team Member.'
 				},
 				{ status: 500 }
 			);
@@ -93,19 +96,19 @@ export const actions: Actions = {
 					updatedBy: locals?.user?.id
 				})
 				.where(eq(paymentMethods.id, id));
-			return message(form, { type: 'success', text: 'Testimonial Successfully Updated' });
+			return message(form, { type: 'success', text: 'Team Member Successfully Updated' });
 		} catch (err: any) {
 			return message(
 				form,
 				{
 					type: 'error',
-					text: 'Error while updating testimonial.'
+					text: 'Error while updating Team Member.'
 				},
 				{ status: 500 }
 			);
 		}
 	},
-	delete: async ({ request, locals }) => {
+	delete: async ({ request }) => {
 		const form = await superValidate(request, zod4(deleteTestimonial));
 
 		if (!form.valid) {
@@ -116,13 +119,13 @@ export const actions: Actions = {
 
 		try {
 			await db.delete(paymentMethods).where(eq(paymentMethods.id, id));
-			return message(form, { type: 'success', text: 'Testimonial Successfully Deleted' });
+			return message(form, { type: 'success', text: 'Team Member Successfully Deleted' });
 		} catch (err: any) {
 			return message(
 				form,
 				{
 					type: 'error',
-					text: 'Error while deleting testimonial.'
+					text: 'Error while deleting Team Member.'
 				},
 				{ status: 500 }
 			);

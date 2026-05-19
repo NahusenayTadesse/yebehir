@@ -45,7 +45,11 @@ export const actions: Actions = {
 		const form = await superValidate(request, zod4(schema));
 
 		if (!form.valid) {
-			return message(form, { type: 'error', text: 'Please check the form for Errors' });
+			return message(
+				form,
+				{ type: 'error', text: 'Please check the form for Errors' },
+				{ status: 400 }
+			);
 		}
 
 		const { name, position, testimonial, avatar } = form.data;
@@ -105,7 +109,7 @@ export const actions: Actions = {
 			);
 		}
 	},
-	delete: async ({ request, locals }) => {
+	delete: async ({ request }) => {
 		const form = await superValidate(request, zod4(deleteTestimonial));
 
 		if (!form.valid) {
