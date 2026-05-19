@@ -2,16 +2,14 @@
 	import {
 		Users,
 		UserRoundCog,
-		ChartArea,
 		LayoutDashboard,
-		CalendarDays,
 		MapPin,
 		TrendingUp,
 		Plus,
 		Sheet,
 		Mail,
 		Star,
-		Image,
+		Contact,
 		Quote,
 		Briefcase,
 		Book,
@@ -19,7 +17,6 @@
 	} from '@lucide/svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import type { ComponentProps } from 'svelte';
-	import { bgGradient } from '$lib/global.svelte';
 	import { useSidebar } from '$lib/components/ui/sidebar/index.js';
 
 	import NavMain from './NavMain.svelte';
@@ -93,6 +90,12 @@
 			title: 'Testimonials',
 			url: '/dashboard/testimonials',
 			icon: Star
+		},
+
+		{
+			title: 'Team Members',
+			url: '/dashboard/team',
+			icon: Contact
 		},
 
 		// {

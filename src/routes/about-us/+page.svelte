@@ -93,6 +93,8 @@
 	];
 
 	let { data } = $props();
+
+	import TeamCarousel from '$lib/components/team-caro.svelte';
 </script>
 
 <svelte:head>
@@ -238,6 +240,14 @@
 		</div>
 	</div>
 </section>
+
+<div class="py-12">
+	<TeamCarousel
+		members={data?.teamMembers}
+		title="Meet Our Team"
+		subtitle="The talented people behind our success, dedicated to delivering excellence every day."
+	/>
+</div>
 
 <section class="bg-muted/30 px-4 py-20 sm:py-32">
 	<div class="mx-auto max-w-5xl">
