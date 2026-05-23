@@ -38,7 +38,7 @@
 		property="og:description"
 		content="We create, manage, and monetize events. Discover full-service event production and venue bookings at 4 Kilo Plaza."
 	/>
-	<meta property="og:image" content="/logo.png" />
+	<meta property="og:image" content="/logo.jpg" />
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image" />
@@ -48,20 +48,20 @@
 		property="twitter:description"
 		content="Leading multi-service event company in Addis Ababa. Specializing in event production, venue operations, and sales-driven brand experiences."
 	/>
-	<meta property="twitter:image" content="/logo.png" />
+	<meta property="twitter:image" content="/logo.jpg" />
 
 	<!-- Canonical URL -->
 	<link rel="canonical" href="https://yebehir.com/" />
 
 	<!-- Favicon / Theming -->
-	<link rel="icon" type="image/png" href="/logo.png" />
+	<link rel="icon" type="image/png" href="/logo.jpg" />
 	<meta name="theme-color" content="#091B38" />
 </svelte:head>
 
 <Hero />
 <About />
 {#if data?.portfolioItems.length}
-	<section class="w-full space-y-8 py-12">
+	<section class="w-full space-y-8 pb-8">
 		<!-- Section Header -->
 		<div class="flex flex-col items-center space-y-2 text-center">
 			<h2 class="text-3xl font-bold tracking-tight text-foreground">Featured Events</h2>
@@ -73,9 +73,9 @@
 		<!-- Carousel Container -->
 		<div class="relative px-12">
 			<Carousel.Root opts={{ align: 'start', loop: true }} class="w-full">
-				<Carousel.Content class="-ml-4">
+				<Carousel.Content class="-ml-4 ">
 					{#each data.portfolioItems as item (item.id)}
-						<Carousel.Item class="basis-full pl-4 md:basis-1/2 lg:basis-1/3">
+						<Carousel.Item class="basis-full md:basis-1/2 lg:basis-1/3">
 							<div class="h-full transition-all hover:scale-[1.01]">
 								<PortfolioCard {item} />
 							</div>

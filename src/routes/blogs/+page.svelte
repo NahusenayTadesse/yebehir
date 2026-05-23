@@ -53,12 +53,12 @@
 		property="og:description"
 		content="Discover professional insights on creating, managing, and monetizing events."
 	/>
-	<meta property="og:image" content="/logo.png" />
+	<meta property="og:image" content="/logo.jpg" />
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image" />
 	<meta property="twitter:title" content="Yebehir Ventures Blog" />
-	<meta property="twitter:image" content="/logo.png" />
+	<meta property="twitter:image" content="/logo.jpg" />
 
 	<link rel="canonical" href="https://yebehir.com/blog" />
 </svelte:head>

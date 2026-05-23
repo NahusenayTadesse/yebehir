@@ -24,12 +24,12 @@
 		property="og:description"
 		content="We don’t just organize events—we create experiences, manage top-tier venues, and connect brands with audiences."
 	/>
-	<meta property="og:image" content="/logo.png" />
+	<meta property="og:image" content="/logo.jpg" />
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image" />
 	<meta property="twitter:title" content="Yebehir Ventures | Services Overview" />
-	<meta property="twitter:image" content="/logo.png" />
+	<meta property="twitter:image" content="/logo." /jpg>
 
 	<link rel="canonical" href="/services" />
 </svelte:head>

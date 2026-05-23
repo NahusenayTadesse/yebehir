@@ -66,12 +66,12 @@
 		property="og:description"
 		content="From high-energy brand activations to premium corporate gatherings. See how we create experiences."
 	/>
-	<meta property="og:image" content="https://yebehir.com/logo.png" />
+	<meta property="og:image" content="https://yebehir.com/logo.jpg" />
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image" />
 	<meta property="twitter:title" content="Yebehir Ventures | Event Portfolio" />
-	<meta property="twitter:image" content="/logo.png" />
+	<meta property="twitter:image" content="/logo.jpg" />
 
 	<link rel="canonical" href="/events" />
 </svelte:head>

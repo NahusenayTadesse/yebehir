@@ -121,7 +121,7 @@
 		property="og:description"
 		content="We create, manage, and monetize events. Discover full-service event production and venue bookings at 4 Kilo Plaza."
 	/>
-	<meta property="og:image" content="/logo.png" />
+	<meta property="og:image" content="/logo.jpg" />
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image" />
@@ -131,13 +131,13 @@
 		property="twitter:description"
 		content="Leading multi-service event company in Addis Ababa. Specializing in event production, venue operations, and sales-driven brand experiences."
 	/>
-	<meta property="twitter:image" content="/logo.png" />
+	<meta property="twitter:image" content="/logo.jpg" />
 
 	<!-- Canonical URL -->
 	<link rel="canonical" href="https://yebehir.com/" />
 
 	<!-- Favicon / Theming -->
-	<link rel="icon" type="image/png" href="/logo.png" />
+	<link rel="icon" type="image/png" href="/logo.jpg" />
 	<meta name="theme-color" content="#091B38" />
 </svelte:head>
 

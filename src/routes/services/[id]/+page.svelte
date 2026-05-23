@@ -17,7 +17,7 @@
 	const service: Service = $derived(data?.portfolioItems);
 
 	const imageUrl = $derived(
-		service.featuredImage ? `/files/${service.featuredImage}` : `/logo.png`
+		service.featuredImage ? `/files/${service.featuredImage}` : `/logo.jpg`
 	);
 
 	// SEO optimization: Even if the URL uses ID, we keep the content brand-focused

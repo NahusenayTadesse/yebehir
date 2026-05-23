@@ -22,12 +22,12 @@
 		property="og:description"
 		content="From the heart of Addis Ababa at 4 Kilo Plaza to bespoke event settings, find the perfect stage for your next vision."
 	/>
-	<meta property="og:image" content="/logo.png" />
+	<meta property="og:image" content="/logo.jpg" />
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image" />
 	<meta property="twitter:title" content="Yebehir Ventures | Premier Venues" />
-	<meta property="twitter:image" content="/logo.png" />
+	<meta property="twitter:image" content="/logo.jpg" />
 
 	<link rel="canonical" href="/venues" />
 </svelte:head>
