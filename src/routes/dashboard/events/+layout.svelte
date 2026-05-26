@@ -14,7 +14,7 @@
 		><Sheet /> Events</Button
 	>
 	<Button
-		href="/dashboard/events/add-events"
+		href="/dashboard/events/add-event"
 		variant={page.url.pathname === '/dashboard/events/add-event' ? 'default' : 'outline'}
 		><Plus /> Add Events</Button
 	>

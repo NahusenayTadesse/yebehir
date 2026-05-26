@@ -27,7 +27,11 @@ export const actions: Actions = {
 		if (!form.valid) {
 			// Stay on the same page and set a flash message
 			setFlash({ type: 'error', message: 'Please check your form data.' }, cookies);
-			return message(form, { type: 'error', text: 'Please check your form data.' });
+			return message(
+				form,
+				{ type: 'error', text: 'Please check your form data.' },
+				{ status: 400 }
+			);
 		}
 
 		const {
@@ -73,7 +77,7 @@ export const actions: Actions = {
 					isFeaturedOnHome,
 					client,
 					image,
-					date,
+					date: new Date(date),
 					location,
 					description,
 					featuredImage,

@@ -60,6 +60,10 @@
 
 <Hero />
 <About />
+{#if data?.servicesItems.length}
+	<ServiceGrid services={data.servicesItems} />
+	<br />
+{/if}
 {#if data?.portfolioItems.length}
 	<section class="w-full space-y-8 pb-8">
 		<!-- Section Header -->
@@ -135,11 +139,6 @@
 			</Carousel.Root>
 		</div>
 	</section>
-{/if}
-
-{#if data?.servicesItems.length}
-	<ServiceGrid services={data.servicesItems} />
-	<br />
 {/if}
 
 {#if data?.imagesList?.length > 0}

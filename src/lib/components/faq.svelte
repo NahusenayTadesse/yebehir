@@ -76,7 +76,7 @@
 		<Accordion
 			type="single"
 			collapsible
-			class="grid w-9/10 grid-cols-1 items-center gap-3 space-y-3 justify-self-center lg:grid-cols-2"
+			class="grid w-9/10 grid-cols-1 items-center gap-3 space-y-3 justify-self-center lg:grid-cols-1"
 		>
 			{#each features as feature (feature.id)}
 				<AccordionItem

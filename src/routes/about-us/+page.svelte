@@ -198,7 +198,7 @@
 		<div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
 			<div class="relative">
 				<div class="aspect-square overflow-hidden rounded-2xl border border-border">
-					<img src="/growth.webp" alt="Yebehir Events" class="h-full w-full object-contain" />
+					<img src="/growth.jpg" alt="Yebehir Events" class="h-full w-full object-contain" />
 				</div>
 				<div
 					class="absolute -right-2 -bottom-6 max-w-xs rounded-xl bg-primary p-6 text-primary-foreground shadow-xl lg:-right-6"
@@ -368,7 +368,7 @@
 	<br />
 {/if}
 
-<section class="mx-auto max-w-7xl px-6 py-24 md:py-32">
+<section class="mx-auto max-w-7xl px-6 py-24 md:py-20">
 	<div class="mb-16 md:mb-20">
 		<h3
 			class="mt-4 text-4xl font-black tracking-tight text-foreground uppercase sm:text-5xl lg:text-6xl"
@@ -411,7 +411,7 @@
 {/if}
 
 {#if data?.testimonialList.length > 0}
-	<main class="flex flex-col items-center justify-center px-4 py-12 md:py-20">
+	<main class="flex flex-col items-center justify-center px-4 py-12 md:py-8">
 		<!-- Section Header -->
 		<div class="mb-12 max-w-2xl text-center">
 			<h2 class="mb-4 text-3xl font-bold text-foreground md:text-4xl">What Our Customers Say</h2>

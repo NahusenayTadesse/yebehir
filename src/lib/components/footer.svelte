@@ -14,7 +14,8 @@
 		IconBrandInstagram,
 		IconBrandLinkedin,
 		IconBrandTiktok,
-		IconBrandFacebook
+		IconBrandFacebook,
+		IconBrandWhatsapp
 	} from '@tabler/icons-svelte';
 
 	const socialLinks = [
@@ -35,6 +36,12 @@
 			url: 'https://www.tiktok.com/@yebehir',
 			icon: IconBrandTiktok,
 			color: 'hover:text-black dark:hover:text-white'
+		},
+		{
+			name: 'WhatsApp',
+			url: 'https://wa.me/+25140424962',
+			icon: IconBrandWhatsapp,
+			color: 'hover:text-green-500'
 		},
 		{
 			name: 'LinkedIn',
@@ -73,13 +80,13 @@
 
 				<div class="flex flex-col gap-2 text-sm">
 					<a
-						href="https://maps.app.goo.gl/KMrgwGNNbsE2SAeV7"
+						href="https://maps.app.goo.gl/hFmfjGKUrHE59tNM9"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="flex items-center gap-2 text-foreground/70"
 					>
 						<MapPinIcon class="size-4 shrink-0" />
-						<span>Yohannes Guest House, Hayahulet, Addis Ababa</span>
+						<span>4 Kilo Plaza, Addis Ababa</span>
 					</a>
 					<a
 						href="tel:+251930109760"
@@ -88,16 +95,25 @@
 						class="flex items-center gap-2 text-foreground/70"
 					>
 						<PhoneIcon class="size-4 shrink-0" />
-						<span>+251930109760</span>
+						<span>+251 93 010 9760</span>
 					</a>
 					<a
-						href="tel:++251 97 037 3285"
+						href="tel:+251 97 037 3285"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="flex items-center gap-2 text-foreground/70"
 					>
 						<PhoneIcon class="size-4 shrink-0" />
 						<span>+251 97 037 3285</span>
+					</a>
+					<a
+						href="tel:0940 424 962"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="flex items-center gap-2 text-foreground/70"
+					>
+						<PhoneIcon class="size-4 shrink-0" />
+						<span>+251 94 042 4962</span>
 					</a>
 					<a
 						href="mailto:contact@yebehir.com"
@@ -130,7 +146,7 @@
 				<h4 class="mb-4 flex gap-2 font-semibold"><MapPin /> Location</h4>
 				<section class="relative h-32 w-full">
 					<iframe
-						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.5823625085322!2d38.779322850608956!3d9.010520800748324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b8592f498d563%3A0x97f1598563cbd7aa!2sYebehir%20Marketing!5e0!3m2!1sen!2set!4v1777583510761!5m2!1sen!2set"
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.334431053691!2d38.761148010080085!3d9.033225888886403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b850037ac00ff%3A0x2718a1624b2fc1df!2zNCBLaWxvIFBsYXphIHwgNCDhiqrhiI4g4Y2V4YiL4Yub!5e0!3m2!1sen!2set!4v1779783487929!5m2!1sen!2set"
 						style="border:0;"
 						class="w-full rounded-3xl"
 						loading="lazy"
@@ -171,7 +187,7 @@
 			<!-- Social Links -->
 			<div class="flex flex-col items-center justify-between gap-4 border-t pt-8 md:flex-row">
 				<p class="text-sm text-foreground/70">Follow us on social media</p>
-				<div class="grid grid-cols-4 gap-3">
+				<div class="grid grid-cols-5 gap-3">
 					{#each socialLinks as social (social.name)}
 						<a
 							href={social.url}

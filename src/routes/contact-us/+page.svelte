@@ -263,7 +263,7 @@
 						</div>
 						<div class="flex justify-between">
 							<span class="text-muted-foreground">Saturday</span>
-							<span class="font-semibold">8:30 AM - 4:00 PM</span>
+							<span class="font-semibold">8:30 AM - 12:00 PM</span>
 						</div>
 					</CardContent>
 				</Card>

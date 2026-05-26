@@ -115,7 +115,7 @@
 			</div>
 		</div>
 
-		<div transition:fly={{ y: 20, duration: 600, delay: 300 }} class="mb-16">
+		<!-- <div transition:fly={{ y: 20, duration: 600, delay: 300 }} class="mb-16">
 			<Card class="border-[#F2E1D1] bg-[#F2E1D1]/10 shadow-none">
 				<CardHeader>
 					<CardTitle class="text-[#091838]">Our Core Services</CardTitle>
@@ -139,5 +139,6 @@
 				</CardContent>
 			</Card>
 		</div>
+	</div> -->
 	</div>
 </section>

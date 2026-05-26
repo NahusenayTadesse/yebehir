@@ -61,7 +61,7 @@
 <ProgressBar color="#F2E1D1" zIndex={1000} />
 
 {#if !page.url.pathname.startsWith('/dashboard')}
-	<Header />
+	<Header serviceNames={data.servicesItems} />
 	{@render children()}
 	<Footer />
 {:else}

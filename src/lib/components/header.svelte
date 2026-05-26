@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { ArrowRight, MenuIcon, XIcon } from '@lucide/svelte';
+	import { ArrowDown, ArrowRight, MenuIcon, XIcon } from '@lucide/svelte';
 	import DarkMode from './DarkMode.svelte';
 
 	import { Sheet, SheetContent, SheetTrigger } from '$lib/components/ui/sheet';
 	import { Button } from '$lib/components/ui/button';
+	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 
 	let isOpen = $state(false);
 
@@ -12,11 +13,13 @@
 	};
 	import { page } from '$app/state';
 
+	let { serviceNames }: { serviceNames: { id: number; name: string }[] } = $props();
+
 	const menuItems = [
 		{ label: 'Home', href: '/' },
 		{ label: 'About Us', href: '/about-us' },
 
-		{ label: 'Services', href: '/services' },
+		{ label: 'Services', href: '' },
 		{ label: 'Events', href: '/events' },
 		{ label: 'Venues', href: '/venues' },
 		{ label: 'Blogs', href: '/blogs' },
@@ -33,8 +36,8 @@
 		<div class="flex shrink-0 items-center gap-2">
 			<a href="/" class="inline-block">
 				<img
-					src="/logo.webp"
-					class="h-18 w-auto object-contain"
+					src="/logoWhite.png"
+					class="h-16 w-16 w-auto object-contain"
 					alt="Yebehir"
 					fetchpriority="high"
 				/>
@@ -46,15 +49,50 @@
 		<!-- Desktop Menu -->
 		<nav class="hidden items-center gap-1 md:flex">
 			{#each menuItems as item (item.href)}
-				<Button
-					variant={page.url.pathname === item.href ? 'default' : 'ghost'}
-					size="sm"
-					class="text-white {page.url.pathname === item.href ? 'bg-[#F2E1D1] text-[#091B38]' : ''}"
-					href={item.href}
-					onclick={handleMenuClick}
-				>
-					{item.label}
-				</Button>
+				{#if item.label !== 'Services'}
+					<Button
+						variant={page.url.pathname === item.href ? 'default' : 'ghost'}
+						size="sm"
+						class="text-white {page.url.pathname === item.href
+							? 'bg-[#F2E1D1] text-[#091B38]'
+							: ''}"
+						href={item.href}
+						onclick={handleMenuClick}
+					>
+						{item.label}
+					</Button>
+				{:else}
+					<DropdownMenu.Root>
+						<DropdownMenu.Trigger>
+							{#snippet child({ props })}
+								<Button
+									{...props}
+									variant={page.url.pathname === item.href ? 'default' : 'ghost'}
+									size="sm"
+									class="text-white {page.url.pathname === item.href
+										? 'bg-[#F2E1D1] text-[#091B38]'
+										: ''}"
+									onclick={handleMenuClick}
+								>
+									{item.label}
+								</Button>
+							{/snippet}
+						</DropdownMenu.Trigger>
+						<DropdownMenu.Content>
+							<DropdownMenu.Group class="p-4">
+								{#each serviceNames as service (service.id)}
+									<DropdownMenu.Item>
+										{#snippet child({ props })}
+											<Button variant="ghost" href="/services/{service.id}" {...props}>
+												{service.name}
+											</Button>
+										{/snippet}</DropdownMenu.Item
+									>
+								{/each}
+							</DropdownMenu.Group>
+						</DropdownMenu.Content>
+					</DropdownMenu.Root>
+				{/if}
 			{/each}
 		</nav>
 		<div class="flex flex-row gap-4">

@@ -29,7 +29,7 @@
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image" />
 	<meta property="twitter:title" content="Yebehir Ventures | Services Overview" />
-	<meta property="twitter:image" content="/logo." /jpg>
+	<meta property="twitter:image" content="/logo.jpg" />
 
 	<link rel="canonical" href="/services" />
 </svelte:head>

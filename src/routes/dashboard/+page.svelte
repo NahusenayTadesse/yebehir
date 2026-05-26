@@ -61,7 +61,7 @@
 </svelte:head>
 
 <div class="grid grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-1">
-	{#each navigation as section}
+	{#each navigation as section (section.title)}
 		<Card.Root
 			class="group overflow-hidden border-l-4 {section.color} transition-all hover:shadow-lg {section.span ??
 				''}"
@@ -71,7 +71,7 @@
 				<Card.Description>{section.description}</Card.Description>
 			</Card.Header>
 			<Card.Content class="grid grid-cols-2 gap-3 sm:grid-cols-3">
-				{#each section.links as link}
+				{#each section.links as link (link.name)}
 					<a
 						href="/dashboard{link.href}"
 						class="flex flex-col items-center justify-center gap-2 rounded-xl border bg-muted/30 p-4 transition-colors hover:bg-primary hover:text-primary-foreground"
