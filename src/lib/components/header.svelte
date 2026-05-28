@@ -79,13 +79,13 @@
 							{/snippet}
 						</DropdownMenu.Trigger>
 						<DropdownMenu.Content>
-							<DropdownMenu.Group class="p-4">
+							<DropdownMenu.Group>
 								{#each serviceNames as service (service.id)}
-									<DropdownMenu.Item>
+									<DropdownMenu.Item class="text-xs">
 										{#snippet child({ props })}
-											<Button variant="ghost" href="/services/{service.id}" {...props}>
+											<a class="p-2 text-[6px]!" href="/services/{service.id}" {...props}>
 												{service.name}
-											</Button>
+											</a>
 										{/snippet}</DropdownMenu.Item
 									>
 								{/each}

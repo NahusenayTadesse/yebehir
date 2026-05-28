@@ -65,8 +65,10 @@
 		<div transition:fly={{ y: 20, duration: 600 }} class="mb-16 flex flex-col gap-4 text-center">
 			<h2 class="text-4xl font-bold sm:text-5xl">About Yebehir Ventures</h2>
 			<p class="mx-auto max-w-3xl text-lg">
-				A multi-service company specializing in event management, venue operations, and sales-driven
-				brand experiences in Addis Ababa.
+				Yebehir is a creative event and activation company based in Addis Ababa, Ethiopia. We
+				specialize in event organizing and management, brand activations, sales outsourcing, and
+				venue rental services at 4 Kilo Plaza. Our mission is to help brands create impactful
+				experiences that connect with people and drive growth
 			</p>
 		</div>
 

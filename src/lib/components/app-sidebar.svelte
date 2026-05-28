@@ -142,7 +142,7 @@
 			</Sidebar.GroupLabel>
 
 			<Sidebar.GroupContent class="my-6">
-				<NavMain items={navigation} />
+				<NavMain {closeSidebar} items={navigation} />
 			</Sidebar.GroupContent>
 		</Sidebar.Group>
 	</Sidebar.Content>

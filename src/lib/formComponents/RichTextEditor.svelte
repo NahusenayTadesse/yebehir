@@ -1,62 +1,22 @@
 <!-- QuillEditor.svelte -->
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import 'quill/dist/quill.snow.css';
+	import { Tipex } from '@friendofsvelte/tipex';
+	import '@friendofsvelte/tipex/styles/index.css';
 
-	/* -------------------------------------------------
-	 * Public props
-	 * ------------------------------------------------- */
+	let { value = $bindable(''), placeholder = 'Start writing...' } = $props();
 
-	let { value = $bindable(), placeholder = 'Start writing...' } = $props();
+	import type { Editor } from '@tiptap/core';
+	let editorInstance: Editor | undefined = $state();
 
-	let container: HTMLDivElement;
-
-	/* -------------------------------------------------
-	 * Toolbar definition
-	 * ------------------------------------------------- */
-	const toolbar = [
-		[{ header: [1, 2, 3, false] }],
-		['bold', 'italic', 'underline', 'strike'],
-		[{ list: 'ordered' }, { list: 'bullet' }],
-		['link', 'blockquote', 'clean']
-	];
-
-	/* -------------------------------------------------
-	 * Lifecycle
-	 * ------------------------------------------------- */
-	onMount(async () => {
-		const { default: Quill } = await import('quill');
-
-		let quill = new Quill(container, {
-			theme: 'snow',
-			placeholder,
-			modules: { toolbar }
-		});
-
-		// --- load initial value ---
-		if (value) {
-			quill.clipboard.dangerouslyPasteHTML(value, 'silent');
+	$effect(() => {
+		if (editorInstance) {
+			editorInstance.on('update', () => {
+				value = editorInstance?.getHTML() || '';
+			});
 		}
-
-		// --- two-way binding ---
-		quill.on('text-change', () => {
-			value = quill.root.innerHTML;
-		});
-
-		// --- cleanup ---
-		return () => {
-			quill = null;
-		};
 	});
 </script>
 
-<div bind:this={container}></div>
+<!-- <div bind:this={container}></div> -->
 
-<style>
-	/* keep the editor from collapsing */
-	div {
-		height: auto;
-		min-height: 150px;
-		width: 100%;
-	}
-</style>
+<Tipex body={value} bind:tipex={editorInstance} focal floating />

@@ -6,15 +6,16 @@
 		MapPinIcon,
 		TrendingUpIcon,
 		BadgeCheckIcon,
-		ZapIcon,
 		UsersIcon,
-		Send,
 		PhoneIcon,
-		QuoteIcon,
 		CoffeeIcon,
-		MicIcon
+		Coffee
 	} from '@lucide/svelte';
 	import { Card, CardContent, CardHeader, CardTitle } from '$lib/components/ui/card';
+	import HeroSection from '$lib/components/hero-section.svelte';
+	import FeaturesSection from '$lib/components/features-section.svelte';
+	import IndustriesSection from '$lib/components/industries-section.svelte';
+	import VisionMission from '$lib/components/vision-mission.svelte';
 	import {
 		IconBrandFacebook,
 		IconBrandLinkedin,
@@ -23,7 +24,6 @@
 	} from '@tabler/icons-svelte';
 	import FAQ from '$lib/components/faq.svelte';
 	import Slider from '$lib/components/slider.svelte';
-	import Catalog from '$lib/components/catalog.svelte';
 	import Testimonial from '$lib/components/testimonial.svelte';
 	import ServiceGrid from '$lib/components/services/service-grid.svelte';
 
@@ -77,18 +77,18 @@
 			short: 'VENUE'
 		},
 		{
-			name: 'Sales & Sponsorship',
+			name: 'Sales',
 			description:
 				'Strategic partnership acquisition and event-based marketing. We connect global and local brands with target audiences to generate revenue.',
 			icon: TrendingUpIcon,
 			short: 'SALES'
 		},
 		{
-			name: 'Brand Activations',
+			name: 'Yebehir Coffee',
 			description:
-				'Creating high-impact experiences that build brand credibility and engage the youth market in Addis Ababa.',
-			icon: ZapIcon,
-			short: 'BRAND'
+				'Creating quality coffee experiences that build brand credibility and engage the youth market in Addis Ababa.',
+			icon: Coffee,
+			short: 'COFFEE'
 		}
 	];
 
@@ -157,12 +157,15 @@
 		<h1
 			class="text-center text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl"
 		>
-			We Create, Manage & Monetize Events.
+			Creating Experiences That Move Brands Forward
 		</h1>
 
 		<p class="mx-auto max-w-2xl text-lg text-white/80 sm:text-xl">
-			A multi-service platform in Addis Ababa integrating event management, premium venue providing,
-			and sales-driven brand partnerships.
+			Yebehir is a creative event and activation company based in Addis Ababa, Ethiopia,
+			specializing in event organizing and management, brand activations, sales outsourcing, and
+			venue rental services at 4 Kilo Plaza. We help brands create memorable experiences, connect
+			with audiences, increase visibility, and drive business growth through impactful events and
+			strategic activations.
 		</p>
 
 		<div class="flex flex-col justify-center gap-4 pt-4 sm:flex-row">
@@ -211,14 +214,17 @@
 
 			<div class="space-y-6">
 				<div>
-					<h2 class="mb-4 text-3xl font-bold text-foreground sm:text-4xl">Our Identity</h2>
+					<h2 class="mb-4 text-3xl font-bold text-foreground sm:text-4xl">Who we are</h2>
 					<p class="mb-4 text-lg leading-relaxed text-muted-foreground">
-						Yebehir Ventures is not just an event company. We are a unique hybrid that combines
-						world-class management with venue operations and sponsorship tools.
+						Yebehir is built around the idea that experiences create stronger connections than
+						traditional advertising. Our focus is to help businesses engage with people through
+						creative events, activations, and sales-driven experiences that leave lasting
+						impressions.
 					</p>
 					<p class="text-lg leading-relaxed text-muted-foreground">
-						Our mission is to create experiences that don't just entertain—they generate qualified
-						leads, attract brand partnerships, and provide high-energy lifestyle moments.
+						Whether it is organizing corporate events, managing entertainment experiences, executing
+						brand activations, or providing venue solutions, we create environments where brands and
+						people connect naturally.
 					</p>
 				</div>
 
@@ -240,6 +246,29 @@
 		</div>
 	</div>
 </section>
+
+<section>
+	<HeroSection />
+	<FeaturesSection />
+	<IndustriesSection />
+	<VisionMission />
+
+	<!-- Footer CTA -->
+	<section class="bg-linear-to-t from-primary/10 to-background px-4 py-16">
+		<div class="mx-auto max-w-2xl text-center">
+			<h3 class="mb-4 text-2xl font-bold text-foreground">Ready to Create Something Amazing?</h3>
+			<p class="mb-8 text-muted-foreground">
+				Let's work together to bring your brand's vision to life through unforgettable experiences.
+			</p>
+			<Button
+				size="lg"
+				class="shadow-lg-lg shadow-lg-primary/30 hover:shadow-lg-xl hover:shadow-lg-primary/40 rounded-full px-8 transition-all duration-300"
+				>Get in Touch</Button
+			>
+		</div>
+	</section>
+</section>
+
 {#if data?.teamMembers.length}
 	<div class="py-12">
 		<TeamCarousel
