@@ -7,6 +7,7 @@
 	import InfoCard from './info-card.svelte';
 	import {
 		UsersIcon,
+		CircleChevronRight,
 		MapPinIcon,
 		BuildingIcon,
 		ClockIcon,
@@ -71,24 +72,24 @@
 	</div>
 
 	<!-- Content Overlay -->
-	<div class="relative flex h-full max-w-4xl flex-col justify-end p-6 md:p-12 lg:p-16">
+	<div class="relative flex h-full max-w-4xl flex-col justify-end gap-4 p-6 md:p-12 lg:p-16">
 		<Badge variant="secondary">
 			<SparklesIcon class="size-4" />
 			Premium Venue
 		</Badge>
 
-		<h1 class="mb-4 text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
+		<h1 class="text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
 			{venue?.name}
 		</h1>
 
 		{#if venue?.location}
-			<p class="mb-8 max-w-2xl text-lg text-white/80 md:text-xl">
+			<p class="max-w-2xl text-lg text-white/80 md:text-xl">
 				{venue.location}
 			</p>
 		{/if}
 
 		<Button href="/quote" size="lg" class="w-40" variant="outline"
-			><Calendar /> Request a Quote</Button
+			>Book Now <CircleChevronRight /></Button
 		>
 	</div>
 </section>

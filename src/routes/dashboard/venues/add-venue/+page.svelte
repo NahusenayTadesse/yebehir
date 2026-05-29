@@ -79,7 +79,6 @@
 			name="capacity"
 			label="Capacity"
 			placeholder="Enter Capacity"
-			required
 		/>
 
 		<InputComp

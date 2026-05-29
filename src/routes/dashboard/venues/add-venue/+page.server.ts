@@ -36,7 +36,7 @@ export const actions: Actions = {
 			// 1. Upload images first (usually done before the DB transaction starts
 			// to avoid keeping a DB connection open during slow network I/O)
 			const featuredImage = await saveUploadedFile(image);
-			const galleryImages = await uploadGallery(gallery);
+			const galleryImages = gallery ? await uploadGallery(gallery) : undefined;
 
 			// 2. Insert the main product
 			const [product] = await tx
@@ -55,7 +55,7 @@ export const actions: Actions = {
 			const newProductId = product.id;
 
 			// 3. Prepare and insert the gallery images
-			if (galleryImages.length > 0) {
+			if (gallery) {
 				const imageRecords = galleryImages.map((url) => ({
 					venueId: newProductId,
 					imageUrl: url

@@ -63,21 +63,15 @@
 	// Business Units based on the Project Brief
 	const units = [
 		{
-			name: 'Yebehir Events',
+			name: 'Yebehir Events & Promotions',
 			description:
 				'Full-service event management specializing in corporate clients, brand activations, and high-energy private events with a focus on cinematic experiences.',
 			icon: CalendarHeartIcon,
 			short: 'EVENTS'
 		},
+
 		{
-			name: '4 Kilo Plaza',
-			description:
-				'Our central, flexible venue in Addis Ababa. Designed for corporate meetings, lifestyle events, and brand showcases with premium amenities.',
-			icon: MapPinIcon,
-			short: 'VENUE'
-		},
-		{
-			name: 'Sales',
+			name: 'Yebehir Sales Activations',
 			description:
 				'Strategic partnership acquisition and event-based marketing. We connect global and local brands with target audiences to generate revenue.',
 			icon: TrendingUpIcon,
@@ -89,6 +83,13 @@
 				'Creating quality coffee experiences that build brand credibility and engage the youth market in Addis Ababa.',
 			icon: Coffee,
 			short: 'COFFEE'
+		},
+		{
+			name: '4 Kilo Plaza',
+			description:
+				'Our central, flexible venue in Addis Ababa. Designed for corporate meetings, lifestyle events, and brand showcases with premium amenities.',
+			icon: MapPinIcon,
+			short: 'VENUE'
 		}
 	];
 

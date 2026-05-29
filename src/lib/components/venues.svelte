@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { Calendar, Users, ArrowUpRight, MapPin } from '@lucide/svelte';
+	import { Calendar, Users, CircleChevronRight as ArrowUpRight, MapPin } from '@lucide/svelte';
 	import Button from './ui/button/button.svelte';
-	import { fade, fly } from 'svelte/transition';
 	import Badge from './ui/badge/badge.svelte';
 
 	// ── Types ─────────────────────────────────────────────────────────────────
@@ -118,6 +117,8 @@
 						>
 							Details <ArrowUpRight size="14" />
 						</Button>
+
+						<Button variant="secondary" size="sm" href="/quote">Book Now ></Button>
 					</div>
 				</div>
 			</article>
@@ -195,6 +196,7 @@
 			>
 				Explore Venue <ArrowUpRight class="ml-2" />
 			</Button>
+			<Button variant="secondary" size="sm" href="/quote">Book Now ></Button>
 		</div>
 	</article>
 {:else}
@@ -239,15 +241,16 @@
 					<p class="mb-6 line-clamp-2 text-white/80">{current.description}</p>
 
 					<div class="mb-8 flex items-center gap-6">
-						{#if current.capacity}<span
-								class="flex items-center gap-2 text-sm font-medium text-white/80"
+						{#if current.capacity}
+							<span class="flex items-center gap-2 text-sm font-medium text-white/80"
 								><Users size="16" class="text-white/80" /> {current.capacity} Guests</span
-							>{/if}
-						<Button
-							size="sm"
-							variant="secondary"
-							href="/venues/{current.id}"
-							class="rounded-full font-bold">View Venue</Button
+							>
+						{/if}
+						<Button size="sm" variant="secondary" href="/venues/{current.id}"
+							>View Venue <ArrowUpRight size="14" /></Button
+						>
+						<Button variant="secondary" size="sm" href="/quote"
+							>Book Now <ArrowUpRight size="14" /></Button
 						>
 					</div>
 				</div>
