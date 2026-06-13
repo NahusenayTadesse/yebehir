@@ -123,7 +123,9 @@
 	<div class="scanline" aria-hidden="true"></div>
 
 	<!-- Main content -->
-	<div class="relative z-20 mx-auto flex min-h-dvh max-w-7xl flex-col justify-center px-6 lg:px-10">
+	<div
+		class="relative z-20 mx-auto flex min-h-dvh max-w-7xl flex-col justify-center px-6 py-4 lg:px-10"
+	>
 		<div class="grid gap-12 lg:grid-cols-12 lg:items-center">
 			<!-- Left column: copy -->
 			<div class="flex flex-col space-y-10 lg:col-span-7">

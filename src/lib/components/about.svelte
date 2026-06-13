@@ -6,14 +6,7 @@
 		CardHeader,
 		CardTitle
 	} from '$lib/components/ui/card';
-	import {
-		CalendarHeartIcon,
-		MapPinIcon,
-		TrendingUpIcon,
-		UsersIcon,
-		ZapIcon,
-		CheckIcon
-	} from '@lucide/svelte';
+	import { CalendarHeartIcon, MapPinIcon, TrendingUpIcon, ZapIcon } from '@lucide/svelte';
 	import { fly } from 'svelte/transition';
 
 	// Highlights based on "Key Differentiation" and "General Information"
@@ -39,30 +32,14 @@
 			description: 'Creating experiences and generating revenue'
 		}
 	];
-
-	// Core Business Units
-	const services = [
-		'Event Management',
-		'Venue Operations',
-		'Sales Division',
-		'Sponsorships',
-		'Brand Activations',
-		'Catering'
-	];
-
-	// Target Audience segments for the secondary section
-	const audience = [
-		{ name: 'Corporate Clients', description: 'Banks, telecom, FMCG, and major companies' },
-		{
-			name: 'Brands & Sponsors',
-			description: 'Connecting brands with high-energy youth audiences'
-		}
-	];
 </script>
 
 <section class="relative px-4 pt-20 pb-8 sm:px-6 lg:px-8">
 	<div class="mx-auto">
-		<div transition:fly={{ y: 20, duration: 600 }} class="mb-16 flex flex-col gap-4 text-center">
+		<div
+			transition:fly={{ y: 20, duration: 600 }}
+			class="mb-16 flex flex-col items-center justify-center gap-4 justify-self-center text-center"
+		>
 			<h2 class="text-4xl font-bold sm:text-5xl">About Yebehir Ventures</h2>
 			<p class="mx-auto max-w-3xl text-lg">
 				Yebehir is a creative event and activation company based in Addis Ababa, Ethiopia. We
@@ -76,14 +53,16 @@
 			<div transition:fly={{ y: 20, duration: 600, delay: 100 }} class="lg:col-span-2">
 				<Card
 					style="background-image: url('/event (2).webp')"
-					class="relative z-0 h-full overflow-hidden border-none bg-cover bg-center text-white shadow-xl"
+					class="relative z-0 flex h-full flex-col items-center justify-center overflow-hidden border-none bg-cover bg-center px-8 text-white shadow-xl"
 				>
 					<div class="absolute inset-0 -z-1 bg-primary/80 dark:bg-primary-foreground/80"></div>
-					<CardHeader>
-						<CardTitle class="text-2xl text-[#F2E1D1]">Ahead of the Curve</CardTitle>
-						<CardDescription class="text-white/80">More than just an event company</CardDescription>
+					<CardHeader class="flex w-full flex-col items-center justify-center">
+						<CardTitle class="text-center text-5xl text-[#F2E1D1]">Ahead of the Curve</CardTitle>
+						<CardDescription class="text-2xl text-white/80"
+							>More than just an event company</CardDescription
+						>
 					</CardHeader>
-					<CardContent class="flex flex-col gap-4 text-white">
+					<CardContent class="flex flex-col gap-4 text-center text-white">
 						<p class="leading-relaxed">
 							Yebehir Ventures is a unique platform that integrates event management, venue
 							providing, and sales/sponsorship services. We don't just organize events—we create
@@ -116,31 +95,5 @@
 				{/each}
 			</div>
 		</div>
-
-		<!-- <div transition:fly={{ y: 20, duration: 600, delay: 300 }} class="mb-16">
-			<Card class="border-[#F2E1D1] bg-[#F2E1D1]/10 shadow-none">
-				<CardHeader>
-					<CardTitle class="text-[#091838]">Our Core Services</CardTitle>
-					<CardDescription
-						>Comprehensive solutions for events, venues, and marketing</CardDescription
-					>
-				</CardHeader>
-				<CardContent>
-					<div class="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
-						{#each services as item (item)}
-							<div
-								class="flex items-center gap-3 rounded-lg border border-[#091838]/10 bg-white p-3 transition-colors duration-300 hover:border-[#F2E1D1]"
-							>
-								<CheckIcon class="size-4 shrink-0 text-[#091838]" />
-								<span class="text-xs font-bold tracking-tighter text-[#091838] uppercase"
-									>{item}</span
-								>
-							</div>
-						{/each}
-					</div>
-				</CardContent>
-			</Card>
-		</div>
-	</div> -->
 	</div>
 </section>

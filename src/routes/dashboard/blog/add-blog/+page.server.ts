@@ -41,7 +41,7 @@ export const actions: Actions = {
 			return message(form, { type: 'error', text: 'Please check your form data.' });
 		}
 
-		const { title, category, slug, image, gallery, content, excerpt } = form.data;
+		const { title, category, slug, image, gallery, content, excerpt, date } = form.data;
 
 		const result = await db.transaction(async (tx) => {
 			// 1. Upload images first (usually done before the DB transaction starts
@@ -73,7 +73,8 @@ export const actions: Actions = {
 					gallery,
 					content,
 					excerpt,
-					featuredImage,
+          featuredImage,
+					createdAt: new Date(date),
 					createdBy: locals?.user?.id
 				})
 				.returning();

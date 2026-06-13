@@ -45,7 +45,10 @@ export const load: LayoutServerLoad = async ({ params }) => {
 		.limit(1)
 		.then((rows) => rows[0]);
 
-	const form = await superValidate(product, zod4(edit));
+	const form = await superValidate(
+		{ ...product, date: new Date(product.createdAt).toLocaleDateString('en-CA') },
+		zod4(edit)
+	);
 	const galleryEdit = await superValidate(zod4(editGallery));
 
 	return {

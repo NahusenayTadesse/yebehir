@@ -24,7 +24,7 @@ export const actions: Actions = {
 			return fail(400, { form });
 		}
 
-		const { title, slug, category, image, excerpt, content } = form.data;
+		const { title, slug, category, image, excerpt, content, date } = form.data;
 
 		try {
 			if (image) {
@@ -35,8 +35,9 @@ export const actions: Actions = {
 					.set({
 						title,
 						slug,
-						category,
+						categoryId: category,
 						excerpt,
+						createdAt: new Date(date),
 						content,
 						featuredImage,
 						updatedBy: locals?.user?.id
@@ -48,10 +49,10 @@ export const actions: Actions = {
 					.set({
 						title,
 						slug,
-						category,
+						categoryId: category,
 						excerpt,
 						content,
-
+						createdAt: new Date(date),
 						updatedBy: locals?.user?.id
 					})
 					.where(eq(products.id, Number(id)));

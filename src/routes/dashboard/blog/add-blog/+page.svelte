@@ -134,6 +134,15 @@
 			required
 			bind:images
 		/>
+		<InputComp
+			{form}
+			{errors}
+			type="date"
+			name="date"
+			label="Created At Date"
+			placeholder="Enter Date"
+			required
+		/>
 
 		<Button type="submit" form="main">
 			{#if $delayed}

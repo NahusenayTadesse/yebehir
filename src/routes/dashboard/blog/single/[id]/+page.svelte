@@ -56,6 +56,8 @@
 	});
 
 	let images = $derived(data?.images);
+
+	// $form.date = data?.product?.createdAt?.toLocaleString('en-CA');
 </script>
 
 <svelte:head>
@@ -178,6 +180,17 @@
 					placeholder="Upload Blog Featured Image"
 					required
 				/>
+
+				<InputComp
+					{form}
+					{errors}
+					type="date"
+					name="date"
+					label="Created At Date"
+					placeholder="Enter Date"
+					required
+				/>
+
 				<Button form="edit" type="submit" class="mt-4">
 					{#if $delayed}
 						<LoadingBtn name="Saving Changes" />
