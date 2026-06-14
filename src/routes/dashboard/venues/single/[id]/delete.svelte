@@ -22,19 +22,26 @@
 	} = $props();
 
 	const { form, enhance, delayed, message, allErrors } = superForm(data, {
-		resetForm: false
-	});
-	import { toast } from 'svelte-sonner';
-
-	$effect(() => {
-		if ($message) {
-			if ($message.type === 'error') {
-				toast.error($message.text);
+		resetForm: false,
+		onUpdated({ form }) {
+			if (form.message?.type === 'error') {
+				toast.error(form.message.text);
 			} else {
-				toast.success($message.text);
+				toast.success(form.message.text);
 			}
 		}
 	});
+	import { toast } from 'svelte-sonner';
+
+	// $effect(() => {
+	// 	if ($message) {
+	// 		if ($message.type === 'error') {
+	// 			toast.error($message.text);
+	// 		} else {
+	// 			toast.success($message.text);
+	// 		}
+	// 	}
+	// });
 
 	$form.id = id;
 
@@ -50,7 +57,7 @@
 		<ScrollArea class="h-auto rounded-md border p-2">
 			<h5 class="text-center">Are you sure you want to Delete? This action is irreversable</h5>
 			<div class="flex flex-row items-end justify-center gap-4 pt-4">
-				<form method="post" id="delete" action="?/deleteFeature" use:enhance>
+				<form method="post" id="delete" {action} use:enhance>
 					<Errors allErrors={$allErrors} />
 					<input bind:value={$form.id} name="id" type="hidden" />
 					<Button type="submit" class="mt-4" form="delete">

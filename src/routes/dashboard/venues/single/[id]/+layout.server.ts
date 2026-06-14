@@ -17,7 +17,8 @@ import {
 	venueImages as productImages,
 	user,
 	venueFeatures,
-	venueVideos
+	venueVideos,
+	venueLottery,
 } from '$lib/server/db/schema';
 import { eq, sql, getTableColumns } from 'drizzle-orm';
 import type { LayoutServerLoad } from './$types';
@@ -62,6 +63,11 @@ export const load: LayoutServerLoad = async ({ params }) => {
 		.from(venueVideos)
 		.where(eq(venueVideos.venueId, Number(id)));
 
+	const lottery = await db
+		.select()
+		.from(venueLottery)
+		.where(eq(venueLottery.venueId, Number(id)));
+
 	const addForm = await superValidate(zod4(addFeature));
 	const addVideoForm = await superValidate(zod4(addVideo));
 	const editForm = await superValidate(zod4(editFeature));
@@ -81,6 +87,7 @@ export const load: LayoutServerLoad = async ({ params }) => {
 		form,
 		images,
 		features,
-		galleryEdit
+		galleryEdit,
+		lottery
 	};
 };

@@ -37,7 +37,7 @@
 			<a href="/" class="inline-block">
 				<img
 					src="/logoWhite.png"
-					class="h-16 w-16 w-auto object-contain"
+					class="h-16 w-auto object-contain"
 					alt="Yebehir"
 					fetchpriority="high"
 				/>

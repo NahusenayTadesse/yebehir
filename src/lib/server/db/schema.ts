@@ -234,6 +234,7 @@ export const venueDetails = sqliteTable('venue_details', {
 	isActive: integer('is_active').default(1).notNull(),
 	featuredImage: text({ length: 255 }),
 	location: text({ length: 255 }),
+	enableLottery: integer('enable_lottery').default(0).notNull(),
 	...auditFields(),
 	...timestamps(),
 	...softDelete()
@@ -244,6 +245,15 @@ export const venueFeatures = sqliteTable('venue_features', {
 	name: text({ length: 255 }),
 	description: text(),
 	venueId: integer('venue_id').notNull()
+});
+
+export const venueLottery = sqliteTable('venue_lottery', {
+	id: integer().primaryKey({ autoIncrement: true }),
+	venueId: integer('venue_id').notNull(),
+	name: text({ length: 255 }),
+	phone: text({ length: 20 }),
+	email: text({ length: 255 }),
+	...timestamps()
 });
 
 export const venueImages = sqliteTable('venue_images', {

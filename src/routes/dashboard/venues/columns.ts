@@ -103,5 +103,16 @@ export const columns = [
 				text: row.original.description
 			});
 		}
+	},
+	{
+		accessorKey: 'enableLottery',
+		header: 'Lottery',
+
+		cell: ({ row }) => {
+			// You can pass whatever you need from `row.original` to the component
+			return renderComponent(Statuses, {
+				status: row.original.enableLottery ? 'Yes' : 'No'
+			});
+		}
 	}
 ];

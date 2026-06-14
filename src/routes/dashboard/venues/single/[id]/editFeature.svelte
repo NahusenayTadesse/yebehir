@@ -33,7 +33,14 @@
 	} = $props();
 
 	const { form, errors, enhance, delayed, message, allErrors } = superForm(data, {
-		resetForm: false
+		resetForm: false,
+		onUpdated({ form }) {
+			if (form.message?.type === 'error') {
+				toast.error(form.message.text);
+			} else {
+				toast.success(form.message.text);
+			}
+		}
 	});
 
 	let open = $state(false);
@@ -45,16 +52,16 @@
 
 	import { toast } from 'svelte-sonner';
 	import InputComp from '$lib/formComponents/InputComp.svelte';
-	$effect(() => {
-		if ($message) {
-			if ($message.type === 'error') {
-				toast.error($message.text);
-			} else {
-				toast.success($message.text);
-				open = false;
-			}
-		}
-	});
+	// $effect(() => {
+	// 	if ($message) {
+	// 		if ($message.type === 'error') {
+	// 			toast.error($message.text);
+	// 		} else {
+	// 			toast.success($message.text);
+	// 			open = false;
+	// 		}
+	// 	}
+	// });
 </script>
 
 <Tooltip.Provider>

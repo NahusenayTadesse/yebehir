@@ -7,5 +7,6 @@ export const add = z.object({
 	bookingPolicy: z.string().optional(),
 	location: z.string().optional(),
 	image: z.file('Featured Image is required').max(10000000),
-	gallery: z.file().max(10000000).array().optional()
+	gallery: z.file().max(10000000).array().optional(),
+	enableLottery: z.number().default(0)
 });

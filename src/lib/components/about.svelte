@@ -62,7 +62,7 @@
 							>More than just an event company</CardDescription
 						>
 					</CardHeader>
-					<CardContent class="flex flex-col gap-4 text-center text-white">
+					<CardContent class="flex flex-col gap-4  text-white">
 						<p class="leading-relaxed">
 							Yebehir Ventures is a unique platform that integrates event management, venue
 							providing, and sales/sponsorship services. We don't just organize events—we create

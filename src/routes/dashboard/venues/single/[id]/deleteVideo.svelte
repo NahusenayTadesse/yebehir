@@ -21,19 +21,26 @@
 	} = $props();
 
 	const { form, enhance, delayed, message, allErrors } = superForm(data, {
-		resetForm: false
-	});
-	import { toast } from 'svelte-sonner';
-
-	$effect(() => {
-		if ($message) {
-			if ($message.type === 'error') {
-				toast.error($message.text);
+		resetForm: false,
+		onUpdated({ form }) {
+			if (form.message?.type === 'error') {
+				toast.error(form.message.text);
 			} else {
-				toast.success($message.text);
+				toast.success(form.message.text);
 			}
 		}
 	});
+	import { toast } from 'svelte-sonner';
+
+	// $effect(() => {
+	// 	if ($message) {
+	// 		if ($message.type === 'error') {
+	// 			toast.error($message.text);
+	// 		} else {
+	// 			toast.success($message.text);
+	// 		}
+	// 	}
+	// });
 
 	$form.id = id;
 

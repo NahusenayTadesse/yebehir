@@ -6,6 +6,7 @@ export const edit = z.object({
 	description: z.string().optional(),
 	bookingPolicy: z.string().optional(),
 	location: z.string().optional(),
+	enableLottery: z.number().default(0),
 	image: z.file('Featured Image is required').max(10000000).optional()
 });
 

@@ -94,21 +94,29 @@
 	import { superForm } from 'sveltekit-superforms';
 
 	import InputComp from '$lib/formComponents/InputComp.svelte';
-
-	const { form, errors, enhance, delayed, message } = superForm(data, {});
 	import { toast } from 'svelte-sonner';
-	import DialogComp from '$lib/formComponents/DialogComp.svelte';
-	import BigText from '$lib/components/Table/bigText.svelte';
-	import Delete from './delete.svelte';
-	$effect(() => {
-		if ($message) {
-			if ($message.type === 'error') {
-				toast.error($message.text);
+	const { form, errors, enhance, delayed, message } = superForm(data, {
+		onUpdated({ form }) {
+			if (form.message?.type === 'error') {
+				toast.error(form.message.text);
 			} else {
-				toast.success($message.text);
+				toast.success(form.message.text);
 			}
 		}
 	});
+
+	import DialogComp from '$lib/formComponents/DialogComp.svelte';
+	import BigText from '$lib/components/Table/bigText.svelte';
+	import Delete from './delete.svelte';
+	// $effect(() => {
+	// 	if ($message) {
+	// 		if ($message.type === 'error') {
+	// 			toast.error($message.text);
+	// 		} else {
+	// 			toast.success($message.text);
+	// 		}
+	// 	}
+	// });
 </script>
 
 {#key features}

@@ -93,21 +93,29 @@
 
 	import InputComp from '$lib/formComponents/InputComp.svelte';
 
-	const { form, errors, enhance, delayed, message } = superForm(data, {});
+	const { form, errors, enhance, delayed, message } = superForm(data, {
+		onUpdated({ form }) {
+			if (form.message?.type === 'error') {
+				toast.error(form.message.text);
+			} else {
+				toast.success(form.message.text);
+			}
+		}
+	});
 	import { toast } from 'svelte-sonner';
 	import DialogComp from '$lib/formComponents/DialogComp.svelte';
 	import BigText from '$lib/components/Table/bigText.svelte';
 	import Delete from './deleteVideo.svelte';
 	import VideoViewer from '$lib/components/Table/videoViewer.svelte';
-	$effect(() => {
-		if ($message) {
-			if ($message.type === 'error') {
-				toast.error($message.text);
-			} else {
-				toast.success($message.text);
-			}
-		}
-	});
+	// $effect(() => {
+	// 	if ($message) {
+	// 		if ($message.type === 'error') {
+	// 			toast.error($message.text);
+	// 		} else {
+	// 			toast.success($message.text);
+	// 		}
+	// 	}
+	// });
 </script>
 
 {#key videos}

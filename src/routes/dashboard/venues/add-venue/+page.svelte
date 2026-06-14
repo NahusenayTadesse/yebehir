@@ -132,6 +132,20 @@
 			bind:images
 		/>
 
+		<InputComp
+			{form}
+			{errors}
+			type="select"
+			name="enableLottery"
+			label="Enable Lottery"
+			placeholder="Enter Enable Lottery"
+			items={[
+				{ value: 0, name: 'No' },
+				{ value: 1, name: 'Yes' }
+			]}
+			required
+		/>
+
 		<Button type="submit" class="mt-4" form="main">
 			{#if $delayed}
 				<LoadingBtn name="Adding Venue" />

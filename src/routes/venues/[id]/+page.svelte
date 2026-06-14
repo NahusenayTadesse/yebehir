@@ -8,14 +8,13 @@
 	import {
 		UsersIcon,
 		CircleChevronRight,
-		MapPinIcon,
 		BuildingIcon,
-		ClockIcon,
 		FileTextIcon,
 		CheckCircleIcon
 	} from '@lucide/svelte';
 	import Gallery from '$lib/components/gallery.svelte';
 	import { get } from 'svelte/store';
+	import Lottery from './lottery.svelte';
 
 	let { data } = $props();
 
@@ -88,9 +87,12 @@
 			</p>
 		{/if}
 
-		<Button href="/quote" size="lg" class="w-40" variant="outline"
-			>Book Now <CircleChevronRight /></Button
-		>
+		<div class="flex w-100 flex-row gap-2">
+			<Button href="/quote" class="w-40" variant="outline">Book Now <CircleChevronRight /></Button>
+			{#if venue.enableLottery === 1}
+				<Lottery data={data?.form} />
+			{/if}
+		</div>
 	</div>
 </section>
 

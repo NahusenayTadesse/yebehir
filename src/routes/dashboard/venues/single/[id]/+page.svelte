@@ -23,6 +23,7 @@
 
 		{ name: 'Booking Policy', value: data.product?.bookingPolicy },
 		{ name: 'Description', value: data.product?.description },
+		{ name: 'Lottery', value: data.product?.enableLottery ? 'Yes' : 'No' },
 		{ name: 'Added On', value: formatEthiopianDate(new Date(data.product?.createdAt)) },
 		{ name: 'Added By', value: data.product?.createdBy }
 	]);
@@ -32,7 +33,14 @@
 		{
 			validators: zod4Client(edit),
 			resetForm: false,
-			dataType: 'json'
+			dataType: 'json',
+			onUpdated({ form }) {
+				if (form.message?.type === 'error') {
+					toast.error(form.message.text);
+				} else {
+					toast.success(form.message.text);
+				}
+			}
 		}
 	);
 
@@ -48,15 +56,17 @@
 	import { formatEthiopianDate } from '$lib/global.svelte.js';
 	import AddFeatures from './addFeatures.svelte';
 	import AddVideo from './addVideo.svelte';
-	$effect(() => {
-		if ($message) {
-			if ($message.type === 'error') {
-				toast.error($message.text);
-			} else {
-				toast.success($message.text);
-			}
-		}
-	});
+	import Lottery from './lottery.svelte';
+
+	// $effect(() => {
+	// 	if ($message) {
+	// 		if ($message.type === 'error') {
+	// 			toast.error($message.text);
+	// 		} else {
+	// 			toast.success($message.text);
+	// 		}
+	// 	}
+	// });
 
 	let images = $derived(data?.images);
 </script>
@@ -161,6 +171,20 @@
 					required
 				/>
 
+				<InputComp
+					{form}
+					{errors}
+					type="select"
+					name="enableLottery"
+					label="Enable Lottery"
+					placeholder="Enter Enable Lottery"
+					items={[
+						{ value: 0, name: 'No' },
+						{ value: 1, name: 'Yes' }
+					]}
+					required
+				/>
+
 				<Button form="edit" type="submit" class="mt-4">
 					{#if $delayed}
 						<LoadingBtn name="Saving Changes" />
@@ -173,6 +197,11 @@
 		</div>
 	{/if}
 </SingleView>
+
+{#if data?.lottery?.length}
+	<h3 class="mt-16 text-2xl font-bold">Lottery {data.lottery.length} entries</h3>
+	<Lottery features={data?.lottery} deleteForm={data?.deleteForm} />
+{/if}
 
 <div class="my-8">
 	<AddFeatures

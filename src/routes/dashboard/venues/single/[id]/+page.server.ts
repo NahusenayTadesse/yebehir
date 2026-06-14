@@ -16,7 +16,8 @@ import {
 	venueDetails as products,
 	venueImages as productImages,
 	venueFeatures as paymentMethods,
-	venueVideos
+	venueVideos,
+	venueLottery
 } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 import { fail, message } from 'sveltekit-superforms';
@@ -37,7 +38,8 @@ export const actions: Actions = {
 			return fail(400, { form });
 		}
 
-		const { name, capacity, bookingPolicy, image, location, description } = form.data;
+		const { name, capacity, bookingPolicy, image, location, description, enableLottery } =
+			form.data;
 
 		try {
 			if (image) {
@@ -52,7 +54,8 @@ export const actions: Actions = {
 						location,
 						description,
 						featuredImage,
-						updatedBy: locals?.user?.id
+						updatedBy: locals?.user?.id,
+						enableLottery: enableLottery
 					})
 					.where(eq(products.id, Number(id)));
 			} else {
@@ -62,9 +65,9 @@ export const actions: Actions = {
 						name,
 						capacity,
 						bookingPolicy,
-
 						location,
 						description,
+						enableLottery,
 						updatedBy: locals?.user?.id
 					})
 					.where(eq(products.id, Number(id)));
@@ -333,6 +336,29 @@ export const actions: Actions = {
 				{
 					type: 'error',
 					text: 'Error while deleting Video.'
+				},
+				{ status: 500 }
+			);
+		}
+	},
+	deleteLottery: async ({ request }) => {
+		const form = await superValidate(request, zod4(deleteFeature));
+
+		if (!form.valid) {
+			return fail(400, { form });
+		}
+
+		const { id } = form.data;
+
+		try {
+			await db.delete(venueLottery).where(eq(venueLottery.id, id));
+			return message(form, { type: 'success', text: 'Lottery Successfully Deleted' });
+		} catch (err: any) {
+			return message(
+				form,
+				{
+					type: 'error',
+					text: 'Error while deleting Feature.'
 				},
 				{ status: 500 }
 			);

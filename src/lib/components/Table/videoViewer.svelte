@@ -14,7 +14,7 @@
 </script>
 
 <div
-	class="relative aspect-video w-full max-w-80 min-w-50 overflow-hidden rounded-lg border bg-muted"
+	class="relative aspect-video w-full max-w-80 min-w-20 overflow-hidden rounded-lg border bg-muted"
 >
 	<iframe
 		src="https://www.youtube.com/embed/{videoId}"

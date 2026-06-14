@@ -15,6 +15,20 @@
       "when": 1779186917722,
       "tag": "0001_mature_slayback",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1781426592423,
+      "tag": "0002_boring_celestials",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1781427056118,
+      "tag": "0003_sloppy_hawkeye",
+      "breakpoints": true
     }
   ]
 }
