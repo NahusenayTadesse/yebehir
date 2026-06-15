@@ -144,9 +144,9 @@
 
 <section
 	class="relative overflow-hidden bg-muted/30 bg-cover bg-center px-4 py-20 text-white sm:py-32"
-	style="background-image: url('/event (2).webp')"
+	style="background-image: url('/about.jpg')"
 >
-	<div class="absolute inset-0 bg-primary/70 dark:bg-primary-foreground/70"></div>
+	<div class="absolute inset-0 bg-primary/80 dark:bg-primary-foreground/70"></div>
 
 	<div class="relative z-10 mx-auto max-w-4xl space-y-6 text-center">
 		<div
@@ -255,7 +255,7 @@
 	<VisionMission />
 
 	<!-- Footer CTA -->
-	<section class="bg-linear-to-t from-primary/10 to-background px-4 py-16">
+	<!-- <section class="bg-linear-to-t from-primary/10 to-background px-4 py-16">
 		<div class="mx-auto max-w-2xl text-center">
 			<h3 class="mb-4 text-2xl font-bold text-foreground">Ready to Create Something Amazing?</h3>
 			<p class="mb-8 text-muted-foreground">
@@ -267,7 +267,7 @@
 				>Get in Touch</Button
 			>
 		</div>
-	</section>
+	</section> -->
 </section>
 
 {#if data?.teamMembers.length}

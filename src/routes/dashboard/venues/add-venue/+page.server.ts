@@ -22,8 +22,6 @@ import { saveUploadedFile } from '$lib/server/upload.js';
 export const actions: Actions = {
 	addVenue: async ({ request, cookies, locals }) => {
 		const form = await superValidate(request, zod4(add));
-		console.log(form);
-
 		if (!form.valid) {
 			// Stay on the same page and set a flash message
 			setFlash({ type: 'error', message: 'Please check your form data.' }, cookies);

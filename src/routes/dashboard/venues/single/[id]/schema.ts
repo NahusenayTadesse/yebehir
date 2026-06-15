@@ -2,7 +2,7 @@ import { z } from 'zod/v4';
 
 export const edit = z.object({
 	name: z.string().min(1, { message: 'Name is required.' }),
-	capacity: z.number().optional(),
+	capacity: z.number().optional().nullable(),
 	description: z.string().optional(),
 	bookingPolicy: z.string().optional(),
 	location: z.string().optional(),

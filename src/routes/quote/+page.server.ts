@@ -19,7 +19,6 @@ export const load: PageServerLoad = async () => {
 export const actions: Actions = {
 	contact: async ({ request }) => {
 		const form = await superValidate(request, zod4(contactSchema));
-		console.log(form);
 		if (!form.valid) {
 			return message(form, { type: 'error', text: 'Please check the form for Errors' });
 		}

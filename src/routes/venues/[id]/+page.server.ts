@@ -64,7 +64,6 @@ export const actions: Actions = {
 	add: async ({ request, params }) => {
 		const { id } = params;
 		const form = await superValidate(request, zod4(schema));
-		console.log(form);
 		if (!form.valid) {
 			return message(form, { type: 'error', text: 'Please check the form for Errors' });
 		}

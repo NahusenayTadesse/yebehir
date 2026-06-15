@@ -122,8 +122,8 @@
 				{/if}
 
 				<!-- Additional Details Section -->
-				<article class="mt-8 rounded-xl border border-border/50 bg-muted/50 p-6">
-					{@html item.content}
+				<article class="mt-8 rounded-xl border border-border/50 bg-muted/50 p-6 text-primary!">
+					{@html item?.content}
 
 					<br />
 

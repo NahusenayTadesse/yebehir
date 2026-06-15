@@ -128,7 +128,6 @@
 			name="gallery"
 			label="Event Gallery Images"
 			placeholder="Upload Event Gallery Images"
-			required
 			bind:images
 		/>
 

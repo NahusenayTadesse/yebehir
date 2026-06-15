@@ -325,8 +325,6 @@ export const actions: Actions = {
 
 		const { id } = form.data;
 
-		console.log(form);
-
 		try {
 			await db.delete(venueVideos).where(eq(venueVideos.id, id));
 			return message(form, { type: 'success', text: 'Video Successfully Deleted' });
