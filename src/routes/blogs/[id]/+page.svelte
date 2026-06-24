@@ -3,7 +3,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Badge } from '$lib/components/ui/badge';
 	import { Separator } from '$lib/components/ui/separator';
-	import { ArrowLeftIcon, CalendarIcon } from '@lucide/svelte';
+	import { ArrowLeftIcon, CalendarIcon, PlayCircle } from '@lucide/svelte';
 	import type { BlogItem } from '$lib/data/portfolio';
 	import Gallery from '$lib/components/gallery.svelte';
 	import { formatEthiopianDate } from '$lib/global.svelte.js';
@@ -16,6 +16,13 @@
 	);
 
 	const post: BlogItem = $derived(data?.portfolioItems);
+
+	function getId(videoUrl: string) {
+		const regex =
+			/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i;
+		const match = videoUrl?.match(regex);
+		return match ? match[1] : null;
+	}
 </script>
 
 <svelte:head>
@@ -131,6 +138,40 @@
 						<Gallery bento images={data.images} title={item.title} />
 					{/if}
 				</article>
+				{#if data?.videos?.length}
+					<section id="videos" class="mx-auto max-w-7xl px-6 py-24">
+						<div class="mb-12 flex items-center gap-4">
+							<Separator class="flex-1 bg-primary/10" />
+							<h2 class="flex items-center gap-2 px-4 text-2xl font-bold">
+								<PlayCircle class="size-6" />
+								Video{#if data.videos.length !== 1}s{/if}
+							</h2>
+							<Separator class="flex-1 bg-primary/10" />
+						</div>
+
+						<div class="grid grid-cols-1 items-center gap-12">
+							{#each data?.videos as video (video.id)}
+								<div class="group relative">
+									<div
+										class="absolute -inset-4 scale-95 rounded-[2.5rem] bg-primary/5 opacity-0 transition-all duration-500 group-hover:scale-100 group-hover:opacity-100"
+									></div>
+									<div
+										class="relative aspect-video overflow-hidden rounded-[2rem] border-8 border-background shadow-2xl"
+									>
+										<iframe
+											src="https://www.youtube.com/embed/{getId(video.videoUrl)}"
+											title="YouTube video player"
+											frameborder="0"
+											allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+											allowfullscreen
+											class="h-full w-full"
+										></iframe>
+									</div>
+								</div>
+							{/each}
+						</div>
+					</section>
+				{/if}
 
 				<!-- CTA Section -->
 				<div class="mt-8 flex flex-col gap-3 sm:flex-row">

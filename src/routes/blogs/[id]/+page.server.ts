@@ -2,7 +2,8 @@ import { db } from '$lib/server/db';
 import {
 	blog as portfolio,
 	blogGallery as portfolioGallery,
-	blogCategories
+	blogCategories,
+	blogVideos
 } from '$lib/server/db/schema';
 import { eq, getTableColumns } from 'drizzle-orm';
 
@@ -31,8 +32,16 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	const images = result.map((img) => img.url);
 
+	const videos = await db
+		.select({
+			id: blogVideos.id,
+			videoUrl: blogVideos.videoUrl
+		})
+		.from(blogVideos)
+		.where(eq(blogVideos.blogId, portfolioItems.id));
 	return {
 		portfolioItems,
-		images
+		images,
+		videos
 	};
 };

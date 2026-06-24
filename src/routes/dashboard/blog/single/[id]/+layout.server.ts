@@ -1,13 +1,14 @@
 import { superValidate } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
-import { edit, editGallery } from './schema';
+import { addVideo, deleteFeature, edit, editGallery, editVideo } from './schema';
 
 import { db } from '$lib/server/db';
 import {
 	blog as event,
 	blogGallery as productImages,
 	blogCategories,
-	user
+	user,
+	blogVideos
 } from '$lib/server/db/schema';
 import { eq, sql, getTableColumns } from 'drizzle-orm';
 import type { LayoutServerLoad } from './$types';
@@ -51,11 +52,24 @@ export const load: LayoutServerLoad = async ({ params }) => {
 	);
 	const galleryEdit = await superValidate(zod4(editGallery));
 
+	const addVideoForm = await superValidate(zod4(addVideo));
+	const editVideoForm = await superValidate(zod4(editVideo));
+	const deleteForm = await superValidate(zod4(deleteFeature));
+
+	const videos = await db
+		.select()
+		.from(blogVideos)
+		.where(eq(blogVideos.blogId, Number(id)));
+
 	return {
 		product,
 		form,
 		images,
 		galleryEdit,
-		cats
+		cats,
+		addVideoForm,
+		editVideoForm,
+		videos,
+		deleteForm
 	};
 };

@@ -47,6 +47,7 @@
 	import Gallery from '$lib/components/gallery.svelte';
 	import EditGallery from './editGallery.svelte';
 	import { formatEthiopianDate } from '$lib/global.svelte.js';
+	import ViewOnSite from '$lib/components/ViewOnSite.svelte';
 	$effect(() => {
 		if ($message) {
 			if ($message.type === 'error') {
@@ -82,6 +83,7 @@
 		</Button>
 
 		<Delete redirect="/dashboard/events" />
+		<ViewOnSite href="/events/{data?.product.slug}" />
 	</div>
 
 	{#if editForm === false}

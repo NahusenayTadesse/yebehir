@@ -57,6 +57,7 @@
 	import AddFeatures from './addFeatures.svelte';
 	import AddVideo from './addVideo.svelte';
 	import Lottery from './lottery.svelte';
+	import ViewOnSite from '$lib/components/ViewOnSite.svelte';
 
 	// $effect(() => {
 	// 	if ($message) {
@@ -93,6 +94,8 @@
 		</Button>
 
 		<Delete redirect="/dashboard/products" />
+
+		<ViewOnSite href="/venues/{data?.product.id}" />
 	</div>
 
 	{#if editForm === false}

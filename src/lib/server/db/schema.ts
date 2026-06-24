@@ -73,6 +73,16 @@ export const blogGallery = sqliteTable('blog_gallery', {
 	imageUrl: text('image_url', { length: 255 })
 });
 
+export const blogVideos = sqliteTable('blog_videos', {
+	id: integer().primaryKey({ autoIncrement: true }),
+	blogId: integer('blog_id').notNull(),
+	videoUrl: text('video_url', { length: 255 }).notNull(),
+	isActive: integer('is_active').default(1).notNull(),
+	...auditFields(),
+	...timestamps(),
+	...softDelete()
+});
+
 export const contactMessages = sqliteTable('contact_messages', {
 	id: integer().primaryKey({ autoIncrement: true }),
 	name: text({ length: 255 }).notNull(),

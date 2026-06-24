@@ -56,7 +56,8 @@
 	});
 
 	let images = $derived(data?.images);
-
+	import AddVideo from './addVideo.svelte';
+	import ViewOnSite from '$lib/components/ViewOnSite.svelte';
 	// $form.date = data?.product?.createdAt?.toLocaleString('en-CA');
 </script>
 
@@ -82,6 +83,7 @@
 		</Button>
 
 		<Delete redirect="/dashboard/blog" />
+		<ViewOnSite href="/blogs/{data?.product.slug}" />
 	</div>
 
 	{#if editForm === false}
@@ -238,4 +240,13 @@
 			{/if}
 		</div>
 	</div>
+</div>
+
+<div class="my-8">
+	<AddVideo
+		data={data?.addVideoForm}
+		editForm={data?.editVideoForm}
+		deleteForm={data?.deleteForm}
+		videos={data?.videos}
+	/>
 </div>
