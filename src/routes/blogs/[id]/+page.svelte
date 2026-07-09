@@ -7,6 +7,7 @@
 	import type { BlogItem } from '$lib/data/portfolio';
 	import Gallery from '$lib/components/gallery.svelte';
 	import { formatEthiopianDate } from '$lib/global.svelte.js';
+	import RichTextEditor from '$lib/formComponents/RichTextEditor.svelte';
 	const { data } = $props();
 
 	const item: BlogItem = $derived(data?.portfolioItems);
@@ -23,6 +24,22 @@
 		const match = videoUrl?.match(regex);
 		return match ? match[1] : null;
 	}
+
+function injectHTML(node, htmlContent) {
+    // Clean up wrapping quotes if they exist
+    let cleanContent = htmlContent?.trim() || '';
+    if (cleanContent.startsWith('"') && cleanContent.endsWith('"')) {
+      cleanContent = cleanContent.slice(1, -1);
+    }
+    
+    node.innerHTML = cleanContent;
+    
+    return {
+      update(newContent) {
+        node.innerHTML = newContent;
+      }
+    };
+  }
 </script>
 
 <svelte:head>
@@ -130,8 +147,8 @@
 
 				<!-- Additional Details Section -->
 				<article class="mt-8 rounded-xl border border-border/50 bg-muted/50 p-6 text-primary!">
-					{@html item?.content}
-
+<!-- {@html renderCleanHTML(item?.content)}		 -->
+  <RichTextEditor value={item?.content} disabled />
 					<br />
 
 					{#if data?.images}
@@ -190,6 +207,8 @@
 	<div class="h-20"></div>
 </div>
 
+<style>
+</style>
 <!-- ... existing code ... -->
 
 <!-- Gallery Section -->

@@ -11,6 +11,7 @@ local.db
 local.db-shm
 local.db-wal
 build.tar
+build.tar.gz
 
 # OS
 .DS_Store

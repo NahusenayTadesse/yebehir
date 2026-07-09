@@ -4,9 +4,7 @@
 	import PortfolioGrid from '$lib/components/blogs/portfolio-grid.svelte';
 	import type { BlogItem } from '$lib/data/portfolio';
 
-	// Set app hook
 
-	// Filter state
 	let searchQuery = $state('');
 	let selectedEventType = $state<string | null>(null);
 	let { data } = $props();
@@ -85,7 +83,7 @@
 		<div class="mb-6 text-center">
 			<p class="text-muted-foreground">
 				Showing <span class="font-semibold text-foreground">{resultsCount}</span>
-				{resultsCount === 1 ? 'blog' : 'blogss'}
+				{resultsCount === 1 ? 'blog' : 'blogs'}
 			</p>
 		</div>
 

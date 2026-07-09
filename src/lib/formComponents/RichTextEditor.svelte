@@ -1,9 +1,8 @@
-<!-- QuillEditor.svelte -->
 <script lang="ts">
 	import { Tipex } from '@friendofsvelte/tipex';
 	import '@friendofsvelte/tipex/styles/index.css';
 
-	let { value = $bindable(''), placeholder = 'Start writing...' } = $props();
+	let { value = $bindable(''), disabled=false, placeholder = 'Start writing...' } = $props();
 
 	import type { Editor } from '@tiptap/core';
 	let editorInstance: Editor | undefined = $state();
@@ -16,7 +15,14 @@
 		}
 	});
 </script>
+{#if disabled}
 
-<!-- <div bind:this={container}></div> -->
+<Tipex
+	body={value}
+	controlComponent={null}
+	class="bg-transparent!"
 
-<Tipex body={value} bind:tipex={editorInstance} focal floating />
+/>
+{:else} 
+  <Tipex body={value} bind:tipex={editorInstance} focal floating />
+{/if}
