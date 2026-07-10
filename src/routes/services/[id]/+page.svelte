@@ -11,6 +11,7 @@
 		description: string | null;
 	};
 	import Gallery from '$lib/components/gallery.svelte';
+	import RichTextEditor from '$lib/formComponents/RichTextEditor.svelte';
 	const { data } = $props();
 
 	const item: Service = $derived(data?.portfolioItems);
@@ -130,7 +131,9 @@
 
 				<!-- Additional Details Section -->
 				<article class="mt-8 rounded-xl border border-border/50 bg-muted/50 p-6">
-					{@html item.longDescription}
+					<!-- {@html item.longDescription} -->
+
+					 <RichTextEditor disabled value={item?.longDescription} />
 
 					{#if data?.images}
 						<Gallery bento images={data.images} title={item.name} />

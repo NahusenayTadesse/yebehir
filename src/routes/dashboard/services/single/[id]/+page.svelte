@@ -86,10 +86,10 @@
 			<SingleTable {singleTable} />
 
 			<article class="max-auto mx-auto w-full max-w-4xl px-6 py-12">
-				<div class="rounded-2xl border border-slate-100 bg-white p-8 shadow-sm md:p-12">
+				<div class="rounded-2xl border border-slate-100 p-8 shadow-sm md:p-12">
 					<!-- Section Header -->
 					<h2
-						class="mb-6 border-b border-slate-100 pb-4 text-3xl font-bold tracking-tight text-slate-900"
+						class="mb-6 border-b border-slate-100 pb-4 text-3xl font-bold tracking-tight"
 					>
 						Long Description
 					</h2>
@@ -98,7 +98,9 @@
 					<div
 						class="prose prose-slate prose-headings:text-slate-800 prose-p:leading-relaxed prose-li:my-1 max-w-none"
 					>
-						{@html data?.product?.longDescription}
+						<!-- {@html data?.product?.longDescription} -->
+						<RichTextEditor disabled value={data?.product?.longDescription} />
+
 					</div>
 				</div>
 			</article>
